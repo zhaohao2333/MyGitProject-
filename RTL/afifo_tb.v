@@ -35,8 +35,11 @@ module afifo_tb ();
        rrst_n = 1;
        # 100
        winc = 1;
+       rinc = 0;
+       @ (posedge wfull)
+       winc = 0;
        rinc = 1;
-       # 10000
+       # 8000
        $finish;
     end
     // -------------------module--------------------------- //

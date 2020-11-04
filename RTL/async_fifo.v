@@ -22,7 +22,8 @@ module async_fifo #(
     // **************************************************************** //
     wire                wen;
     wire                ren;
-    reg    [WIDTH-1:0]  mem[DEPTH-1:0];
+    //reg    [WIDTH-1:0]  mem[DEPTH-1:0];
+    reg    [WIDTH-1:0]  mem[FIFO_DEEP-1:0];
     reg    [DEPTH  :0]  wptr, r_wptr_g1, r_wptr_g2, wgap;
     reg    [DEPTH  :0]  rptr, w_rptr_g1, w_rptr_g2, rgap;
     wire   [DEPTH  :0]  wptr_g, r_wptr;
@@ -55,7 +56,7 @@ module async_fifo #(
     always @(posedge rclk or negedge rrst_n) begin
         if(!rrst_n)
             rptr = 0;
-        else if (wen) begin
+        else if (ren) begin
             rptr <= rptr + 1;
             rdata <= mem[rptr[DEPTH-1:0]];
         end

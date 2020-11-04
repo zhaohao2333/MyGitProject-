@@ -18,13 +18,13 @@ vmap work work
 vlog *.v
 
 # 无优化simulation  *** 请修改文件名 ***
-vsim -novopt -L lpm -L altera_mf -L cyclone -L altera_primitive work.tb_fsm
-
+# vsim -novopt -L lpm -L altera_mf -L cyclone -L altera_primitive work.tb_fsm
+vsim -novopt work.afifo_tb 
 
 
 # =========================<     添加波形     >===============================
-
+add wave -r /*
 
 # =========================<     仿真时间     >===============================
 
-run 200ns
+run -all
