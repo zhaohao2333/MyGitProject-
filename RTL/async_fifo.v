@@ -49,8 +49,13 @@ module async_fifo #(
         w_rptr_g2 <= w_rptr_g1;
     end
     // gary to bin
-    assign w_rptr = w_rptr_g2 ^ (w_rptr_g2 >> 1) ^ 
-                    (w_rptr_g2 >> 2) ^ (w_rptr_g2 >> 3);
+    /* assign w_rptr = w_rptr_g2 ^ (w_rptr_g2 >> 1) ^ 
+                    (w_rptr_g2 >> 2) ^ (w_rptr_g2 >> 3); */
+    assign w_rptr = w_rptr_g2 ^ (w_rptr_g2 >> 1) ^
+                    (w_rptr_g2 >> 2) ^ (w_rptr_g2 >> 3) ^
+                    (w_rptr_g2 >> 4) ^ (w_rptr_g2 >> 5) ^
+                    (w_rptr_g2 >> 6) ^ (w_rptr_g2 >> 7) ^
+                    (w_rptr_g2 >> 8);
     // ---------------------read logic----------------------------------//
     assign ren = rinc && (~rempty);
     always @(posedge rclk or negedge rrst_n) begin
@@ -69,8 +74,14 @@ module async_fifo #(
         r_wptr_g2 <= r_wptr_g1;
     end
     // gary to bin 
+    /* assign r_wptr = r_wptr_g2 ^ (r_wptr_g2 >> 1) ^
+                    (r_wptr_g2 >> 2) ^ (r_wptr_g2 >> 3); */
     assign r_wptr = r_wptr_g2 ^ (r_wptr_g2 >> 1) ^
-                    (r_wptr_g2 >> 2) ^ (r_wptr_g2 >> 3);
+                    (r_wptr_g2 >> 2) ^ (r_wptr_g2 >> 3) ^
+                    (r_wptr_g2 >> 4) ^ (r_wptr_g2 >> 5) ^
+                    (r_wptr_g2 >> 6) ^ (r_wptr_g2 >> 7) ^
+                    (r_wptr_g2 >> 8);
+                    
 
     // --------------------wfull and wfull_almost--------------------- //
     assign wfull = ((wptr[DEPTH-1:0]) == w_rptr[DEPTH-1:0]) &&
@@ -101,5 +112,6 @@ module async_fifo #(
         else 
             rempty_almost <= 1'b0;
     end
-    assign rempty = (rgap == 0)||((rgap == 1)&&(rinc));
+    //assign rempty = (rgap == 0)||((rgap == 1)&&(rinc));
+    assign rempty = (rgap == 0);
 endmodule //async_fifo

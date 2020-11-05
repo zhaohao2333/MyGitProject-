@@ -1,1 +1,1 @@
-modelsim -do wave.do
+modelsim -do sim.do

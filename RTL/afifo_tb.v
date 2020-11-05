@@ -40,7 +40,7 @@ module afifo_tb ();
        winc = 0;
        rinc = 1;
        # 8000
-       $finish;
+       $stop;
     end
     // -------------------module--------------------------- //
     async_fifo
@@ -48,7 +48,7 @@ module afifo_tb ();
     .DEPTH(8),
     .FIFO_DEEP(256),
     .WIDTH(4),
-    .GAP(3)
+    .GAP(5)
     )
     fifo1(
     // write clock domain
