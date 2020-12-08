@@ -1,0 +1,1 @@
+modelsim -do sim_sync.do

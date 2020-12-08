@@ -1,4 +1,4 @@
-module tdc_top (
+module tdc_top_sync (
     input  wire [31:0]  phase,
     input  wire         clk, //500Mhz
     input  wire         rst,
@@ -17,8 +17,8 @@ reg          sync;
 wire         s;
 wire         sync_clk;
 reg  [7:0]   counter_reg_out;
-// stop sign
-reg          light_pulse_d;
+reg          stop_0;
+reg          stop_1;
 
 //------------------------------------------
 
@@ -39,11 +39,9 @@ end
 always @(posedge light_pulse or negedge rst) begin
     if (!rst) begin
         stop_reg_out <= 32'h0000_0000;
-        light_pulse_d <= 0;
     end
     else begin
         stop_reg_out <= phase;
-        light_pulse_d <= 1;
     end
 end
 
@@ -65,28 +63,45 @@ assign s = stop_reg_out[0];
 // always @(posedge sync_clk or negedge rst) begin
 always @(negedge sync_clk or negedge rst) begin
     if(!rst) begin
-        sync <= 1'b0;
-        counter_reg_out <= 8'b0000_0000;
-        out_valid <= 1'b0;
+        stop_0 <= 1'b0;//! initial value
     end
-    else if (light_pulse_d) begin
-        sync <= s;
-        counter_reg_out <= counter;//! correct?
-        out_valid <= 1'b1;
+    else begin
+        stop_0 <= light_pulse;
     end
 end
 
+always @(posedge sync_clk or negedge rst) begin
+    if(!rst) begin
+        stop_1 <= 1'b0;//! initial value
+    end
+    else begin
+        stop_1 <= light_pulse;
+    end
+end
+
+always @(*) begin
+    case (s)
+        0:
+            sync = stop_0;
+        1:
+            sync = stop_1;
+        default:
+            sync = stop_0;
+    endcase
+end
 
 //---------------coarse counter reg------------------
 
-/* always @(posedge clk or negedge rstn) begin//! the clk?
+always @(negedge sync_clk or negedge rst) begin
     if(!rst) begin
-        
+        counter_reg_out <= 8'b0000_0000;
+        out_valid <= 1'b0;
     end
-    else if () begin//! triger in sync negedge?
+    else if(sync) begin
         counter_reg_out <= counter;
+        out_valid <= 1'b1;
     end
-end */
+end
 
 //---------------decode------------------------------
 
@@ -102,6 +117,6 @@ decode decode_stop(
 
 //---------------tof data out------------------------
 
+// assign tof[12:0] = (out_valid) ? {counter_reg_out - 1, stop_data_out - start_data_out} : 13'd0;
 assign tof[12:0] = {counter_reg_out[7:0], stop_data_out[4:0]} - {8'b0000_0001, start_data_out[4:0]};
-
 endmodule //tdc_top
