@@ -14,11 +14,13 @@ wire [4:0]   stop_data_out;
 reg          cnt_start;
 reg  [7:0]   counter;
 reg          sync;
+wire         vout;
 wire         s;
 wire         sync_clk;
 reg  [7:0]   counter_reg_out;
-// stop sign
-reg          light_pulse_d;
+reg          stop_0;
+reg          stop_1;
+wire         sync_clk_i;
 
 //------------------------------------------
 
@@ -39,11 +41,9 @@ end
 always @(posedge light_pulse or negedge rst) begin
     if (!rst) begin
         stop_reg_out <= 32'h0000_0000;
-        light_pulse_d <= 0;
     end
     else begin
         stop_reg_out <= phase;
-        light_pulse_d <= 1;
     end
 end
 
@@ -62,31 +62,58 @@ end
 //---------------sync module-------------------------
 
 assign s = stop_reg_out[0];
-// always @(posedge sync_clk or negedge rst) begin
-always @(negedge sync_clk or negedge rst) begin
+assign sync_clk_i = !sync_clk;
+always @(posedge sync_clk_i or negedge rst) begin
     if(!rst) begin
-        sync <= 1'b0;
-        counter_reg_out <= 8'b0000_0000;
-        out_valid <= 1'b0;
+        stop_0 <= 1'b0;
     end
-    else if (light_pulse_d) begin
-        sync <= s;
-        counter_reg_out <= counter;//! correct?
-        out_valid <= 1'b1;
+    else begin
+        stop_0 <= light_pulse;
     end
 end
 
+always @(posedge sync_clk or negedge rst) begin
+    if(!rst) begin
+        stop_1 <= 1'b0;
+    end
+    else begin
+        stop_1 <= light_pulse;
+    end
+end
+
+/* always @(*) begin
+    case (s)
+        0:
+            sync = stop_0;
+        1:
+            sync = stop_1;
+        default:
+            sync = stop_0;
+    endcase
+end */
+
+assign vout = (s == 0) ? stop_0 : stop_1;
+always @(posedge sync_clk_i or negedge rst) begin
+    if(!rst) begin
+        sync <= 1'b0;        
+    end
+    else begin
+        sync <= vout;        
+    end
+end
 
 //---------------coarse counter reg------------------
 
-/* always @(posedge clk or negedge rstn) begin//! the clk?
+always @(posedge sync or negedge rst) begin
     if(!rst) begin
-        
+        counter_reg_out <= 8'b0000_0000;
+        out_valid <= 1'b0;
     end
-    else if () begin//! triger in sync negedge?
+    else if(sync) begin
         counter_reg_out <= counter;
+        out_valid <= 1'b1;
     end
-end */
+end
 
 //---------------decode------------------------------
 

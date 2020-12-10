@@ -19,34 +19,23 @@ vlog *.v
 
 # 无优化simulation  *** 请修改文件名 ***
 # vsim -novopt -L lpm -L altera_mf -L cyclone -L altera_primitive work.tb_fsm
-vsim -novopt work.tb_tdc 
+vsim -novopt work.tb_decode
 
 
 # =========================<     添加波形     >===============================
 onerror {resume}
 quietly WaveActivateNextPane {} 0
-add wave -noupdate /tb_tdc/tdc_top_dut/clk
-add wave -noupdate /tb_tdc/tdc_top_dut/rst
-add wave -noupdate /tb_tdc/tdc_top_dut/phase
-add wave -noupdate /tb_tdc/tdc_top_dut/start
-add wave -noupdate /tb_tdc/tdc_top_dut/cnt_start
-add wave -noupdate /tb_tdc/tdc_top_dut/counter
-add wave -noupdate /tb_tdc/tdc_top_dut/start_reg_out
-add wave -noupdate /tb_tdc/tdc_top_dut/start_data_out
-add wave -noupdate /tb_tdc/tdc_top_dut/light_pulse
-add wave -noupdate /tb_tdc/tdc_top_dut/stop_reg_out
-add wave -noupdate /tb_tdc/tdc_top_dut/stop_data_out
-add wave -noupdate /tb_tdc/tdc_top_dut/sync
-add wave -noupdate /tb_tdc/tdc_top_dut/s
-add wave -noupdate /tb_tdc/tdc_top_dut/sync_clk
-add wave -noupdate /tb_tdc/tdc_top_dut/counter_reg_out
-add wave -noupdate /tb_tdc/tdc_top_dut/out_valid
-add wave -noupdate /tb_tdc/tdc_top_dut/tof
+add wave -noupdate /tb_decode/rst
+add wave -noupdate /tb_decode/clk
+add wave -noupdate /tb_decode/phase
+add wave -noupdate /tb_decode/data_in
+add wave -noupdate /tb_decode/decode_inst/i
+add wave -noupdate /tb_decode/decode_inst/data_out
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {333 ns} 0}
-quietly wave cursor active 1
-configure wave -namecolwidth 164
-configure wave -valuecolwidth 100
+WaveRestoreCursors {{Cursor 1} {0 ns} 0}
+quietly wave cursor active 0
+configure wave -namecolwidth 277
+configure wave -valuecolwidth 218
 configure wave -justifyvalue left
 configure wave -signalnamewidth 1
 configure wave -snapdistance 10
@@ -59,7 +48,7 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ns
 update
-WaveRestoreZoom {0 ns} {1452 ns}
+WaveRestoreZoom {0 ns} {811 ns}
 
 # =========================<     仿真时间     >===============================
 

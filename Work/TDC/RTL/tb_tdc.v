@@ -10,9 +10,9 @@ reg             rst;
 reg             start;
 reg             light_pulse;
 wire   [12:0]   tof;
-wire    	out_valid;
+wire    	    out_valid;
 
-tdc_top_sync tdc_top_dut(
+tdc_top tdc_top_dut(
     .phase (phase),
     .clk (clk),
     .rst (rst),
@@ -31,13 +31,16 @@ initial begin
     // start
         #5 rst = 0;
         #20 rst = 1;
-        #28 start = 1;
-        // #228 start = 1;
+        //#28 start = 1;
+        #228 start = 1;
         #200 start = 0;
     // stop
-        // #1000 light_pulse = 1;
-        #900 light_pulse = 1;
-        #200 light_pulse = 0;
+        //#1000 light_pulse = 1; //done
+        #900 light_pulse = 1; //done
+        //#800 light_pulse = 1; //done 
+        //#40 light_pulse = 1; //done
+        //#350 light_pulse = 0;
+        #350 light_pulse = 0;
         #300 ;
         $finish;
     end

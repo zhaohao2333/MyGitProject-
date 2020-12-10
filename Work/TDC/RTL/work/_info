@@ -9,99 +9,140 @@ z2
 cModel Technology
 Z0 dD:/Workplace/Work/TDC/RTL
 vdecode
-Z1 VDg1SIo80bB@j0V0VzS_@n1
-r1
-!s85 0
-31
+Z1 !s110 1607599185
 !i10b 1
 !s100 6GQ4@kRSMgKb@cPF[c`ge0
 I6HOMPJO7A;1GmUEM1M??40
+Z2 VDg1SIo80bB@j0V0VzS_@n1
 R0
 w1607394911
 8decode.v
 Fdecode.v
 L0 1
-Z2 OL;L;10.4;61
-Z3 !s108 1607426025.608000
-Z4 !s107 tdc_top_sync.v|tdc_top.v|tb_tdc_sync.v|tb_tdc.v|decode.v|
-Z5 !s90 -reportprogress|300|decode.v|tb_tdc.v|tb_tdc_sync.v|tdc_top.v|tdc_top_sync.v|
+Z3 OL;L;10.4;61
+r1
+!s85 0
+31
+Z4 !s108 1607599185.317000
+Z5 !s107 tdc_top_sync.v|tdc_top.v|tb_tdc_sync.v|tb_tdc.v|tb_decode.v|decode_1.v|decode.v|
+Z6 !s90 -reportprogress|300|decode.v|decode_1.v|tb_decode.v|tb_tdc.v|tb_tdc_sync.v|tdc_top.v|tdc_top_sync.v|
 !i113 0
-Z6 o-L mtiAvm -L mtiOvm -L mtiUvm -L mtiUPF
-vtb_tdc
-Z7 !s110 1607426025
-!i10b 1
-!s100 bak3GL2n98Z^N[Yo`KG120
-IA^<YWNS[R1zBDPiNE<^V21
-R1
-R0
-w1607414147
-8tb_tdc.v
-Ftb_tdc.v
-L0 2
+Z7 o-L mtiAvm -L mtiOvm -L mtiUvm -L mtiUPF
+vdecode_1
 R2
 r1
 !s85 0
 31
+!i10b 1
+!s100 n8YzoY24UhnXKQBgI0_0j0
+I6[Mo@]zobGhF=cg4c@4Q61
+R0
+w1607598631
+8decode_1.v
+Fdecode_1.v
+L0 1
 R3
 R4
 R5
-!i113 0
 R6
-vtb_tdc_sync
-R1
+!i113 0
+R7
+vtb_decode
+R2
 r1
 !s85 0
 31
 !i10b 1
+!s100 Kni@:hA>G[GNZJXR`DX]90
+IKecZ4FJR8R;ado1:>mHYJ3
+R0
+w1607599126
+8tb_decode.v
+Ftb_decode.v
+L0 2
+R3
+R4
+R5
+R6
+!i113 0
+R7
+vtb_tdc
+R1
+!i10b 1
+!s100 ^J[;01[Y:ScZWK85kFk9_1
+I6eK>6]j:k2;MR8QLV4a>20
+R2
+R0
+w1607597361
+8tb_tdc.v
+Ftb_tdc.v
+L0 2
+R3
+r1
+!s85 0
+31
+R4
+R5
+R6
+!i113 0
+R7
+vtb_tdc_sync
+R1
+!i10b 1
 !s100 MPQbJ59i>l7:a@GO5`aPn1
 I<B5R?e=l;Zj<aUYnmXchB2
+R2
 R0
 w1607424635
 8tb_tdc_sync.v
 Ftb_tdc_sync.v
 L0 2
-R2
 R3
+r1
+!s85 0
+31
 R4
 R5
-!i113 0
 R6
-vtdc_top
+!i113 0
 R7
-!i10b 1
-!s100 9AnZ]<EFL@2a13N?SlIi82
-IR8QlJNogQceUdJ6QYHo>I0
+vtdc_top
 R1
+!i10b 1
+!s100 IfalDm4mhW>Az<06572K<2
+IzmZUU[6So9:2ISN5f6iWW1
+R2
 R0
-w1607413329
+w1607597550
 8tdc_top.v
 Ftdc_top.v
 L0 1
-R2
+R3
 r1
 !s85 0
 31
-R3
 R4
 R5
-!i113 0
 R6
+!i113 0
+R7
 vtdc_top_sync
 R1
-r1
-!s85 0
-31
 !i10b 1
 !s100 =7QiCj@ZUANVca>FB7SBJ0
 I>I3iJAk4oa3L=1>A3T2K]2
+R2
 R0
 w1607423905
 8tdc_top_sync.v
 Ftdc_top_sync.v
 L0 1
-R2
 R3
+r1
+!s85 0
+31
 R4
 R5
-!i113 0
 R6
+!i113 0
+R7
