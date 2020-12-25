@@ -1,0 +1,106 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dD:/Workplace/Work/TDC_1.2/RTL
+vdecode
+Z1 VDg1SIo80bB@j0V0VzS_@n1
+r1
+!s85 0
+31
+!i10b 1
+!s100 6GQ4@kRSMgKb@cPF[c`ge0
+I6HOMPJO7A;1GmUEM1M??40
+R0
+w1608628231
+8decode.v
+Fdecode.v
+L0 1
+Z2 OL;L;10.4;61
+Z3 !s108 1608860750.430000
+Z4 !s107 tdc_top.v|tb_tdc.v|sync.v|sort.v|decode.v|
+Z5 !s90 -reportprogress|300|decode.v|sort.v|sync.v|tb_tdc.v|tdc_top.v|
+!i113 0
+Z6 o-L mtiAvm -L mtiOvm -L mtiUvm -L mtiUPF
+vsort
+!s110 1608860750
+!i10b 1
+!s100 :ZHa5IZ6lA9]X23>7D6070
+I_e9;oiU7Go:hf2fMLL7Tb2
+R1
+R0
+w1608812999
+8sort.v
+Fsort.v
+L0 1
+R2
+r1
+!s85 0
+31
+R3
+R4
+R5
+!i113 0
+R6
+vsync
+R1
+r1
+!s85 0
+31
+!i10b 1
+!s100 >:Wmn_CZ:MheEfmf:GcM[0
+I:WS;iB5eJ30BJa_BT1VC41
+R0
+w1608792815
+8sync.v
+Fsync.v
+L0 1
+R2
+R3
+R4
+R5
+!i113 0
+R6
+vtb_tdc
+R1
+r1
+!s85 0
+31
+!i10b 1
+!s100 eb:N`o<ji==RCiGh?2KGU3
+IInh_AYN3?]@?FzCYF7Cz82
+R0
+w1608860741
+8tb_tdc.v
+Ftb_tdc.v
+L0 2
+R2
+R3
+R4
+R5
+!i113 0
+R6
+vtdc_top
+R1
+r1
+!s85 0
+31
+!i10b 1
+!s100 7b9F;582WXo=;Yl6S>adl1
+I6G>5TQk?e4T52Nbh1gFzo3
+R0
+w1608860072
+8tdc_top.v
+Ftdc_top.v
+L0 1
+R2
+R3
+R4
+R5
+!i113 0
+R6

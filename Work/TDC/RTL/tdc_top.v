@@ -109,7 +109,7 @@ always @(posedge sync or negedge rst) begin
         counter_reg_out <= 8'b0000_0000;
         out_valid <= 1'b0;
     end
-    else if(sync) begin
+    else begin
         counter_reg_out <= counter;
         out_valid <= 1'b1;
     end
