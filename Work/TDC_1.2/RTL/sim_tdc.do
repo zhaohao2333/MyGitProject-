@@ -45,6 +45,8 @@ add wave -noupdate /tb_tdc/tdc_top_dut/start_data_out
 add wave -noupdate /tb_tdc/tdc_top_dut/stop_reg_out
 add wave -noupdate /tb_tdc/tdc_top_dut/stop_data_out
 add wave -noupdate /tb_tdc/tdc_top_dut/cnt_start
+add wave -noupdate /tb_tdc/tdc_top_dut/cnt_start_d
+add wave -noupdate /tb_tdc/tdc_top_dut/cnt_en
 add wave -noupdate /tb_tdc/tdc_top_dut/counter
 add wave -noupdate /tb_tdc/tdc_top_dut/sync
 add wave -noupdate /tb_tdc/tdc_top_dut/counter_reg_out
@@ -55,8 +57,8 @@ add wave -noupdate /tb_tdc/tdc_top_dut/INT_in
 add wave -noupdate /tb_tdc/tdc_top_dut/tof_data
 add wave -noupdate /tb_tdc/tdc_top_dut/INT
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {1353000 ps} 0}
-quietly wave cursor active 0
+WaveRestoreCursors {{Cursor 1} {12900700 ps} 0}
+quietly wave cursor active 1
 configure wave -namecolwidth 223
 configure wave -valuecolwidth 397
 configure wave -justifyvalue left
@@ -71,7 +73,8 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ns
 update
-WaveRestoreZoom {207782 ps} {2642555 ps}
+WaveRestoreZoom {2974696 ps} {13530806 ps}
+
 
 # =========================<     仿真时间     >===============================
 

@@ -7,6 +7,7 @@ module tb_tdc;
     reg          clk5; 
     reg          clk;
     reg          rst_n; 
+    reg          rst;
     reg          TDC_start;
     reg          TDC_trigger;
     reg  [15:0]  TDC_spaden; 
@@ -47,14 +48,17 @@ initial begin
         clk_i = 0;
         clk = 0;
         rst_n = 1;
+        rst = 1;
         TDC_start = 0;
         TDC_trigger = 0;
         TDC_tgate = 0;
         TDC_spaden = 0;
-        TDC_Oready = 0; //!todo
-    // start:
-        #5 rst_n = 0;
-        #20 rst_n = 1;
+        TDC_Oready = 1; //!todo
+    // start 1:
+        #5   rst_n = 0;
+             rst = 0;
+        #20  rst_n = 1;
+             rst = 1;
         //#28 TDC_start = 1;
         #228 TDC_start = 1;
         #200 TDC_start = 0;
@@ -93,17 +97,49 @@ initial begin
         #480 TDC_tgate = 0;
         #320 TDC_trigger = 0;
         
-        #200 ;
+        #5000 ;// overflow
+    // test if trigger signal is valid
+             TDC_trigger = 1;
+             TDC_spaden = 16'b0011_0000_1111_0011; //int = 8
+             TDC_tgate = 1;
+        #480 TDC_tgate = 0;
+        #320 TDC_trigger = 0;
+        
+    //----------------------------------------------------------------------------------------------
+    //! reset
+        #500 ;
+        #5   rst_n = 0;
+        #20  rst_n = 1;
+    // start 2:
+             TDC_start = 1;
+        #200 TDC_start = 0;
+    // pulse 1:
+        #900 TDC_trigger = 1;
+             TDC_spaden = 16'b0000_0000_0000_0001; //int = 1
+             TDC_tgate = 1;
+        #480 TDC_tgate = 0;
+        #320 TDC_trigger = 0; // light_pulse == 800 ns = 480 + 320 ns
+    // pulse 2:
+        #150
+             TDC_trigger = 1;
+             TDC_spaden = 16'b0000_0000_1111_0001; //int = 5
+             TDC_tgate = 1;
+        #480 TDC_tgate = 0;
+        #320 TDC_trigger = 0;
+
+        #500 ;
         $finish;
     end
 end
 
+
+
+//-------------------------------------------------------------------------------------
 always #5 clk_i = !clk_i;
 //1 cnt cycle 320 ns == 2 ns, light_pulse 5 ns = 800 ns ,time gate 3 ns == 480 ns
-//---------------------------------
 
-always @(posedge clk_i or negedge rst_n) begin
-    if (!rst_n) begin
+always @(posedge clk_i or negedge rst) begin
+    if (!rst) begin
         DLL_Phase <= 32'b1111_1111_1111_1111_0000_0000_0000_0000;
     end
     else begin

@@ -1,3 +1,4 @@
+`define TEST
 module tdc_top (
     input  wire [31:0]  DLL_Phase,
     input  wire         clk5, //500 Mhz for cnt, DLL_Phase[0]
@@ -7,14 +8,16 @@ module tdc_top (
     input  wire         TDC_trigger, //from SPAD
     input  wire [15:0]  TDC_spaden, //from 4*4 SPAD
     input  wire         TDC_tgate, //from analog end, 3ns pulse follow trigger signal
-    output wire [14:0]  TDC_Odata, //!todo
+    //! for test
+    //output wire [14:0]  TDC_Odata,
+    output wire [9 :0]  TDC_Odata, //!todo
     //output wire [3 :0]  TDC_Oint, //output intensity counter for each depth data 
     output wire [4 :0]  TDC_Oint, //!todo
     output reg  [1 :0]  TDC_Onum, //output valid data number
     output wire         TDC_Olast, //!todo output last data signal
     output wire         TDC_Ovalid, //!todo output data valid signal
     input  wire         TDC_Oready, //output data ready signal
-    output wire         TDC_INT //!todo output interrupt signal
+    output reg          TDC_INT
 );
 //-------------------------------------------------------------------
 reg  [31:0]  start_reg_out;
@@ -22,18 +25,25 @@ wire [4:0]   start_data_out;
 reg  [31:0]  stop_reg_out;
 wire [4:0]   stop_data_out;
 reg          cnt_start;
-reg  [9:0]   counter;
 wire         sync;
 //wire         clk5;
-reg  [9:0]   counter_reg_out;
-reg          out_valid;
-//-------------------------------------------------------------------
-wire [14:0]  tof;
-reg  [14:0]  tof_data[2:0]; //depth = 3 
 reg  [4:0]   light_level;
 reg  [4:0]   INT[2:0];
 wire [4:0]   INT_in;
 //reg  [31:0]  stop_data[2:0]; //depth = 3 
+reg          out_valid;
+reg          cnt_start_d;
+wire         cnt_en;
+//-------------------------------------------------------------------
+//! for test
+//wire [14:0]  tof;
+//reg  [14:0]  tof_data[2:0]; //depth = 3 
+//reg  [9:0]   counter_reg_out;
+//reg  [9:0]   counter;
+reg  [4:0]  counter;
+reg  [4:0]  counter_reg_out;
+wire [9:0]  tof;
+reg  [9:0]  tof_data[2:0]; //depth = 3 
 
 //-------------------------------------------------------------------
 
@@ -44,31 +54,41 @@ always @(posedge TDC_start or negedge rst_n) begin
     end
     else begin
         start_reg_out <= DLL_Phase;
-        cnt_start <= 1'b1;
+        cnt_start <= ~cnt_start; //! test
     end
 end
 
 always @(posedge TDC_trigger or negedge rst_n) begin
     if (!rst_n) begin
-        //stop_data <= 0;
-        TDC_Onum <= 0;
         stop_reg_out <= 32'h0000_0000;
+    end
+    else if (~cnt_en) begin
+        stop_reg_out <= 32'h0000_0000;
+    end
+    else begin
+        stop_reg_out <= DLL_Phase;        
+    end
+end
+
+always @(posedge TDC_trigger or negedge rst_n) begin
+    if (!rst_n) begin
+        TDC_Onum <= 0;
+    end
+    else if (~cnt_en) begin
+        TDC_Onum <= TDC_Onum;//! ??
     end
     else if (TDC_Onum <= 2) begin
         TDC_Onum <= TDC_Onum + 1;
-        //stop_data <= {stop_data[1:0], DLL_Phase};
-        stop_reg_out <= DLL_Phase;
     end
-    else if (TDC_Onum == 3) begin
-        //TDC_Onum <= 3;
-        //stop_data <= {stop_data[1:0], DLL_Phase};
-        stop_reg_out <= DLL_Phase;
-    end
-        
+/*     else if (TDC_Onum == 3) begin
+    end */
 end
 
 always @(negedge TDC_tgate or negedge rst_n) begin
     if (!rst_n) begin
+        light_level <= 5'b0_0000;
+    end
+    else if (~cnt_en) begin
         light_level <= 5'b0_0000;
     end
     else begin
@@ -82,14 +102,30 @@ end
 //---------------coarse counter----------------------
 
 //assign clk5 = DLL_Phase[0]; // clk5 from external pin
+assign cnt_en = cnt_start ^ cnt_start_d;
 always @(posedge clk5 or negedge rst_n) begin
     if(!rst_n) begin
-        counter <= 10'b00_0000_0000;
+        //! for test
+        //counter <= 10'b00_0000_0000;
+        counter <= 5'b0_0000;
+        TDC_INT <= 0;
+        cnt_start_d <= 0;
     end
-    else if(cnt_start) begin
-        counter <= counter + 10'b00_0000_0001;
+    else if(TDC_INT) begin
+        TDC_INT <= 0; 
+    end
+    else if(counter == 5'b1_1111) begin //! for test
+        TDC_INT <= 1;
+        counter <= 5'b0_0000;
+        cnt_start_d <= cnt_start;
+    end
+    else if(cnt_en) begin
+        //! for test
+        //counter <= counter + 10'b00_0000_0001;
+        counter <= counter + 5'b0_0001;
     end
 end
+//! when counter overflows, ignore TDC_trigger signal
 
 //---------------sync module-------------------------
 sync sync_inst0(
@@ -104,7 +140,9 @@ sync sync_inst0(
 
 always @(posedge sync or negedge rst_n) begin
     if(!rst_n) begin
-        counter_reg_out <= 10'b00_0000_0000;
+        //! for test
+        //counter_reg_out <= 10'b00_0000_0000;
+        counter_reg_out <= 5'b0_0000;
         out_valid <= 1'b0;
     end
     else begin
@@ -126,8 +164,9 @@ decode decode_stop(
     );
 
 //---------------tof data out------------------------
-
-assign tof[14:0] = {counter_reg_out[9:0], stop_data_out[4:0]} - {10'b00_0000_0001, start_data_out[4:0]};
+//! for test
+//assign tof[14:0] = {counter_reg_out[9:0], stop_data_out[4:0]} - {10'b00_0000_0001, start_data_out[4:0]};
+assign tof[9:0] = {counter_reg_out[4:0], stop_data_out[4:0]} - {5'b0_0001, start_data_out[4:0]};
 
 
 assign INT_in = light_level;
@@ -148,7 +187,7 @@ always @(negedge TDC_trigger or negedge rst_n) begin //clk?
         tof_data[1] <= tof;
         INT[1] <= INT_in;
     end
-    else if (INT[2] <= INT[0] && INT[2] <= INT[1] && INT[2] <= INT_in) begin
+    else if(INT[2] <= INT[0] && INT[2] <= INT[1] && INT[2] <= INT_in) begin
         tof_data[2] <= tof;
         INT[2] <= INT_in;
     end
@@ -163,7 +202,16 @@ assign TDC_Odata = 0;
 assign TDC_Oint = 0;
 assign TDC_Olast = 0;
 assign TDC_Ovalid = 0;
-assign TDC_INT = 0;
+//assign TDC_INT = 0;
+//---------------hand shake module--------------------
+
+
+
+
+
+
+
+
 endmodule //tdc_top
 
 
