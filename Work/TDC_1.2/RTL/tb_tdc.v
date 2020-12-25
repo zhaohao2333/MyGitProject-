@@ -110,6 +110,7 @@ initial begin
         #500 ;
         #5   rst_n = 0;
         #20  rst_n = 1;
+        #300 ;
     // start 2:
              TDC_start = 1;
         #200 TDC_start = 0;
@@ -136,6 +137,7 @@ end
 
 //-------------------------------------------------------------------------------------
 always #5 clk_i = !clk_i;
+always #320 clk = !clk;
 //1 cnt cycle 320 ns == 2 ns, light_pulse 5 ns = 800 ns ,time gate 3 ns == 480 ns
 
 always @(posedge clk_i or negedge rst) begin

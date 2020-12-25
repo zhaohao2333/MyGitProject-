@@ -10,15 +10,23 @@ module tdc_top (
     input  wire         TDC_tgate, //from analog end, 3ns pulse follow trigger signal
     //! for test
     //output wire [14:0]  TDC_Odata,
-    output wire [9 :0]  TDC_Odata, //!todo
+    output reg  [9 :0]  TDC_Odata, //!todo
     //output wire [3 :0]  TDC_Oint, //output intensity counter for each depth data 
-    output wire [4 :0]  TDC_Oint, //!todo
+    output reg  [4 :0]  TDC_Oint, //!todo
     output reg  [1 :0]  TDC_Onum, //output valid data number
-    output wire         TDC_Olast, //!todo output last data signal
-    output wire         TDC_Ovalid, //!todo output data valid signal
+    output reg          TDC_Olast, //!todo output last data signal
+    output reg          TDC_Ovalid, //!todo output data valid signal
     input  wire         TDC_Oready, //output data ready signal
     output reg          TDC_INT
 );
+//-------------------------------------------------------------------
+parameter IDLE    = 6'b000000;
+parameter DATA1   = 6'b000001;
+parameter DATA2   = 6'b000010;
+parameter DATA2_1 = 6'b000100;
+parameter DATA3   = 6'b001000;
+parameter DATA3_1 = 6'b010000;
+parameter DATA3_2 = 6'b100000;
 //-------------------------------------------------------------------
 reg  [31:0]  start_reg_out;
 wire [4:0]   start_data_out;
@@ -34,6 +42,9 @@ wire [4:0]   INT_in;
 reg          out_valid;
 reg          cnt_start_d;
 wire         cnt_en;
+wire         hs;
+reg  [5:0]   n_state;
+reg  [5:0]   c_state;
 //-------------------------------------------------------------------
 //! for test
 //wire [14:0]  tof;
@@ -198,17 +209,143 @@ always @(negedge TDC_trigger or negedge rst_n) begin //clk?
 end
 //! -------------------------------------------------------
 
-assign TDC_Odata = 0;
-assign TDC_Oint = 0;
-assign TDC_Olast = 0;
-assign TDC_Ovalid = 0;
+//assign TDC_Odata = 0;
+//assign TDC_Oint = 0;
+//assign TDC_Olast = 0;
+//assign TDC_Ovalid = 0;
 //assign TDC_INT = 0;
 //---------------hand shake module--------------------
+always @(posedge clk5 or negedge rst_n) begin //clk 500 Mhz
+    if (!rst_n) begin
+        TDC_Ovalid <= 0;
+    end
+    else if (counter == 5'b1_1111) begin
+        TDC_Ovalid <= 1;
+    end
+    else if (n_state == IDLE) begin
+        TDC_Ovalid <= 0;
+    end
+end
 
+/* always @(posedge clk or negedge rst_n) begin //clk 250 Mhz
+    if (!rst_n) begin
+        TDC_Odata <= 0;
+    end
+    else if () begin
+         
+    end
+    else if (hs) begin
+        out_num <= TDC_Onum;
+        case (out_num)
+            0:  
+                TDC_Odata <= 0;         
+            1:  
+                TDC_Odata <= tof_data[0];            
+            2:  begin
+                TDC_Odata <= tof_data[1];
+                out_num <= 1;
+            end            
+            3:  begin
+                TDC_Odata <= tof_data[2];            
+                out_num <= 2;
+            end
+            default :
+                TDC_Odata <= 0;
+        endcase
+    end
+end */
+//
+always @(posedge clk or negedge rst_n) begin
+    if (!rst_n) begin
+        c_state <= IDLE;
+    end
+    else 
+        c_state <= n_state;
+end
 
+assign hs = TDC_Oready & TDC_Ovalid;
 
+always @(*) begin
+    //!
+    n_state = IDLE;
+    case (c_state)
+        IDLE: 
+            if ((TDC_Onum == 0) & hs)
+                n_state = IDLE;
+            else if ((TDC_Onum == 1) & hs)
+                n_state = DATA1;
+            else if ((TDC_Onum == 2) & hs)
+                n_state = DATA2;
+            else if ((TDC_Onum == 3) & hs)
+                n_state = DATA3;
+        DATA1:
+            n_state = IDLE;
+        DATA2:
+            n_state = DATA2_1;
+        DATA2_1:
+            n_state = IDLE;
+        DATA3:
+            n_state = DATA3_1;
+        DATA3_1:
+            n_state = DATA3_2;
+        DATA3_2:
+            n_state = IDLE;
+        default :
+            n_state = IDLE;
+    endcase
+end
 
-
+always @(posedge clk or negedge rst_n) begin
+    if (!rst_n) begin
+        TDC_Odata <= 0;
+        TDC_Olast <= 0;
+        TDC_Oint  <= 0;
+    end
+    else if (hs) begin
+        case (n_state)
+            IDLE: begin 
+                TDC_Odata <= 0;
+                TDC_Olast <= 0;
+                TDC_Oint  <= 0;
+            end
+            DATA1: begin
+                TDC_Odata <= tof_data[0];
+                TDC_Oint  <= INT[0];
+            end
+            DATA2: begin
+                TDC_Odata <= tof_data[0];
+                TDC_Oint  <= INT[0];
+            end
+            DATA2_1: begin
+                TDC_Odata <= tof_data[1];
+                TDC_Oint  <= INT[1];
+            end
+            DATA3: begin
+                TDC_Odata <= tof_data[0];
+                TDC_Oint  <= INT[0];
+            end
+            DATA3_1: begin
+                TDC_Odata <= tof_data[1];
+                TDC_Oint  <= INT[1];
+            end
+            DATA3_2: begin
+                TDC_Odata <= tof_data[2];
+                TDC_Oint  <= INT[2];
+                TDC_Olast <= 1;
+            end
+            default : begin
+                TDC_Odata <= 0;
+                TDC_Olast <= 0;
+                TDC_Oint  <= 0;
+            end
+        endcase
+    end
+    else begin
+        TDC_Odata <= 0;
+        TDC_Olast <= 0;
+        TDC_Oint  <= 0;
+    end
+end
 
 
 
