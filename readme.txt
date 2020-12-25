@@ -1,6 +1,0 @@
-
-my
-git
-project
-
-
