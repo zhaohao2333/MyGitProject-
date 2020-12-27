@@ -48,8 +48,10 @@ add wave -noupdate /tb_tdc/tdc_top_dut/sync
 add wave -noupdate /tb_tdc/tdc_top_dut/out_valid
 add wave -noupdate /tb_tdc/tdc_top_dut/tof
 add wave -noupdate /tb_tdc/tdc_top_dut/tof_data
+add wave -noupdate /tb_tdc/tdc_top_dut/odata
 add wave -noupdate /tb_tdc/tdc_top_dut/INT_in
 add wave -noupdate /tb_tdc/tdc_top_dut/INT
+add wave -noupdate /tb_tdc/tdc_top_dut/oINT
 add wave -noupdate /tb_tdc/tdc_top_dut/TDC_Ovalid
 add wave -noupdate /tb_tdc/tdc_top_dut/TDC_Oready
 add wave -noupdate /tb_tdc/tdc_top_dut/hs
@@ -61,9 +63,9 @@ add wave -noupdate /tb_tdc/tdc_top_dut/TDC_Odata
 add wave -noupdate /tb_tdc/tdc_top_dut/TDC_Oint
 add wave -noupdate /tb_tdc/tdc_top_dut/TDC_Olast
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {1415000 ps} 0}
+WaveRestoreCursors {{Cursor 1} {15136526 ps} 0}
 quietly wave cursor active 1
-configure wave -namecolwidth 172
+configure wave -namecolwidth 206
 configure wave -valuecolwidth 210
 configure wave -justifyvalue left
 configure wave -signalnamewidth 1
@@ -77,7 +79,8 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ns
 update
-WaveRestoreZoom {0 ps} {18515443 ps}
+WaveRestoreZoom {0 ps} {14479455 ps}
+
 
 
 # =========================<     仿真时间     >===============================

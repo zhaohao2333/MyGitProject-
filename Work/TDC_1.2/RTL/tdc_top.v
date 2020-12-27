@@ -45,6 +45,9 @@ wire         cnt_en;
 wire         hs;
 reg  [5:0]   n_state;
 reg  [5:0]   c_state;
+reg          clr_num;
+//reg  [9:0]   odata[2:0];
+//reg  [4:0]   oINT[2:0];
 //-------------------------------------------------------------------
 //! for test
 //wire [14:0]  tof;
@@ -85,6 +88,9 @@ always @(posedge TDC_trigger or negedge rst_n) begin
     if (!rst_n) begin
         TDC_Onum <= 0;
     end
+    else if (clr_num ^ cnt_start) begin
+        TDC_Onum <= 1;
+    end
     else if (~cnt_en) begin
         TDC_Onum <= TDC_Onum;//! ??
     end
@@ -94,6 +100,16 @@ always @(posedge TDC_trigger or negedge rst_n) begin
 /*     else if (TDC_Onum == 3) begin
     end */
 end
+
+always @(posedge TDC_trigger or negedge rst_n) begin
+    if (!rst_n) begin
+        clr_num <= 0;
+    end
+    else if (cnt_en) begin
+        clr_num <= cnt_start;
+    end
+end
+        
 
 always @(negedge TDC_tgate or negedge rst_n) begin
     if (!rst_n) begin
@@ -190,6 +206,14 @@ always @(negedge TDC_trigger or negedge rst_n) begin //clk?
         INT[1]  <= 0;
         INT[0]  <= 0;
     end
+    else if (TDC_Onum == 1) begin //! test
+        tof_data[2] <= 0;
+        tof_data[1] <= 0;
+        tof_data[0] <= tof;
+        INT[2]  <= 0;
+        INT[1]  <= 0;
+        INT[0]  <= INT_in;
+    end
     else if(INT[0] <= INT[1] && INT[0] <= INT[2] && INT[0] <= INT_in) begin
         tof_data[0] <= tof;
         INT[0] <= INT_in;
@@ -208,7 +232,23 @@ always @(negedge TDC_trigger or negedge rst_n) begin //clk?
     end */
 end
 //! -------------------------------------------------------
-
+/* always @( *) begin
+    if (TDC_start) begin //! start pulse width?
+        odata[2] = 0;
+        odata[1] = 0;
+        odata[0] = 0;
+        oINT[2]  = 0;
+        oINT[1]  = 0;
+        oINT[0]  = 0;
+    end
+    else
+        odata[2] = tof_data[2];
+        odata[1] = tof_data[1];
+        odata[0] = tof_data[0];
+        oINT[2]  = INT[2];
+        oINT[1]  = INT[1];
+        oINT[0]  = INT[0];
+end */
 //assign TDC_Odata = 0;
 //assign TDC_Oint = 0;
 //assign TDC_Olast = 0;
@@ -226,35 +266,19 @@ always @(posedge clk5 or negedge rst_n) begin //clk 500 Mhz
         TDC_Ovalid <= 0;
     end
 end
-
-/* always @(posedge clk or negedge rst_n) begin //clk 250 Mhz
+//! todo
+/* always @(posedge clk or negedge rst_n) begin //clk 500 Mhz
     if (!rst_n) begin
-        TDC_Odata <= 0;
+        TDC_Ovalid <= 0;
     end
-    else if () begin
-         
+    else if (counter == 5'b1_1111) begin
+        TDC_Ovalid <= 1;
     end
-    else if (hs) begin
-        out_num <= TDC_Onum;
-        case (out_num)
-            0:  
-                TDC_Odata <= 0;         
-            1:  
-                TDC_Odata <= tof_data[0];            
-            2:  begin
-                TDC_Odata <= tof_data[1];
-                out_num <= 1;
-            end            
-            3:  begin
-                TDC_Odata <= tof_data[2];            
-                out_num <= 2;
-            end
-            default :
-                TDC_Odata <= 0;
-        endcase
+    else if (n_state == IDLE) begin
+        TDC_Ovalid <= 0;
     end
 end */
-//
+
 always @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
         c_state <= IDLE;
@@ -303,7 +327,7 @@ always @(posedge clk or negedge rst_n) begin
     end
     else if (hs) begin
         case (n_state)
-            IDLE: begin 
+            IDLE: begin // output data 0 or Z state?
                 TDC_Odata <= 0;
                 TDC_Olast <= 0;
                 TDC_Oint  <= 0;
