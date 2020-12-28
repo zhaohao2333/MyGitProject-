@@ -44,14 +44,18 @@ add wave -noupdate /tb_tdc/tdc_top_dut/cnt_start_d
 add wave -noupdate /tb_tdc/tdc_top_dut/cnt_en
 add wave -noupdate /tb_tdc/tdc_top_dut/counter
 add wave -noupdate /tb_tdc/tdc_top_dut/counter_reg_out
+add wave -noupdate /tb_tdc/tdc_top_dut/TDC_trigger
+add wave -noupdate /tb_tdc/tdc_top_dut/clk5
+add wave -noupdate /tb_tdc/tdc_top_dut/sync_inst0/s
+add wave -noupdate /tb_tdc/tdc_top_dut/sync_inst0/stop_0
+add wave -noupdate /tb_tdc/tdc_top_dut/sync_inst0/stop_1
+add wave -noupdate /tb_tdc/tdc_top_dut/sync_inst0/vout
 add wave -noupdate /tb_tdc/tdc_top_dut/sync
 add wave -noupdate /tb_tdc/tdc_top_dut/out_valid
 add wave -noupdate /tb_tdc/tdc_top_dut/tof
 add wave -noupdate /tb_tdc/tdc_top_dut/tof_data
-add wave -noupdate /tb_tdc/tdc_top_dut/odata
 add wave -noupdate /tb_tdc/tdc_top_dut/INT_in
 add wave -noupdate /tb_tdc/tdc_top_dut/INT
-add wave -noupdate /tb_tdc/tdc_top_dut/oINT
 add wave -noupdate /tb_tdc/tdc_top_dut/TDC_Ovalid
 add wave -noupdate /tb_tdc/tdc_top_dut/TDC_Oready
 add wave -noupdate /tb_tdc/tdc_top_dut/hs
@@ -63,10 +67,10 @@ add wave -noupdate /tb_tdc/tdc_top_dut/TDC_Odata
 add wave -noupdate /tb_tdc/tdc_top_dut/TDC_Oint
 add wave -noupdate /tb_tdc/tdc_top_dut/TDC_Olast
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {15136526 ps} 0}
-quietly wave cursor active 1
-configure wave -namecolwidth 206
-configure wave -valuecolwidth 210
+WaveRestoreCursors {{Cursor 1} {2255000 ps} 0} {{Cursor 2} {20508370 ps} 0}
+quietly wave cursor active 2
+configure wave -namecolwidth 155
+configure wave -valuecolwidth 260
 configure wave -justifyvalue left
 configure wave -signalnamewidth 1
 configure wave -snapdistance 10
@@ -79,7 +83,8 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ns
 update
-WaveRestoreZoom {0 ps} {14479455 ps}
+WaveRestoreZoom {17790169 ps} {22180877 ps}
+
 
 
 

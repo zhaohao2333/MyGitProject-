@@ -35,9 +35,11 @@ always @(posedge sync_clk_i or negedge rst_n) begin
     if(!rst_n) begin
         sync <= 1'b0;        
     end
-    else begin
-        sync <= vout;        
+    else if (sync == 1)begin //!
+        sync <= 0;        
     end
+    else
+        sync <= vout;// next trigger s change, error
 end
 endmodule //sync
 

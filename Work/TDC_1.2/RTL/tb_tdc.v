@@ -104,6 +104,7 @@ initial begin
              TDC_tgate = 1;
         #480 TDC_tgate = 0;
         #320 TDC_trigger = 0;
+        #5000 ;// overflow
         
     //----------------------------------------------------------------------------------------------
     //! reset
@@ -128,7 +129,7 @@ initial begin
         #480 TDC_tgate = 0;
         #320 TDC_trigger = 0;
 
-        #500 ;
+        #12000 ;
         $finish;
     end
 end

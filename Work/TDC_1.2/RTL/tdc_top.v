@@ -56,7 +56,7 @@ reg          clr_num;
 //reg  [9:0]   counter;
 reg  [4:0]  counter;
 reg  [4:0]  counter_reg_out;
-wire [9:0]  tof;
+reg  [9:0]  tof;
 reg  [9:0]  tof_data[2:0]; //depth = 3 
 
 //-------------------------------------------------------------------
@@ -193,8 +193,24 @@ decode decode_stop(
 //---------------tof data out------------------------
 //! for test
 //assign tof[14:0] = {counter_reg_out[9:0], stop_data_out[4:0]} - {10'b00_0000_0001, start_data_out[4:0]};
-assign tof[9:0] = {counter_reg_out[4:0], stop_data_out[4:0]} - {5'b0_0001, start_data_out[4:0]};
-
+//assign tof[9:0] = {counter_reg_out[4:0], stop_data_out[4:0]} - {5'b0_0001, start_data_out[4:0]};
+always @( *) begin
+    tof[4:0] = stop_data_out[4:0] - start_data_out[4:0];
+end
+always @( *) begin
+    if(start_data_out >= 5'b10000 && stop_data_out >= start_data_out) begin
+        tof[9:5] = counter_reg_out[4:0] - 1;
+    end
+    else if(start_data_out >= 5'b10000 && stop_data_out <= start_data_out) begin
+        tof[9:5] = counter_reg_out[4:0] - 2;
+    end
+    else if(start_data_out <= 5'b10000 && stop_data_out >= start_data_out) begin
+        tof[9:5] = counter_reg_out[4:0] - 2;
+    end
+    else if(start_data_out <= 5'b10000 && stop_data_out <= start_data_out) begin
+        tof[9:5] = counter_reg_out[4:0] - 3;
+    end
+end
 
 assign INT_in = light_level;
 always @(negedge TDC_trigger or negedge rst_n) begin //clk?
@@ -335,6 +351,7 @@ always @(posedge clk or negedge rst_n) begin
             DATA1: begin
                 TDC_Odata <= tof_data[0];
                 TDC_Oint  <= INT[0];
+                TDC_Olast <= 1;
             end
             DATA2: begin
                 TDC_Odata <= tof_data[0];
@@ -343,6 +360,7 @@ always @(posedge clk or negedge rst_n) begin
             DATA2_1: begin
                 TDC_Odata <= tof_data[1];
                 TDC_Oint  <= INT[1];
+                TDC_Olast <= 1;
             end
             DATA3: begin
                 TDC_Odata <= tof_data[0];
