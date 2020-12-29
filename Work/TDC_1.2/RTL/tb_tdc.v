@@ -20,6 +20,7 @@ module tb_tdc;
     wire         TDC_Ovalid; 
     reg          TDC_Oready;
     wire         TDC_INT;
+    reg  [14:0]  TDC_Range;
 
 
 tdc_top tdc_top_dut(
@@ -31,6 +32,7 @@ tdc_top tdc_top_dut(
     .TDC_trigger        (TDC_trigger), //from SPAD
     .TDC_spaden         (TDC_spaden), //from 4*4 SPAD
     .TDC_tgate          (TDC_tgate), //from analog end, 3ns pulse follow trigger signal
+    .TDC_Range          (TDC_Range),
     .TDC_Odata          (TDC_Odata),
     //output wire [3 :0]  TDC_Oint, //output intensity counter for each depth data 
     .TDC_Oint           (TDC_Oint),
@@ -54,6 +56,7 @@ initial begin
         TDC_tgate = 0;
         TDC_spaden = 0;
         TDC_Oready = 1; //!todo
+        TDC_Range = 31; // TDC_Range = 15'b xxxx;
     // start 1:
         #5   rst_n = 0;
              rst = 0;
@@ -122,7 +125,8 @@ initial begin
         #480 TDC_tgate = 0;
         #320 TDC_trigger = 0; // light_pulse == 800 ns = 480 + 320 ns
     // pulse 2:
-        #150
+        //#150
+        #325
              TDC_trigger = 1;
              TDC_spaden = 16'b0000_0000_1111_0001; //int = 5
              TDC_tgate = 1;

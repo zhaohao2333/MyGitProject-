@@ -8,6 +8,7 @@ module tdc_top (
     input  wire         TDC_trigger, //from SPAD
     input  wire [15:0]  TDC_spaden, //from 4*4 SPAD
     input  wire         TDC_tgate, //from analog end, 3ns pulse follow trigger signal
+    input  wire [14:0]  TDC_Range, 
     //! for test
     //output wire [14:0]  TDC_Odata,
     output reg  [9 :0]  TDC_Odata, //!todo
@@ -58,6 +59,9 @@ reg  [4:0]  counter;
 reg  [4:0]  counter_reg_out;
 reg  [9:0]  tof;
 reg  [9:0]  tof_data[2:0]; //depth = 3 
+
+reg  [9:0]  range;
+
 
 //-------------------------------------------------------------------
 
@@ -141,7 +145,7 @@ always @(posedge clk5 or negedge rst_n) begin
     else if(TDC_INT) begin
         TDC_INT <= 0; 
     end
-    else if(counter == 5'b1_1111) begin //! for test
+    else if(counter == range) begin //! for test
         TDC_INT <= 1;
         counter <= 5'b0_0000;
         cnt_start_d <= cnt_start;
@@ -153,6 +157,16 @@ always @(posedge clk5 or negedge rst_n) begin
     end
 end
 //! when counter overflows, ignore TDC_trigger signal
+
+always @(posedge clk or negedge rst_n) begin //clk or clk5£¿
+    if (!rst_n) begin
+        range <= 5'b11111;//! for test
+    end
+    else if (~cnt_en & TDC_Oready) begin
+        range <= TDC_Range;
+    end
+        
+end
 
 //---------------sync module-------------------------
 sync sync_inst0(
@@ -275,7 +289,7 @@ always @(posedge clk5 or negedge rst_n) begin //clk 500 Mhz
     if (!rst_n) begin
         TDC_Ovalid <= 0;
     end
-    else if (counter == 5'b1_1111) begin
+    else if (counter == range && TDC_Onum != 0) begin
         TDC_Ovalid <= 1;
     end
     else if (n_state == IDLE) begin
