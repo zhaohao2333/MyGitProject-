@@ -57,7 +57,7 @@ reg          clr_num;
 //reg  [9:0]   counter;
 reg  [4:0]  counter;
 reg  [4:0]  counter_reg_out;
-reg  [9:0]  tof;
+wire [9:0]  tof;
 reg  [9:0]  tof_data[2:0]; //depth = 3 
 
 reg  [9:0]  range;
@@ -162,7 +162,7 @@ always @(posedge clk or negedge rst_n) begin //clk or clk5£¿
     if (!rst_n) begin
         range <= 5'b11111;//! for test
     end
-    else if (~cnt_en & TDC_Oready) begin
+    else if (~cnt_en & TDC_Oready) begin //! ~cnt_en?
         range <= TDC_Range;
     end
         
@@ -173,7 +173,7 @@ sync sync_inst0(
     .s (stop_reg_out[0]),
     .TDC_trigger (TDC_trigger),
     .rst_n (rst_n),
-    .clk5 (clk5),
+    .sync_clk (clk5),
     .sync (sync)
 );
 
@@ -207,8 +207,8 @@ decode decode_stop(
 //---------------tof data out------------------------
 //! for test
 //assign tof[14:0] = {counter_reg_out[9:0], stop_data_out[4:0]} - {10'b00_0000_0001, start_data_out[4:0]};
-//assign tof[9:0] = {counter_reg_out[4:0], stop_data_out[4:0]} - {5'b0_0001, start_data_out[4:0]};
-always @( *) begin
+assign tof[9:0] = {counter_reg_out[4:0], stop_data_out[4:0]} - {5'b0_0001, start_data_out[4:0]};
+/* always @( *) begin
     tof[4:0] = stop_data_out[4:0] - start_data_out[4:0];
 end
 always @( *) begin
@@ -224,7 +224,7 @@ always @( *) begin
     else if(start_data_out <= 5'b10000 && stop_data_out <= start_data_out) begin
         tof[9:5] = counter_reg_out[4:0] - 3;
     end
-end
+end */
 
 assign INT_in = light_level;
 always @(negedge TDC_trigger or negedge rst_n) begin //clk?
@@ -261,24 +261,6 @@ always @(negedge TDC_trigger or negedge rst_n) begin //clk?
         INT[2:0][ 4:0] <= {INT[2], INT[1], INT[0]};
     end */
 end
-//! -------------------------------------------------------
-/* always @( *) begin
-    if (TDC_start) begin //! start pulse width?
-        odata[2] = 0;
-        odata[1] = 0;
-        odata[0] = 0;
-        oINT[2]  = 0;
-        oINT[1]  = 0;
-        oINT[0]  = 0;
-    end
-    else
-        odata[2] = tof_data[2];
-        odata[1] = tof_data[1];
-        odata[0] = tof_data[0];
-        oINT[2]  = INT[2];
-        oINT[1]  = INT[1];
-        oINT[0]  = INT[0];
-end */
 //assign TDC_Odata = 0;
 //assign TDC_Oint = 0;
 //assign TDC_Olast = 0;
@@ -297,7 +279,7 @@ always @(posedge clk5 or negedge rst_n) begin //clk 500 Mhz
     end
 end
 //! todo
-/* always @(posedge clk or negedge rst_n) begin //clk 500 Mhz
+/* always @(posedge clk or negedge rst_n) begin //!clk 250 Mhz
     if (!rst_n) begin
         TDC_Ovalid <= 0;
     end
