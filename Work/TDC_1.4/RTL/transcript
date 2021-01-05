@@ -1,0 +1,1071 @@
+# Reading D:/modeltech64_10.4/tcl/vsim/pref.tcl
+# //  ModelSim SE-64 10.4 Dec  3 2014 
+# //
+# //  Copyright 1991-2014 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  THIS WORK CONTAINS TRADE SECRET AND PROPRIETARY INFORMATION
+# //  WHICH IS THE PROPERTY OF MENTOR GRAPHICS CORPORATION OR ITS
+# //  LICENSORS AND IS SUBJECT TO LICENSE TERMS.
+# //  THIS DOCUMENT CONTAINS TRADE SECRETS AND COMMERCIAL OR FINANCIAL
+# //  INFORMATION THAT ARE PRIVILEGED, CONFIDENTIAL, AND EXEMPT FROM
+# //  DISCLOSURE UNDER THE FREEDOM OF INFORMATION ACT, 5 U.S.C. SECTION 552.
+# //  FURTHERMORE, THIS INFORMATION IS PROHIBITED FROM DISCLOSURE UNDER
+# //  THE TRADE SECRETS ACT, 18 U.S.C. SECTION 1905.
+# //
+# do sim_tdc.do
+# Model Technology ModelSim SE-64 vmap 10.4 Lib Mapping Utility 2014.12 Dec  3 2014
+# vmap -modelsim_quiet work work 
+# Modifying modelsim.ini
+# Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
+# Start time: 10:27:22 on Jan 05,2021
+# vlog -reportprogress 300 decode.v sort.v sync.v tb_tdc.v tdc_top.v 
+# -- Compiling module decode
+# -- Compiling module sort
+# -- Compiling module sync
+# -- Compiling module tb_tdc
+# -- Compiling module tdc_top
+# ** Error: tdc_top.v(282): Register is illegal in left-hand side of continuous assignment
+# End time: 10:27:22 on Jan 05,2021, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# ** Error: D:/modeltech64_10.4/win64/vlog failed.
+# Error in macro ./sim_tdc.do line 18
+# D:/modeltech64_10.4/win64/vlog failed.
+#     while executing
+# "vlog *.v"
+do sim_tdc.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# 
+# Model Technology ModelSim SE-64 vmap 10.4 Lib Mapping Utility 2014.12 Dec  3 2014
+# vmap -modelsim_quiet work work 
+# Modifying modelsim.ini
+# Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
+# Start time: 10:27:52 on Jan 05,2021
+# vlog -reportprogress 300 decode.v sort.v sync.v tb_tdc.v tdc_top.v 
+# -- Compiling module decode
+# -- Compiling module sort
+# -- Compiling module sync
+# -- Compiling module tb_tdc
+# -- Compiling module tdc_top
+# 
+# Top level modules:
+# 	sort
+# 	tb_tdc
+# End time: 10:27:53 on Jan 05,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# vsim -gui -do "sim_tdc.do" 
+# Start time: 10:27:53 on Jan 05,2021
+# ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
+# 
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.tb_tdc
+# Loading work.tb_tdc
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.tdc_top
+# Loading work.tdc_top
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.sync
+# Loading work.sync
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.decode
+# Loading work.decode
+# ** Warning: (vsim-3015) tb_tdc.v(26): [PCDPC] - Port size (10) does not match connection size (15) for port 'TDC_Odata'. The port definition is at: tdc_top.v(14).
+#    Time: 0 ps  Iteration: 0  Instance: /tb_tdc/tdc_top_dut File: tdc_top.v
+# ** Error: (vish-4014) No objects found matching '/tb_tdc/tdc_top_dut/out_valid'.
+# Executing ONERROR command at macro ./sim_tdc.do line 54
+# ** Note: $finish    : tb_tdc.v(137)
+#    Time: 33628 ns  Iteration: 0  Instance: /tb_tdc
+# 1
+# Break in Module tb_tdc at tb_tdc.v line 137
+add wave -position insertpoint sim:/tb_tdc/tdc_top_dut/Ovalid
+add wave -position insertpoint sim:/tb_tdc/tdc_top_dut/Ovalid_d1
+restart
+# ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
+# 
+# ** Warning: (vsim-3015) tb_tdc.v(26): [PCDPC] - Port size (10) does not match connection size (15) for port 'TDC_Odata'. The port definition is at: tdc_top.v(14).
+#    Time: 0 ps  Iteration: 0  Instance: /tb_tdc/tdc_top_dut File: tdc_top.v
+run -all
+# ** Note: $finish    : tb_tdc.v(137)
+#    Time: 33628 ns  Iteration: 0  Instance: /tb_tdc
+# 1
+# Break in Module tb_tdc at tb_tdc.v line 137
+write format wave -window .main_pane.wave.interior.cs.body.pw.wf D:/Workplace/Work/TDC_1.4/RTL/wave.do
+do sim_tdc.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# 
+# Model Technology ModelSim SE-64 vmap 10.4 Lib Mapping Utility 2014.12 Dec  3 2014
+# vmap -modelsim_quiet work work 
+# Modifying modelsim.ini
+# Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
+# Start time: 10:36:41 on Jan 05,2021
+# vlog -reportprogress 300 decode.v sort.v sync.v tb_tdc.v tdc_top.v 
+# -- Compiling module decode
+# -- Compiling module sort
+# -- Compiling module sync
+# -- Compiling module tb_tdc
+# -- Compiling module tdc_top
+# 
+# Top level modules:
+# 	sort
+# 	tb_tdc
+# End time: 10:36:41 on Jan 05,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vsim 
+# Start time: 10:36:41 on Jan 05,2021
+# ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
+# 
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.tb_tdc
+# Loading work.tb_tdc
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.tdc_top
+# Loading work.tdc_top
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.sync
+# Loading work.sync
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.decode
+# Loading work.decode
+# ** Warning: (vsim-3015) tb_tdc.v(26): [PCDPC] - Port size (10) does not match connection size (15) for port 'TDC_Odata'. The port definition is at: tdc_top.v(14).
+#    Time: 0 ps  Iteration: 0  Instance: /tb_tdc/tdc_top_dut File: tdc_top.v
+# ** Note: $finish    : tb_tdc.v(137)
+#    Time: 33628 ns  Iteration: 0  Instance: /tb_tdc
+# 1
+# Break in Module tb_tdc at tb_tdc.v line 137
+do sim_tdc.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# 
+# Model Technology ModelSim SE-64 vmap 10.4 Lib Mapping Utility 2014.12 Dec  3 2014
+# vmap -modelsim_quiet work work 
+# Modifying modelsim.ini
+# Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
+# Start time: 10:51:11 on Jan 05,2021
+# vlog -reportprogress 300 decode.v sort.v sync.v tb_tdc.v tdc_top.v 
+# -- Compiling module decode
+# -- Compiling module sort
+# -- Compiling module sync
+# -- Compiling module tb_tdc
+# -- Compiling module tdc_top
+# 
+# Top level modules:
+# 	sort
+# 	tb_tdc
+# End time: 10:51:11 on Jan 05,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vsim 
+# Start time: 10:51:11 on Jan 05,2021
+# ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
+# 
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.tb_tdc
+# Loading work.tb_tdc
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.tdc_top
+# Loading work.tdc_top
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.sync
+# Loading work.sync
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.decode
+# Loading work.decode
+# ** Warning: (vsim-3015) tb_tdc.v(26): [PCDPC] - Port size (10) does not match connection size (15) for port 'TDC_Odata'. The port definition is at: tdc_top.v(14).
+#    Time: 0 ps  Iteration: 0  Instance: /tb_tdc/tdc_top_dut File: tdc_top.v
+# ** Note: $finish    : tb_tdc.v(137)
+#    Time: 33628 ns  Iteration: 0  Instance: /tb_tdc
+# 1
+# Break in Module tb_tdc at tb_tdc.v line 137
+do sim_tdc.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# 
+# Model Technology ModelSim SE-64 vmap 10.4 Lib Mapping Utility 2014.12 Dec  3 2014
+# vmap -modelsim_quiet work work 
+# Modifying modelsim.ini
+# Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
+# Start time: 12:27:25 on Jan 05,2021
+# vlog -reportprogress 300 decode.v sort.v sync.v tb_tdc.v tdc_top.v 
+# -- Compiling module decode
+# -- Compiling module sort
+# -- Compiling module sync
+# -- Compiling module tb_tdc
+# -- Compiling module tdc_top
+# 
+# Top level modules:
+# 	sort
+# 	tb_tdc
+# End time: 12:27:25 on Jan 05,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vsim 
+# Start time: 12:27:25 on Jan 05,2021
+# ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
+# 
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.tb_tdc
+# Loading work.tb_tdc
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.tdc_top
+# Loading work.tdc_top
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.sync
+# Loading work.sync
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.decode
+# Loading work.decode
+# ** Warning: (vsim-3015) tb_tdc.v(26): [PCDPC] - Port size (10) does not match connection size (15) for port 'TDC_Odata'. The port definition is at: tdc_top.v(14).
+#    Time: 0 ps  Iteration: 0  Instance: /tb_tdc/tdc_top_dut File: tdc_top.v
+# ** Note: $finish    : tb_tdc.v(142)
+#    Time: 63828 ns  Iteration: 0  Instance: /tb_tdc
+# 1
+# Break in Module tb_tdc at tb_tdc.v line 142
+do sim_tdc.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# 
+# Model Technology ModelSim SE-64 vmap 10.4 Lib Mapping Utility 2014.12 Dec  3 2014
+# vmap -modelsim_quiet work work 
+# Modifying modelsim.ini
+# Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
+# Start time: 13:19:12 on Jan 05,2021
+# vlog -reportprogress 300 decode.v sort.v spad_model.v sync.v tb_tdc.v tdc_top.v 
+# -- Compiling module decode
+# -- Compiling module sort
+# -- Compiling module spad_module
+# ** Error: (vlog-13069) spad_model.v(5): near "trig": syntax error, unexpected IDENTIFIER, expecting ')'.
+# 
+# -- Compiling module sync
+# -- Compiling module tb_tdc
+# -- Compiling module tdc_top
+# End time: 13:19:12 on Jan 05,2021, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# ** Error: D:/modeltech64_10.4/win64/vlog failed.
+# Error in macro ./sim_tdc.do line 18
+# D:/modeltech64_10.4/win64/vlog failed.
+#     while executing
+# "vlog *.v"
+do sim_tdc.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# 
+# Model Technology ModelSim SE-64 vmap 10.4 Lib Mapping Utility 2014.12 Dec  3 2014
+# vmap -modelsim_quiet work work 
+# Modifying modelsim.ini
+# Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
+# Start time: 13:21:06 on Jan 05,2021
+# vlog -reportprogress 300 decode.v sort.v sync.v tb_tdc.v tdc_top.v 
+# -- Compiling module decode
+# -- Compiling module sort
+# -- Compiling module sync
+# -- Compiling module tb_tdc
+# -- Compiling module tdc_top
+# 
+# Top level modules:
+# 	sort
+# 	tb_tdc
+# End time: 13:21:06 on Jan 05,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vsim 
+# Start time: 13:21:06 on Jan 05,2021
+# ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
+# 
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.tb_tdc
+# Loading work.tb_tdc
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.tdc_top
+# Loading work.tdc_top
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.sync
+# Loading work.sync
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.decode
+# Loading work.decode
+# ** Error: (vsim-3033) tb_tdc.v(49): Instantiation of 'spad_module' failed. The design unit was not found.
+#    Time: 0 ns  Iteration: 0  Instance: /tb_tdc File: tb_tdc.v
+#         Searched libraries:
+#             D:/Workplace/Work/TDC_1.4/RTL/work
+# Error loading design
+# Error: Error loading design
+#        Pausing macro execution
+# MACRO ./sim_tdc.do PAUSED at line 22
+write format wave -window .main_pane.wave.interior.cs.body.pw.wf D:/Workplace/Work/TDC_1.4/RTL/wave.do
+# could not find wave window
+do sim_tdc.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# 
+# Model Technology ModelSim SE-64 vmap 10.4 Lib Mapping Utility 2014.12 Dec  3 2014
+# vmap -modelsim_quiet work work 
+# Modifying modelsim.ini
+# Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
+# Start time: 13:23:01 on Jan 05,2021
+# vlog -reportprogress 300 decode.v sort.v spad_model.v sync.v tb_tdc.v tdc_top.v 
+# -- Compiling module decode
+# -- Compiling module sort
+# -- Compiling module spad_module
+# -- Compiling module sync
+# -- Compiling module tb_tdc
+# -- Compiling module tdc_top
+# 
+# Top level modules:
+# 	sort
+# 	tb_tdc
+# End time: 13:23:01 on Jan 05,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vsim 
+# Start time: 13:23:01 on Jan 05,2021
+# ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
+# 
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.tb_tdc
+# Loading work.tb_tdc
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.tdc_top
+# Loading work.tdc_top
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.sync
+# Loading work.sync
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.decode
+# Loading work.decode
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.spad_module
+# Loading work.spad_module
+# ** Warning: (vsim-3015) tb_tdc.v(27): [PCDPC] - Port size (10) does not match connection size (15) for port 'TDC_Odata'. The port definition is at: tdc_top.v(14).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_tdc/tdc_top_dut File: tdc_top.v
+# ** Note: $finish    : tb_tdc.v(82)
+#    Time: 31303 ns  Iteration: 0  Instance: /tb_tdc
+# 1
+# Break in Module tb_tdc at tb_tdc.v line 82
+step
+# Next activity is in 2 ns.
+step
+do sim_tdc.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# 
+# Model Technology ModelSim SE-64 vmap 10.4 Lib Mapping Utility 2014.12 Dec  3 2014
+# vmap -modelsim_quiet work work 
+# Modifying modelsim.ini
+# Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
+# Start time: 13:55:39 on Jan 05,2021
+# vlog -reportprogress 300 decode.v sort.v spad_model.v sync.v tb_tdc.v tdc_top.v 
+# -- Compiling module decode
+# -- Compiling module sort
+# -- Compiling module spad_module
+# -- Compiling module sync
+# -- Compiling module tb_tdc
+# -- Compiling module tdc_top
+# 
+# Top level modules:
+# 	sort
+# 	tb_tdc
+# End time: 13:55:39 on Jan 05,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vsim 
+# Start time: 13:55:39 on Jan 05,2021
+# ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
+# 
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.tb_tdc
+# Loading work.tb_tdc
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.tdc_top
+# Loading work.tdc_top
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.sync
+# Loading work.sync
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.decode
+# Loading work.decode
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.spad_module
+# Loading work.spad_module
+# ** Warning: (vsim-3015) tb_tdc.v(27): [PCDPC] - Port size (10) does not match connection size (15) for port 'TDC_Odata'. The port definition is at: tdc_top.v(14).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_tdc/tdc_top_dut File: tdc_top.v
+# ** Note: $finish    : tb_tdc.v(82)
+#    Time: 31303 ns  Iteration: 0  Instance: /tb_tdc
+# 1
+# Break in Module tb_tdc at tb_tdc.v line 82
+add wave -position insertpoint sim:/tb_tdc/tdc_top_dut/rst_auto
+restart
+# ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
+# 
+# ** Warning: (vsim-3015) tb_tdc.v(27): [PCDPC] - Port size (10) does not match connection size (15) for port 'TDC_Odata'. The port definition is at: tdc_top.v(14).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_tdc/tdc_top_dut File: tdc_top.v
+run -all
+# ** Note: $finish    : tb_tdc.v(82)
+#    Time: 31303 ns  Iteration: 0  Instance: /tb_tdc
+# 1
+# Break in Module tb_tdc at tb_tdc.v line 82
+write format wave -window .main_pane.wave.interior.cs.body.pw.wf D:/Workplace/Work/TDC_1.4/RTL/wave.do
+do sim_tdc.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# 
+# Model Technology ModelSim SE-64 vmap 10.4 Lib Mapping Utility 2014.12 Dec  3 2014
+# vmap -modelsim_quiet work work 
+# Modifying modelsim.ini
+# Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
+# Start time: 14:34:27 on Jan 05,2021
+# vlog -reportprogress 300 decode.v sort.v spad_model.v sync.v tb_tdc.v tdc_top.v 
+# -- Compiling module decode
+# -- Compiling module sort
+# -- Compiling module spad_module
+# -- Compiling module sync
+# -- Compiling module tb_tdc
+# -- Compiling module tdc_top
+# 
+# Top level modules:
+# 	sort
+# 	tb_tdc
+# End time: 14:34:27 on Jan 05,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vsim 
+# Start time: 14:34:28 on Jan 05,2021
+# ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
+# 
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.tb_tdc
+# Loading work.tb_tdc
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.tdc_top
+# Loading work.tdc_top
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.sync
+# Loading work.sync
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.decode
+# Loading work.decode
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.spad_module
+# Loading work.spad_module
+# ** Warning: (vsim-3015) tb_tdc.v(27): [PCDPC] - Port size (10) does not match connection size (15) for port 'TDC_Odata'. The port definition is at: tdc_top.v(14).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_tdc/tdc_top_dut File: tdc_top.v
+# ** Note: $finish    : tb_tdc.v(82)
+#    Time: 31303 ns  Iteration: 0  Instance: /tb_tdc
+# 1
+# Break in Module tb_tdc at tb_tdc.v line 82
+do sim_tdc.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# 
+# Model Technology ModelSim SE-64 vmap 10.4 Lib Mapping Utility 2014.12 Dec  3 2014
+# vmap -modelsim_quiet work work 
+# Modifying modelsim.ini
+# Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
+# Start time: 14:43:06 on Jan 05,2021
+# vlog -reportprogress 300 decode.v sort.v spad_model.v sync.v tb_tdc.v tdc_top.v 
+# -- Compiling module decode
+# -- Compiling module sort
+# -- Compiling module spad_module
+# -- Compiling module sync
+# -- Compiling module tb_tdc
+# -- Compiling module tdc_top
+# 
+# Top level modules:
+# 	sort
+# 	tb_tdc
+# End time: 14:43:06 on Jan 05,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vsim 
+# Start time: 14:43:06 on Jan 05,2021
+# ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
+# 
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.tb_tdc
+# Loading work.tb_tdc
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.tdc_top
+# Loading work.tdc_top
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.sync
+# Loading work.sync
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.decode
+# Loading work.decode
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.spad_module
+# Loading work.spad_module
+# ** Warning: (vsim-3015) tb_tdc.v(27): [PCDPC] - Port size (10) does not match connection size (15) for port 'TDC_Odata'. The port definition is at: tdc_top.v(14).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_tdc/tdc_top_dut File: tdc_top.v
+# ** Note: $finish    : tb_tdc.v(82)
+#    Time: 31303 ns  Iteration: 0  Instance: /tb_tdc
+# 1
+# Break in Module tb_tdc at tb_tdc.v line 82
+do sim_tdc.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# 
+# Model Technology ModelSim SE-64 vmap 10.4 Lib Mapping Utility 2014.12 Dec  3 2014
+# vmap -modelsim_quiet work work 
+# Modifying modelsim.ini
+# Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
+# Start time: 15:17:21 on Jan 05,2021
+# vlog -reportprogress 300 decode.v sort.v spad_model.v sync.v tb_tdc.v tdc_top.v 
+# -- Compiling module decode
+# -- Compiling module sort
+# -- Compiling module spad_module
+# -- Compiling module sync
+# -- Compiling module tb_tdc
+# -- Compiling module tdc_top
+# ** Error: tdc_top.v(325): (vlog-2730) Undefined variable: 'trans_done'.
+# 
+# End time: 15:17:21 on Jan 05,2021, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# ** Error: D:/modeltech64_10.4/win64/vlog failed.
+# Error in macro ./sim_tdc.do line 18
+# D:/modeltech64_10.4/win64/vlog failed.
+#     while executing
+# "vlog *.v"
+do sim_tdc.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# 
+# Model Technology ModelSim SE-64 vmap 10.4 Lib Mapping Utility 2014.12 Dec  3 2014
+# vmap -modelsim_quiet work work 
+# Modifying modelsim.ini
+# Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
+# Start time: 15:17:36 on Jan 05,2021
+# vlog -reportprogress 300 decode.v sort.v spad_model.v sync.v tb_tdc.v tdc_top.v 
+# -- Compiling module decode
+# -- Compiling module sort
+# -- Compiling module spad_module
+# -- Compiling module sync
+# -- Compiling module tb_tdc
+# -- Compiling module tdc_top
+# 
+# Top level modules:
+# 	sort
+# 	tb_tdc
+# End time: 15:17:36 on Jan 05,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vsim 
+# Start time: 15:17:36 on Jan 05,2021
+# ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
+# 
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.tb_tdc
+# Loading work.tb_tdc
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.tdc_top
+# Loading work.tdc_top
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.sync
+# Loading work.sync
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.decode
+# Loading work.decode
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.spad_module
+# Loading work.spad_module
+# ** Warning: (vsim-3015) tb_tdc.v(27): [PCDPC] - Port size (10) does not match connection size (15) for port 'TDC_Odata'. The port definition is at: tdc_top.v(14).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_tdc/tdc_top_dut File: tdc_top.v
+# ** Note: $finish    : tb_tdc.v(82)
+#    Time: 31303 ns  Iteration: 0  Instance: /tb_tdc
+# 1
+# Break in Module tb_tdc at tb_tdc.v line 82
+add wave -position insertpoint sim:/tb_tdc/tdc_top_dut/trans_done
+restart
+# ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
+# 
+# ** Warning: (vsim-3015) tb_tdc.v(27): [PCDPC] - Port size (10) does not match connection size (15) for port 'TDC_Odata'. The port definition is at: tdc_top.v(14).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_tdc/tdc_top_dut File: tdc_top.v
+run -all
+# ** Note: $finish    : tb_tdc.v(82)
+#    Time: 31303 ns  Iteration: 0  Instance: /tb_tdc
+# 1
+# Break in Module tb_tdc at tb_tdc.v line 82
+do sim_tdc.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# 
+# Model Technology ModelSim SE-64 vmap 10.4 Lib Mapping Utility 2014.12 Dec  3 2014
+# vmap -modelsim_quiet work work 
+# Modifying modelsim.ini
+# Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
+# Start time: 15:42:05 on Jan 05,2021
+# vlog -reportprogress 300 decode.v sort.v spad_model.v sync.v tb_tdc.v tdc_top.v 
+# -- Compiling module decode
+# -- Compiling module sort
+# -- Compiling module spad_module
+# -- Compiling module sync
+# -- Compiling module tb_tdc
+# -- Compiling module tdc_top
+# 
+# Top level modules:
+# 	sort
+# 	tb_tdc
+# End time: 15:42:06 on Jan 05,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# vsim 
+# Start time: 15:42:06 on Jan 05,2021
+# ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
+# 
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.tb_tdc
+# Loading work.tb_tdc
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.tdc_top
+# Loading work.tdc_top
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.sync
+# Loading work.sync
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.decode
+# Loading work.decode
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.spad_module
+# Loading work.spad_module
+# ** Warning: (vsim-3015) tb_tdc.v(27): [PCDPC] - Port size (10) does not match connection size (15) for port 'TDC_Odata'. The port definition is at: tdc_top.v(14).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_tdc/tdc_top_dut File: tdc_top.v
+# ** Note: $finish    : tb_tdc.v(82)
+#    Time: 31303 ns  Iteration: 0  Instance: /tb_tdc
+# 1
+# Break in Module tb_tdc at tb_tdc.v line 82
+do sim_tdc.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# 
+# Model Technology ModelSim SE-64 vmap 10.4 Lib Mapping Utility 2014.12 Dec  3 2014
+# vmap -modelsim_quiet work work 
+# Modifying modelsim.ini
+# Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
+# Start time: 15:46:24 on Jan 05,2021
+# vlog -reportprogress 300 decode.v sort.v spad_model.v sync.v tb_tdc.v tdc_top.v 
+# -- Compiling module decode
+# -- Compiling module sort
+# -- Compiling module spad_module
+# -- Compiling module sync
+# -- Compiling module tb_tdc
+# -- Compiling module tdc_top
+# 
+# Top level modules:
+# 	sort
+# 	tb_tdc
+# End time: 15:46:24 on Jan 05,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vsim 
+# Start time: 15:46:24 on Jan 05,2021
+# ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
+# 
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.tb_tdc
+# Loading work.tb_tdc
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.tdc_top
+# Loading work.tdc_top
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.sync
+# Loading work.sync
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.decode
+# Loading work.decode
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.spad_module
+# Loading work.spad_module
+# ** Warning: (vsim-3015) tb_tdc.v(27): [PCDPC] - Port size (10) does not match connection size (15) for port 'TDC_Odata'. The port definition is at: tdc_top.v(14).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_tdc/tdc_top_dut File: tdc_top.v
+# ** Note: $finish    : tb_tdc.v(86)
+#    Time: 32153 ns  Iteration: 0  Instance: /tb_tdc
+# 1
+# Break in Module tb_tdc at tb_tdc.v line 86
+do sim_tdc.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# 
+# Model Technology ModelSim SE-64 vmap 10.4 Lib Mapping Utility 2014.12 Dec  3 2014
+# vmap -modelsim_quiet work work 
+# Modifying modelsim.ini
+# Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
+# Start time: 15:49:32 on Jan 05,2021
+# vlog -reportprogress 300 decode.v sort.v spad_model.v sync.v tb_tdc.v tdc_top.v 
+# -- Compiling module decode
+# -- Compiling module sort
+# -- Compiling module spad_module
+# -- Compiling module sync
+# -- Compiling module tb_tdc
+# -- Compiling module tdc_top
+# 
+# Top level modules:
+# 	sort
+# 	tb_tdc
+# End time: 15:49:32 on Jan 05,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vsim 
+# Start time: 15:49:32 on Jan 05,2021
+# ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
+# 
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.tb_tdc
+# Loading work.tb_tdc
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.tdc_top
+# Loading work.tdc_top
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.sync
+# Loading work.sync
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.decode
+# Loading work.decode
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.spad_module
+# Loading work.spad_module
+# ** Warning: (vsim-3015) tb_tdc.v(27): [PCDPC] - Port size (10) does not match connection size (15) for port 'TDC_Odata'. The port definition is at: tdc_top.v(14).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_tdc/tdc_top_dut File: tdc_top.v
+# ** Note: $finish    : tb_tdc.v(87)
+#    Time: 33425 ns  Iteration: 0  Instance: /tb_tdc
+# 1
+# Break in Module tb_tdc at tb_tdc.v line 87
+do sim_tdc.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# 
+# Model Technology ModelSim SE-64 vmap 10.4 Lib Mapping Utility 2014.12 Dec  3 2014
+# vmap -modelsim_quiet work work 
+# Modifying modelsim.ini
+# Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
+# Start time: 15:52:40 on Jan 05,2021
+# vlog -reportprogress 300 decode.v sort.v spad_model.v sync.v tb_tdc.v tdc_top.v 
+# -- Compiling module decode
+# -- Compiling module sort
+# -- Compiling module spad_module
+# -- Compiling module sync
+# -- Compiling module tb_tdc
+# -- Compiling module tdc_top
+# 
+# Top level modules:
+# 	sort
+# 	tb_tdc
+# End time: 15:52:40 on Jan 05,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vsim 
+# Start time: 15:52:40 on Jan 05,2021
+# ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
+# 
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.tb_tdc
+# Loading work.tb_tdc
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.tdc_top
+# Loading work.tdc_top
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.sync
+# Loading work.sync
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.decode
+# Loading work.decode
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.spad_module
+# Loading work.spad_module
+# ** Warning: (vsim-3015) tb_tdc.v(27): [PCDPC] - Port size (10) does not match connection size (15) for port 'TDC_Odata'. The port definition is at: tdc_top.v(14).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_tdc/tdc_top_dut File: tdc_top.v
+# ** Note: $finish    : tb_tdc.v(95)
+#    Time: 36025 ns  Iteration: 0  Instance: /tb_tdc
+# 1
+# Break in Module tb_tdc at tb_tdc.v line 95
+add wave -position insertpoint sim:/tb_tdc/tdc_top_dut/Ovalid
+add wave -position insertpoint sim:/tb_tdc/tdc_top_dut/Ovalid_d
+add wave -position insertpoint sim:/tb_tdc/tdc_top_dut/Ovalid_d1
+add wave -position insertpoint sim:/tb_tdc/tdc_top_dut/Ovalid_d2
+restart
+# ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
+# 
+# ** Warning: (vsim-3015) tb_tdc.v(27): [PCDPC] - Port size (10) does not match connection size (15) for port 'TDC_Odata'. The port definition is at: tdc_top.v(14).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_tdc/tdc_top_dut File: tdc_top.v
+run -all
+# ** Note: $finish    : tb_tdc.v(95)
+#    Time: 36025 ns  Iteration: 0  Instance: /tb_tdc
+# 1
+# Break in Module tb_tdc at tb_tdc.v line 95
+do sim_tdc.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# 
+# Model Technology ModelSim SE-64 vmap 10.4 Lib Mapping Utility 2014.12 Dec  3 2014
+# vmap -modelsim_quiet work work 
+# Modifying modelsim.ini
+# Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
+# Start time: 16:19:22 on Jan 05,2021
+# vlog -reportprogress 300 decode.v sort.v spad_model.v sync.v tb_tdc.v tdc_top.v 
+# -- Compiling module decode
+# -- Compiling module sort
+# -- Compiling module spad_module
+# -- Compiling module sync
+# -- Compiling module tb_tdc
+# -- Compiling module tdc_top
+# ** Error: tdc_top.v(397): (vlog-2110) Illegal reference to net "TDC_Ovalid".
+# 
+# ** Error: tdc_top.v(405): (vlog-2110) Illegal reference to net "TDC_Ovalid".
+# 
+# ** Error: tdc_top.v(411): (vlog-2110) Illegal reference to net "TDC_Ovalid".
+# 
+# ** Error: tdc_top.v(416): (vlog-2110) Illegal reference to net "TDC_Ovalid".
+# 
+# ** Error: tdc_top.v(422): (vlog-2110) Illegal reference to net "TDC_Ovalid".
+# 
+# ** Error: tdc_top.v(427): (vlog-2110) Illegal reference to net "TDC_Ovalid".
+# 
+# ** Error: tdc_top.v(432): (vlog-2110) Illegal reference to net "TDC_Ovalid".
+# 
+# ** Error: tdc_top.v(438): (vlog-2110) Illegal reference to net "TDC_Ovalid".
+# 
+# ** Error: tdc_top.v(444): (vlog-2110) Illegal reference to net "TDC_Ovalid".
+# 
+# ** Error: tdc_top.v(452): (vlog-2110) Illegal reference to net "TDC_Ovalid".
+# 
+# End time: 16:19:22 on Jan 05,2021, Elapsed time: 0:00:00
+# Errors: 10, Warnings: 0
+# ** Error: D:/modeltech64_10.4/win64/vlog failed.
+# Error in macro ./sim_tdc.do line 18
+# D:/modeltech64_10.4/win64/vlog failed.
+#     while executing
+# "vlog *.v"
+do sim_tdc.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# 
+# Model Technology ModelSim SE-64 vmap 10.4 Lib Mapping Utility 2014.12 Dec  3 2014
+# vmap -modelsim_quiet work work 
+# Modifying modelsim.ini
+# Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
+# Start time: 16:21:19 on Jan 05,2021
+# vlog -reportprogress 300 decode.v sort.v spad_model.v sync.v tb_tdc.v tdc_top.v 
+# -- Compiling module decode
+# -- Compiling module sort
+# -- Compiling module spad_module
+# -- Compiling module sync
+# -- Compiling module tb_tdc
+# -- Compiling module tdc_top
+# 
+# Top level modules:
+# 	sort
+# 	tb_tdc
+# End time: 16:21:19 on Jan 05,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vsim 
+# Start time: 16:21:19 on Jan 05,2021
+# ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
+# 
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.tb_tdc
+# Loading work.tb_tdc
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.tdc_top
+# Loading work.tdc_top
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.sync
+# Loading work.sync
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.decode
+# Loading work.decode
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.spad_module
+# Loading work.spad_module
+# ** Warning: (vsim-3015) tb_tdc.v(27): [PCDPC] - Port size (10) does not match connection size (15) for port 'TDC_Odata'. The port definition is at: tdc_top.v(14).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_tdc/tdc_top_dut File: tdc_top.v
+# ** Note: $finish    : tb_tdc.v(95)
+#    Time: 36025 ns  Iteration: 0  Instance: /tb_tdc
+# 1
+# Break in Module tb_tdc at tb_tdc.v line 95
+do sim_tdc.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# 
+# Model Technology ModelSim SE-64 vmap 10.4 Lib Mapping Utility 2014.12 Dec  3 2014
+# vmap -modelsim_quiet work work 
+# Modifying modelsim.ini
+# Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
+# Start time: 16:30:47 on Jan 05,2021
+# vlog -reportprogress 300 decode.v sort.v spad_model.v sync.v tb_tdc.v tdc_top.v 
+# -- Compiling module decode
+# -- Compiling module sort
+# -- Compiling module spad_module
+# -- Compiling module sync
+# -- Compiling module tb_tdc
+# -- Compiling module tdc_top
+# 
+# Top level modules:
+# 	sort
+# 	tb_tdc
+# End time: 16:30:47 on Jan 05,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vsim 
+# Start time: 16:30:47 on Jan 05,2021
+# ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
+# 
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.tb_tdc
+# Loading work.tb_tdc
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.tdc_top
+# Loading work.tdc_top
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.sync
+# Loading work.sync
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.decode
+# Loading work.decode
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.spad_module
+# Loading work.spad_module
+# ** Warning: (vsim-3015) tb_tdc.v(27): [PCDPC] - Port size (10) does not match connection size (15) for port 'TDC_Odata'. The port definition is at: tdc_top.v(14).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_tdc/tdc_top_dut File: tdc_top.v
+# ** Note: $finish    : tb_tdc.v(100)
+#    Time: 41775 ns  Iteration: 0  Instance: /tb_tdc
+# 1
+# Break in Module tb_tdc at tb_tdc.v line 100
+do sim_tdc.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# 
+# Model Technology ModelSim SE-64 vmap 10.4 Lib Mapping Utility 2014.12 Dec  3 2014
+# vmap -modelsim_quiet work work 
+# Modifying modelsim.ini
+# Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
+# Start time: 16:34:20 on Jan 05,2021
+# vlog -reportprogress 300 decode.v sort.v spad_model.v sync.v tb_tdc.v tdc_top.v 
+# -- Compiling module decode
+# -- Compiling module sort
+# -- Compiling module spad_module
+# -- Compiling module sync
+# -- Compiling module tb_tdc
+# -- Compiling module tdc_top
+# 
+# Top level modules:
+# 	sort
+# 	tb_tdc
+# End time: 16:34:20 on Jan 05,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vsim 
+# Start time: 16:34:20 on Jan 05,2021
+# ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
+# 
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.tb_tdc
+# Loading work.tb_tdc
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.tdc_top
+# Loading work.tdc_top
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.sync
+# Loading work.sync
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.decode
+# Loading work.decode
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.spad_module
+# Loading work.spad_module
+# ** Warning: (vsim-3015) tb_tdc.v(27): [PCDPC] - Port size (10) does not match connection size (15) for port 'TDC_Odata'. The port definition is at: tdc_top.v(14).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_tdc/tdc_top_dut File: tdc_top.v
+# ** Note: $finish    : tb_tdc.v(108)
+#    Time: 44345 ns  Iteration: 0  Instance: /tb_tdc
+# 1
+# Break in Module tb_tdc at tb_tdc.v line 108
+do sim_tdc.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# 
+# Model Technology ModelSim SE-64 vmap 10.4 Lib Mapping Utility 2014.12 Dec  3 2014
+# vmap -modelsim_quiet work work 
+# Modifying modelsim.ini
+# Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
+# Start time: 16:35:37 on Jan 05,2021
+# vlog -reportprogress 300 decode.v sort.v spad_model.v sync.v tb_tdc.v tdc_top.v 
+# -- Compiling module decode
+# -- Compiling module sort
+# -- Compiling module spad_module
+# -- Compiling module sync
+# -- Compiling module tb_tdc
+# -- Compiling module tdc_top
+# 
+# Top level modules:
+# 	sort
+# 	tb_tdc
+# End time: 16:35:37 on Jan 05,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vsim 
+# Start time: 16:35:37 on Jan 05,2021
+# ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
+# 
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.tb_tdc
+# Loading work.tb_tdc
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.tdc_top
+# Loading work.tdc_top
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.sync
+# Loading work.sync
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.decode
+# Loading work.decode
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.spad_module
+# Loading work.spad_module
+# ** Warning: (vsim-3015) tb_tdc.v(27): [PCDPC] - Port size (10) does not match connection size (15) for port 'TDC_Odata'. The port definition is at: tdc_top.v(14).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_tdc/tdc_top_dut File: tdc_top.v
+# ** Note: $finish    : tb_tdc.v(129)
+#    Time: 50425 ns  Iteration: 0  Instance: /tb_tdc
+# 1
+# Break in Module tb_tdc at tb_tdc.v line 129
+do sim_tdc.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# 
+# Model Technology ModelSim SE-64 vmap 10.4 Lib Mapping Utility 2014.12 Dec  3 2014
+# vmap -modelsim_quiet work work 
+# Modifying modelsim.ini
+# Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
+# Start time: 16:40:58 on Jan 05,2021
+# vlog -reportprogress 300 decode.v sort.v spad_model.v sync.v tb_tdc.v tdc_top.v 
+# -- Compiling module decode
+# -- Compiling module sort
+# -- Compiling module spad_module
+# -- Compiling module sync
+# -- Compiling module tb_tdc
+# -- Compiling module tdc_top
+# 
+# Top level modules:
+# 	sort
+# 	tb_tdc
+# End time: 16:40:58 on Jan 05,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vsim 
+# Start time: 16:40:58 on Jan 05,2021
+# ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
+# 
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.tb_tdc
+# Loading work.tb_tdc
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.tdc_top
+# Loading work.tdc_top
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.sync
+# Loading work.sync
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.decode
+# Loading work.decode
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.spad_module
+# Loading work.spad_module
+# ** Warning: (vsim-3015) tb_tdc.v(27): [PCDPC] - Port size (10) does not match connection size (15) for port 'TDC_Odata'. The port definition is at: tdc_top.v(14).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_tdc/tdc_top_dut File: tdc_top.v
+# ** Note: $finish    : tb_tdc.v(122)
+#    Time: 47545 ns  Iteration: 0  Instance: /tb_tdc
+# 1
+# Break in Module tb_tdc at tb_tdc.v line 122
+do sim_tdc.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# 
+# Model Technology ModelSim SE-64 vmap 10.4 Lib Mapping Utility 2014.12 Dec  3 2014
+# vmap -modelsim_quiet work work 
+# Modifying modelsim.ini
+# Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
+# Start time: 16:41:59 on Jan 05,2021
+# vlog -reportprogress 300 decode.v sort.v spad_model.v sync.v tb_tdc.v tdc_top.v 
+# -- Compiling module decode
+# -- Compiling module sort
+# -- Compiling module spad_module
+# -- Compiling module sync
+# -- Compiling module tb_tdc
+# -- Compiling module tdc_top
+# 
+# Top level modules:
+# 	sort
+# 	tb_tdc
+# End time: 16:41:59 on Jan 05,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vsim 
+# Start time: 16:41:59 on Jan 05,2021
+# ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
+# 
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.tb_tdc
+# Loading work.tb_tdc
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.tdc_top
+# Loading work.tdc_top
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.sync
+# Loading work.sync
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.decode
+# Loading work.decode
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.spad_module
+# Loading work.spad_module
+# ** Warning: (vsim-3015) tb_tdc.v(27): [PCDPC] - Port size (10) does not match connection size (15) for port 'TDC_Odata'. The port definition is at: tdc_top.v(14).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_tdc/tdc_top_dut File: tdc_top.v
+# ** Note: $finish    : tb_tdc.v(117)
+#    Time: 47053 ns  Iteration: 0  Instance: /tb_tdc
+# 1
+# Break in Module tb_tdc at tb_tdc.v line 117
+do sim_tdc.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# 
+# Model Technology ModelSim SE-64 vmap 10.4 Lib Mapping Utility 2014.12 Dec  3 2014
+# vmap -modelsim_quiet work work 
+# Modifying modelsim.ini
+# Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
+# Start time: 16:49:54 on Jan 05,2021
+# vlog -reportprogress 300 decode.v sort.v spad_model.v sync.v tb_tdc.v tdc_top.v 
+# -- Compiling module decode
+# -- Compiling module sort
+# -- Compiling module spad_module
+# -- Compiling module sync
+# -- Compiling module tb_tdc
+# -- Compiling module tdc_top
+# 
+# Top level modules:
+# 	sort
+# 	tb_tdc
+# End time: 16:49:54 on Jan 05,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vsim 
+# Start time: 16:49:54 on Jan 05,2021
+# ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
+# 
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.tb_tdc
+# Loading work.tb_tdc
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.tdc_top
+# Loading work.tdc_top
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.sync
+# Loading work.sync
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.decode
+# Loading work.decode
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.spad_module
+# Loading work.spad_module
+# ** Warning: (vsim-3015) tb_tdc.v(27): [PCDPC] - Port size (10) does not match connection size (15) for port 'TDC_Odata'. The port definition is at: tdc_top.v(14).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_tdc/tdc_top_dut File: tdc_top.v
+# Break key hit
+# Break in Module tb_tdc at tb_tdc.v line 133
+quit -sim
+quit -sim
+do sim_tdc.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# 
+# Model Technology ModelSim SE-64 vmap 10.4 Lib Mapping Utility 2014.12 Dec  3 2014
+# vmap -modelsim_quiet work work 
+# Modifying modelsim.ini
+# Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
+# Start time: 16:51:42 on Jan 05,2021
+# vlog -reportprogress 300 decode.v sort.v spad_model.v sync.v tb_tdc.v tdc_top.v 
+# -- Compiling module decode
+# -- Compiling module sort
+# -- Compiling module spad_module
+# -- Compiling module sync
+# -- Compiling module tb_tdc
+# -- Compiling module tdc_top
+# 
+# Top level modules:
+# 	sort
+# 	tb_tdc
+# End time: 16:51:42 on Jan 05,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vsim 
+# Start time: 16:51:42 on Jan 05,2021
+# ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
+# 
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.tb_tdc
+# Loading work.tb_tdc
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.tdc_top
+# Loading work.tdc_top
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.sync
+# Loading work.sync
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.decode
+# Loading work.decode
+# Refreshing D:/Workplace/Work/TDC_1.4/RTL/work.spad_module
+# Loading work.spad_module
+# ** Warning: (vsim-3015) tb_tdc.v(27): [PCDPC] - Port size (10) does not match connection size (15) for port 'TDC_Odata'. The port definition is at: tdc_top.v(14).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_tdc/tdc_top_dut File: tdc_top.v
+# ** Note: $finish    : tb_tdc.v(118)
+#    Time: 47881 ns  Iteration: 0  Instance: /tb_tdc
+# 1
+# Break in Module tb_tdc at tb_tdc.v line 118

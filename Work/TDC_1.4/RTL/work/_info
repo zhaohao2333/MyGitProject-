@@ -7,7 +7,7 @@ z2
 !i10e 25
 !i10f 100
 cModel Technology
-Z0 dD:/Workplace/Work/TDC_1.2/RTL
+Z0 dD:/Workplace/Work/TDC_1.4/RTL
 vdecode
 Z1 VDg1SIo80bB@j0V0VzS_@n1
 r1
@@ -22,13 +22,13 @@ w1609301176
 Fdecode.v
 L0 1
 Z2 OL;L;10.4;61
-Z3 !s108 1609813972.815000
-Z4 !s107 tdc_top.v|tb_tdc.v|sync.v|sort.v|decode.v|
-Z5 !s90 -reportprogress|300|decode.v|sort.v|sync.v|tb_tdc.v|tdc_top.v|
+Z3 !s108 1609836702.702000
+Z4 !s107 tdc_top.v|tb_tdc.v|sync.v|spad_model.v|sort.v|decode.v|
+Z5 !s90 -reportprogress|300|decode.v|sort.v|spad_model.v|sync.v|tb_tdc.v|tdc_top.v|
 !i113 0
 Z6 o-L mtiAvm -L mtiOvm -L mtiUvm -L mtiUPF
 vsort
-!s110 1609813972
+!s110 1609836702
 !i10b 1
 !s100 :ZHa5IZ6lA9]X23>7D6070
 I_e9;oiU7Go:hf2fMLL7Tb2
@@ -47,14 +47,33 @@ R4
 R5
 !i113 0
 R6
+vspad_module
+R1
+r1
+!s85 0
+31
+!i10b 1
+!s100 3`zU1oQSm9DSK<FRb0U@?2
+IlJc]KLk3nXQm[@deB4WRE0
+R0
+w1609824175
+8spad_model.v
+Fspad_model.v
+L0 2
+R2
+R3
+R4
+R5
+!i113 0
+R6
 vsync
 R1
 r1
 !s85 0
 31
 !i10b 1
-!s100 Zo`KH55U;AQF=h@OE_lA?0
-II03dmg9NGObkkT6V1QSKZ3
+!s100 jL6nDaf^0MWTKzbHY=e^>2
+IH>;6[9QQMEI`ZH8RkD0`42
 R0
 w1609301944
 8sync.v
@@ -72,10 +91,10 @@ r1
 !s85 0
 31
 !i10b 1
-!s100 mUB8AEg11=nd]RF;W8LSR2
-IgzW8MlZ8B_T]=XfToWE1T0
+!s100 Wh^Nolz<<E3?O@TZ8Rz7E0
+IV>hDM?TH6]Ra08dbQ@^f52
 R0
-w1609247775
+w1609836687
 8tb_tdc.v
 Ftb_tdc.v
 L0 2
@@ -91,10 +110,10 @@ r1
 !s85 0
 31
 !i10b 1
-!s100 BoEA4`jeWLnjKh[[4@zjP1
-I;E@n0E[kV<=?dK^nH[>H90
+!s100 BWVJn503SUU6eEVR@O=aR2
+I[jz1;?oC0aG_TJmzYT7MY1
 R0
-w1609302082
+w1609835435
 8tdc_top.v
 Ftdc_top.v
 L0 2

@@ -7,7 +7,7 @@ z2
 !i10e 25
 !i10f 100
 cModel Technology
-Z0 dD:/Workplace/Work/TDC_1.2/RTL
+Z0 dD:/Workplace/Work/TDC_1.3/RTL
 vdecode
 Z1 VDg1SIo80bB@j0V0VzS_@n1
 r1
@@ -22,13 +22,13 @@ w1609301176
 Fdecode.v
 L0 1
 Z2 OL;L;10.4;61
-Z3 !s108 1609813972.815000
+Z3 !s108 1609727563.356000
 Z4 !s107 tdc_top.v|tb_tdc.v|sync.v|sort.v|decode.v|
 Z5 !s90 -reportprogress|300|decode.v|sort.v|sync.v|tb_tdc.v|tdc_top.v|
 !i113 0
 Z6 o-L mtiAvm -L mtiOvm -L mtiUvm -L mtiUPF
 vsort
-!s110 1609813972
+Z7 !s110 1609727563
 !i10b 1
 !s100 :ZHa5IZ6lA9]X23>7D6070
 I_e9;oiU7Go:hf2fMLL7Tb2
@@ -48,19 +48,20 @@ R5
 !i113 0
 R6
 vsync
-R1
-r1
-!s85 0
-31
+R7
 !i10b 1
 !s100 Zo`KH55U;AQF=h@OE_lA?0
 II03dmg9NGObkkT6V1QSKZ3
+R1
 R0
 w1609301944
 8sync.v
 Fsync.v
 L0 5
 R2
+r1
+!s85 0
+31
 R3
 R4
 R5
@@ -91,10 +92,10 @@ r1
 !s85 0
 31
 !i10b 1
-!s100 BoEA4`jeWLnjKh[[4@zjP1
-I;E@n0E[kV<=?dK^nH[>H90
+!s100 D4eZH7mW>4G3Ob8QNni8<2
+ILVEZbARQ5b6=E_L;8^[[O0
 R0
-w1609302082
+w1609727558
 8tdc_top.v
 Ftdc_top.v
 L0 2
