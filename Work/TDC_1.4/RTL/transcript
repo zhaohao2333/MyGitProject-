@@ -1069,3 +1069,36 @@ do sim_tdc.do
 #    Time: 47881 ns  Iteration: 0  Instance: /tb_tdc
 # 1
 # Break in Module tb_tdc at tb_tdc.v line 118
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run -continue
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+# End time: 09:38:51 on Jan 07,2021, Elapsed time: 40:47:09
+# Errors: 0, Warnings: 2

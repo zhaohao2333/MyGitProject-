@@ -51,3 +51,5 @@
 #    Time: 33628 ns  Iteration: 0  Instance: /tb_tdc
 # 1
 # Break in Module tb_tdc at tb_tdc.v line 137
+# End time: 09:38:47 on Jan 07,2021, Elapsed time: 47:05:55
+# Errors: 0, Warnings: 2
