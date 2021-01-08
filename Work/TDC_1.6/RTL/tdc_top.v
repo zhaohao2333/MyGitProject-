@@ -251,7 +251,6 @@ end
 assign rst = rst_n & clr_n;
 
 //-------------------------------------------------------------------
-//--------------------hand shake module--------------------
 always @(posedge clk5 or negedge rst_n) begin //clk 500 Mhz
     if (!rst_n) begin
         Ovalid <= 0;
@@ -267,7 +266,6 @@ always @(posedge clk5 or negedge rst_n) begin //clk 500 Mhz
     end
 end
 //-------------------------------------------------------------------
-//------------------------delay module--------------------
 
 int_cal int_cal_inst(
     .clk        (clk),
@@ -281,7 +279,7 @@ int_cal int_cal_inst(
 );
 
 
-always @(posedge clk or negedge rst_n) begin //clk 250 Mhz
+always @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
         cal_en <= 0;
         int_in <= 0;
@@ -341,7 +339,7 @@ always @(posedge clk or negedge rst_n) begin //clk 250 Mhz
     end
 end
 
-always @(posedge clk or negedge rst_n) begin //clk 250 Mhz
+always @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
         shift_tri <= 0;
     end
@@ -384,7 +382,7 @@ end
 //-------------------------------------------------------------------
 //---------------get  intensity  data---------------
 
-always @(posedge clk or negedge rst_n) begin //clk 250 Mhz
+always @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
         int_data_o[2] <= 0;
         int_data_o[1] <= 0;
@@ -418,7 +416,7 @@ end
 //-------------------------------------------------------------------
 //---------------hand shake start signal generate---------------
 
-always @(posedge clk or negedge rst_n) begin //clk 250 Mhz
+always @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
         int_valid <= 0;
     end
@@ -448,9 +446,8 @@ always @(posedge clk or negedge rst_n) begin //clk 250 Mhz
 end
 
 //-------------------------------------------------------------------
-//---------------intensity calculate module---------------
 
-always @(posedge clk or negedge rst_n) begin //clk 250 Mhz
+always @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
         Ovalid_d <= 0;
     end
@@ -459,7 +456,7 @@ always @(posedge clk or negedge rst_n) begin //clk 250 Mhz
     end
 end
 
-always @(posedge clk or negedge rst_n) begin //clk 250 Mhz
+always @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
         Ovalid_d2 <= 0;
     end
@@ -468,7 +465,7 @@ always @(posedge clk or negedge rst_n) begin //clk 250 Mhz
     end
 end
 
-always @(posedge clk or negedge rst_n) begin //clk 250 Mhz
+always @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
         Ovalid_d3 <= 0;
     end
@@ -477,7 +474,7 @@ always @(posedge clk or negedge rst_n) begin //clk 250 Mhz
     end
 end
 
-always @(posedge clk or negedge rst_n) begin //clk 250 Mhz
+always @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
         Ovalid_d1 <= 0;
     end
@@ -489,7 +486,7 @@ always @(posedge clk or negedge rst_n) begin //clk 250 Mhz
     end
 end
 
-always @(posedge clk or negedge rst_n) begin //clk 250 Mhz
+always @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
         trans_done <= 0;
     end
@@ -509,12 +506,10 @@ always @(posedge clk or negedge rst_n) begin
         c_state <= n_state;
 end
 
-//!assign hs = TDC_Oready & Ovalid_d1;
 assign hs = TDC_Oready & int_valid;
 //assign hs = 0;
 
 always @(*) begin
-    //!
     n_state = IDLE;
     case (c_state)
         IDLE: 
@@ -557,7 +552,7 @@ always @(posedge clk or negedge rst_n) begin
     //else if (hs) begin
     else begin
         case (n_state)
-            IDLE: begin // output data 0 or Z state?
+            IDLE: begin
                 TDC_Odata <= 0;
                 TDC_Olast <= 0;
                 TDC_Oint  <= 0;
@@ -610,12 +605,6 @@ always @(posedge clk or negedge rst_n) begin
             end
         endcase
     end
-/*     else begin
-        TDC_Odata <= 0;
-        TDC_Olast <= 0;
-        TDC_Oint  <= 0;
-        TDC_Ovalid <= 0;
-    end */
 end
 
 
