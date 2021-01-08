@@ -999,3 +999,5 @@ do sim_tdc.do
 #    Time: 65520 ns  Iteration: 0  Instance: /tb_tdc
 # 1
 # Break in Module tb_tdc at tb_tdc.v line 131
+# End time: 21:56:47 on Jan 08,2021, Elapsed time: 8:42:10
+# Errors: 0, Warnings: 3
