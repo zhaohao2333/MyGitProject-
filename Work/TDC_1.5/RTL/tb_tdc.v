@@ -105,7 +105,7 @@ initial begin
 
         ///////////////////////////////
         
-        @ (negedge rst_auto);
+        /* @ (negedge rst_auto);
         #628 ;
         @ (posedge clk)
              TDC_start = 1;
@@ -117,6 +117,11 @@ initial begin
 
         #30000;
         
+        @ (posedge clk)
+             TDC_start = 1;
+        #640 TDC_start = 0;
+        #30000; */
+        #20000;
         @ (posedge clk)
              TDC_start = 1;
         #640 TDC_start = 0;

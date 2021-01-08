@@ -13,7 +13,7 @@ module tdc_top (
     //output wire [14:0]  TDC_Odata,
     output reg  [9 :0]  TDC_Odata, 
     //output wire [3 :0]  TDC_Oint, //output intensity counter for each depth data 
-    output reg  [4 :0]  TDC_Oint, 
+    output reg  [3 :0]  TDC_Oint, 
     output reg  [1 :0]  TDC_Onum, //output valid data number
     output reg          TDC_Olast, // output last data signal
     output reg          TDC_Ovalid, // output data valid signal
@@ -46,13 +46,14 @@ wire         cnt_en;
 wire         hs;
 reg  [6:0]   n_state;
 reg  [6:0]   c_state;
-reg          Ovalid, Ovalid_d, Ovalid_d2;
+reg          Ovalid, Ovalid_d, Ovalid_d1, Ovalid_d2, Ovalid_d3;
 reg          trigger_d;
 reg          trans_done;
 reg          tri_ign;
 reg          clr_n;
 wire         rst;
 reg          TDC_Ovalid_d;
+wire         shift_tri;
 
 //-------------------------------------------------------------------
 //wire [14:0]  tof;
@@ -66,6 +67,11 @@ reg  [9:0]  tof_data[2:0]; //depth = 3
 reg  [14:0] tof_data_in;
 reg  [14:0] range;
 
+wire        cal_stop;
+wire        out_valid;
+reg         cal_en;
+wire [3 :0] int_data_o[2:0]; 
+reg  [15:0] cal_data;
 
 //-------------------------------------------------------------------
 assign rst_auto = (!TDC_tgate) & sync;
@@ -251,7 +257,7 @@ end
 assign rst = rst_n & clr_n;
 
 //-------------------------------------------------------------------
-//---------------hand shake module--------------------
+//--------------------hand shake module--------------------
 always @(posedge clk5 or negedge rst_n) begin //clk 500 Mhz
     if (!rst_n) begin
         Ovalid <= 0;
@@ -263,9 +269,44 @@ always @(posedge clk5 or negedge rst_n) begin //clk 500 Mhz
     end
     else if (trans_done) begin
         Ovalid <= 0;
-        TDC_INT <= 0; // wait for clr signal from core logic
+        TDC_INT <= 0; //! wait for clr signal from core logic
     end
 end
+//-------------------------------------------------------------------
+//------------------------delay module--------------------
+
+int_cal int_cal_inst(
+    .clk        (clk),
+    .rst_n      (rst_n),
+    .INT2       (INT[2]),
+    .INT1       (INT[1]),
+    .INT0       (INT[0]),
+    .cal_en     (cal_en),
+    .TDC_Onum   (TDC_Onum),
+    .int_out2   (int_data_o[2]),
+    .int_out1   (int_data_o[1]),
+    .int_out0   (int_data_o[0]),
+    .out_valid  (out_valid),
+    .cal_stop   (cal_stop),
+    .shift_tri  (shift_tri)
+);
+
+always @(posedge clk or negedge rst_n) begin //clk 250 Mhz
+    if (!rst_n) begin
+        cal_en <= 0;
+    end
+    else if (Ovalid_d2 & !Ovalid_d3) begin
+        cal_en <= 1;
+    end
+    else if (cal_stop) begin
+        cal_en <= 0;
+    end
+end
+
+//-------------------------------------------------------------------
+//---------------intensity calculate module---------------
+
+assign shift_tri = Ovalid_d & !Ovalid_d2;
 
 always @(posedge clk or negedge rst_n) begin //clk 250 Mhz
     if (!rst_n) begin
@@ -280,11 +321,29 @@ always @(posedge clk or negedge rst_n) begin //clk 250 Mhz
     if (!rst_n) begin
         Ovalid_d2 <= 0;
     end
+    else begin
+        Ovalid_d2 <= Ovalid_d;
+    end
+end
+
+always @(posedge clk or negedge rst_n) begin //clk 250 Mhz
+    if (!rst_n) begin
+        Ovalid_d3 <= 0;
+    end
+    else begin
+        Ovalid_d3 <= Ovalid_d2;
+    end
+end
+
+always @(posedge clk or negedge rst_n) begin //clk 250 Mhz
+    if (!rst_n) begin
+        Ovalid_d1 <= 0;
+    end
     else if ((n_state == DATA2_1)||(n_state == DATA1)||(n_state == DATA3_2)||(n_state == DATA0)) begin
-        Ovalid_d2 <= 0;
+        Ovalid_d1 <= 0;
     end
     else if (!trans_done) begin
-        Ovalid_d2 <= Ovalid_d;
+        Ovalid_d1 <= Ovalid_d;
     end
 end
 
@@ -308,7 +367,8 @@ always @(posedge clk or negedge rst_n) begin
         c_state <= n_state;
 end
 
-assign hs = TDC_Oready & Ovalid_d2;
+//!assign hs = TDC_Oready & Ovalid_d1;
+assign hs = TDC_Oready & out_valid;
 
 always @(*) begin
     //!
@@ -351,7 +411,8 @@ always @(posedge clk or negedge rst_n) begin
         TDC_Oint  <= 0;
         TDC_Ovalid <= 0;
     end
-    else if (hs) begin
+    //else if (hs) begin
+    else begin
         case (n_state)
             IDLE: begin // output data 0 or Z state?
                 TDC_Odata <= 0;
@@ -367,34 +428,34 @@ always @(posedge clk or negedge rst_n) begin
             end
             DATA1: begin
                 TDC_Odata <= tof_data[0];
-                TDC_Oint  <= INT[0];
+                TDC_Oint  <= int_data_o[0];
                 TDC_Olast <= 1;
                 TDC_Ovalid <= 1;
             end
             DATA2: begin
                 TDC_Odata <= tof_data[0];
-                TDC_Oint  <= INT[0];
+                TDC_Oint  <= int_data_o[0];
                 TDC_Ovalid <= 1;
             end
             DATA2_1: begin
                 TDC_Odata <= tof_data[1];
-                TDC_Oint  <= INT[1];
+                TDC_Oint  <= int_data_o[1];
                 TDC_Olast <= 1;
                 TDC_Ovalid <= 1;
             end
             DATA3: begin
                 TDC_Odata <= tof_data[0];
-                TDC_Oint  <= INT[0];
+                TDC_Oint  <= int_data_o[0];
                 TDC_Ovalid <= 1;
             end
             DATA3_1: begin
                 TDC_Odata <= tof_data[1];
-                TDC_Oint  <= INT[1];
+                TDC_Oint  <= int_data_o[1];
                 TDC_Ovalid <= 1;
             end
             DATA3_2: begin
                 TDC_Odata <= tof_data[2];
-                TDC_Oint  <= INT[2];
+                TDC_Oint  <= int_data_o[2];
                 TDC_Olast <= 1;
                 TDC_Ovalid <= 1;
             end
@@ -402,16 +463,16 @@ always @(posedge clk or negedge rst_n) begin
                 TDC_Odata <= 0;
                 TDC_Olast <= 0;
                 TDC_Oint  <= 0;
-                TDC_Ovalid <= 1;
+                TDC_Ovalid <= 0;
             end
         endcase
     end
-    else begin
+/*     else begin
         TDC_Odata <= 0;
         TDC_Olast <= 0;
         TDC_Oint  <= 0;
         TDC_Ovalid <= 0;
-    end
+    end */
 end
 
 
