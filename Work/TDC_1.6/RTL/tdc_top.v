@@ -29,9 +29,12 @@ parameter DATA3_2 = 7'b0100000;
 parameter DATA0   = 7'b1000000;
 //-------------------------------------------------------------------
 reg  [31:0]  start_reg_out;
-wire [4:0]   start_data_out;
+//wire [4:0]   start_data_out;
 reg  [31:0]  stop_reg_out;
-wire [4:0]   stop_data_out;
+reg  [31:0]  stop_reg[2:0];
+reg  [9 :0]  counter_reg[2:0];
+reg  [9 :0]  counter_in;
+//wire [4:0]   stop_data_out;
 reg          cnt_start;
 wire         sync;
 //wire         clk5;
@@ -55,9 +58,8 @@ reg  [1:0]   num;
 //-------------------------------------------------------------------
 reg  [9:0]  counter;
 reg  [9:0]  counter_reg_out;
-reg  [14:0] tof;
+wire [14:0] tof;
 reg  [14:0] tof_data[2:0];
-reg  [14:0] tof_data_in;
 reg  [14:0] range;
 
 wire        cal_stop;
@@ -67,6 +69,13 @@ reg  [3 :0] int_data_o[2:0];
 reg  [15:0] cal_data;
 wire [3 :0] int_out;
 reg         int_valid;
+
+reg  [31:0] decode_in;
+reg         tof_cal_en;
+wire        tof_out_valid;
+wire        dec_valid;
+reg  [2 :0] cnt;
+wire        tof_cal_stop;
 
 //-------------------------------------------------------------------
 assign rst_auto = (!TDC_tgate) & sync;
@@ -153,7 +162,7 @@ end
 
 //---------------decode------------------------------
 
-decode decode_start(
+/* decode decode_start(
       .data_in(start_reg_out),
       .data_out(start_data_out)
     );
@@ -161,12 +170,12 @@ decode decode_start(
 decode decode_stop(
       .data_in(stop_reg_out),
       .data_out(stop_data_out)
-    );
+    ); */
 
 //---------------tof data out------------------------
 //assign tof[14:0] = {counter_reg_out[9:0], stop_data_out[4:0]} - {10'b00_0000_0001, start_data_out[4:0]};
 
-always @( *) begin
+/* always @( *) begin
     if (counter_reg_out == 0) begin
         tof[14:5] = range[14:5];
         tof[4 :0] = stop_data_out - start_data_out;
@@ -181,7 +190,9 @@ always @( *) begin
     end
     else
         tof_data_in = 15'b11111_11111_11111;
-end
+end */
+//---------------tof data out------------------------
+
 
 always @(negedge TDC_trigger or negedge rst) begin // rst
     if (!rst) begin
@@ -197,30 +208,39 @@ end
 
 always @(negedge TDC_trigger or negedge rst) begin //rst
     if (!rst) begin
-        tof_data[2] <= 0;
-        tof_data[1] <= 0;
-        tof_data[0] <= 0;
+        counter_reg[2] <= 0;
+        counter_reg[1] <= 0;
+        counter_reg[0] <= 0;
+        stop_reg[2] <= 0;
+        stop_reg[1] <= 0;
+        stop_reg[0] <= 0;
         INT[2]  <= 0;
         INT[1]  <= 0;
         INT[0]  <= 0;
     end
     else if(!tri_ign) begin
         if (TDC_Onum == 0) begin
-            tof_data[0] <= tof_data_in;
+            counter_reg[0] <= counter_reg_out;
+            stop_reg[0] <= stop_reg_out;
             INT[0]  <= light_level;
         end
         else if (TDC_Onum == 1) begin
-            tof_data[1] <= tof_data_in;
+            counter_reg[1] <= counter_reg_out;
+            stop_reg[1] <= stop_reg_out;
             INT[1]  <= light_level;
         end
         else if (TDC_Onum == 2) begin
-            tof_data[2] <= tof_data_in;
+            counter_reg[2] <= counter_reg_out;
+            stop_reg[2] <= stop_reg_out;
             INT[2]  <= light_level;
         end
         else if (TDC_Onum == 3) begin
-            tof_data[2] <= tof_data[2];
-            tof_data[1] <= tof_data[1];
-            tof_data[0] <= tof_data[0];
+            counter_reg[0] <= counter_reg[0];
+            counter_reg[1] <= counter_reg[1];
+            counter_reg[2] <= counter_reg[2];
+            stop_reg[2] <= stop_reg[2];
+            stop_reg[1] <= stop_reg[1];
+            stop_reg[0] <= stop_reg[0];
             INT[2]  <= INT[2];
             INT[1]  <= INT[1];
             INT[0]  <= INT[0];
@@ -263,6 +283,140 @@ always @(posedge clk5 or negedge rst_n) begin //clk 500 Mhz
     else if (trans_done) begin
         Ovalid <= 0;
         TDC_INT <= 0; //! wait for clr signal from core logic
+    end
+end
+//-------------------------------------------------------------------
+//-----tof cal control logic-------------------------
+tof_cal tof_cal_inst(
+    .clk                (clk),
+    .rst_n              (rst_n),
+    .decode_in          (decode_in),
+    .tof_data_in        (tof),
+    .cal_en             (tof_cal_en),
+    .cal_stop           (tof_cal_stop),
+    .out_valid          (tof_out_valid),
+    .dec_valid          (dec_valid),
+    .cnt                (cnt),
+    .TDC_Onum           (TDC_Onum),
+    .counter_in         (counter_in),
+    .range              (range)
+);
+
+always @(posedge clk or negedge rst_n) begin
+    if (!rst_n) begin
+        tof_cal_en <= 0;
+        decode_in <= 0;
+        counter_in <= 0;
+        cnt <= 0;
+    end
+    else if (Ovalid_d2 & !Ovalid_d3) begin
+        if (TDC_Onum == 0) begin
+            tof_cal_en <= 0;
+            decode_in <= 0;
+            counter_in <= 0;
+        end
+        else begin
+            tof_cal_en <= 1;
+            decode_in <= start_reg_out;
+            counter_in <= 0;
+        end
+    end
+    else if (tof_cal_en) begin
+        if (tof_cal_stop) begin
+            tof_cal_en <= 0;
+            decode_in <= 0;
+            cnt <= cnt + 1;
+        end
+    end
+    else if (tof_out_valid) begin
+        if (TDC_Onum == 1) begin
+            if (cnt == 1) begin
+                tof_cal_en <= 1;
+                decode_in <= stop_reg[0];
+                counter_in <= counter_reg[0];
+            end
+            else if (cnt == 2) begin
+                tof_cal_en <= 0;
+                decode_in <= 0;
+                counter_in <= 0;
+                cnt <= 0;
+            end
+        end
+        else if (TDC_Onum == 2) begin
+            if (cnt == 1) begin
+                tof_cal_en <= 1;
+                decode_in <= stop_reg[0];
+                counter_in <= counter_reg[0];
+            end
+            else if (cnt == 2) begin
+                tof_cal_en <= 1;
+                decode_in <= stop_reg[1];
+                counter_in <= counter_reg[1];
+            end
+            else if (cnt == 3) begin
+                tof_cal_en <= 0;
+                decode_in <= 0;
+                counter_in <= 0;
+                cnt <= 0;
+            end
+        end
+        else if (TDC_Onum == 3) begin
+            if (cnt == 1) begin
+                tof_cal_en <= 1;
+                decode_in <= stop_reg[0];
+                counter_in <= counter_reg[0];
+            end
+            else if (cnt == 2) begin
+                tof_cal_en <= 1;
+                decode_in <= stop_reg[1];
+                counter_in <= counter_reg[1];
+            end
+            else if (cnt == 3) begin
+                tof_cal_en <= 1;
+                decode_in <= stop_reg[2];
+                counter_in <= counter_reg[2];
+            end
+            else if (cnt == 4) begin
+                tof_cal_en <= 0;
+                decode_in <= 0;
+                counter_in <= 0;
+                cnt <= 0;
+            end
+        end
+    end
+end
+
+always @(posedge clk or negedge rst_n) begin //! todo reset
+    if (!rst_n) begin
+        tof_data[2] <= 0;
+        tof_data[1] <= 0;
+        tof_data[0] <= 0;
+    end
+    else if (tof_out_valid)begin
+        if (TDC_Onum == 1) begin
+            if (cnt == 2) begin
+                tof_data[0] <= tof;
+            end
+        end
+        else if (TDC_Onum == 2) begin
+            if (cnt == 2) begin
+                tof_data[0] <= tof;
+            end
+            else if (cnt == 3) begin
+                tof_data[1] <= tof;
+            end
+        end
+        else if (TDC_Onum == 3) begin
+            if (cnt == 2) begin
+                tof_data[0] <= tof;
+            end
+            else if (cnt == 3) begin
+                tof_data[1] <= tof;
+            end
+            else if (cnt == 4) begin
+                tof_data[2] <= tof;
+            end
+        end
     end
 end
 //-------------------------------------------------------------------
@@ -382,7 +536,7 @@ end
 //-------------------------------------------------------------------
 //---------------get  intensity  data---------------
 
-always @(posedge clk or negedge rst_n) begin
+always @(posedge clk or negedge rst_n) begin //! todo reset
     if (!rst_n) begin
         int_data_o[2] <= 0;
         int_data_o[1] <= 0;

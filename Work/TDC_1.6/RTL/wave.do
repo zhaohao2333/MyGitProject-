@@ -13,9 +13,7 @@ add wave -noupdate /tb_tdc/tdc_top_dut/TDC_Oready
 add wave -noupdate /tb_tdc/tdc_top_dut/TDC_INT
 add wave -noupdate /tb_tdc/tdc_top_dut/rst_auto
 add wave -noupdate /tb_tdc/tdc_top_dut/start_reg_out
-add wave -noupdate /tb_tdc/tdc_top_dut/start_data_out
 add wave -noupdate /tb_tdc/tdc_top_dut/stop_reg_out
-add wave -noupdate /tb_tdc/tdc_top_dut/stop_data_out
 add wave -noupdate /tb_tdc/tdc_top_dut/cnt_start
 add wave -noupdate /tb_tdc/tdc_top_dut/sync
 add wave -noupdate /tb_tdc/tdc_top_dut/light_level
@@ -40,7 +38,6 @@ add wave -noupdate /tb_tdc/tdc_top_dut/TDC_Ovalid_d
 add wave -noupdate /tb_tdc/tdc_top_dut/counter
 add wave -noupdate /tb_tdc/tdc_top_dut/counter_reg_out
 add wave -noupdate /tb_tdc/tdc_top_dut/tof
-add wave -noupdate /tb_tdc/tdc_top_dut/tof_data_in
 add wave -noupdate /tb_tdc/tdc_top_dut/range
 add wave -noupdate /tb_tdc/tdc_top_dut/cal_stop
 add wave -noupdate /tb_tdc/tdc_top_dut/out_valid
@@ -53,9 +50,32 @@ add wave -noupdate /tb_tdc/tdc_top_dut/int_cal_inst/cal_en_d1
 add wave -noupdate /tb_tdc/tdc_top_dut/int_cal_inst/shift_tri
 add wave -noupdate /tb_tdc/tdc_top_dut/int_cal_inst/int_out
 add wave -noupdate /tb_tdc/tdc_top_dut/int_cal_inst/INT
+add wave -noupdate /tb_tdc/tdc_top_dut/int_data_o
+add wave -noupdate /tb_tdc/tdc_top_dut/tof_cal_inst/clk
+add wave -noupdate /tb_tdc/tdc_top_dut/tof_cal_inst/decode_in
+add wave -noupdate /tb_tdc/tdc_top_dut/tof_cal_inst/tof_data_in
+add wave -noupdate /tb_tdc/tdc_top_dut/tof_cal_inst/cal_en
+add wave -noupdate /tb_tdc/tdc_top_dut/tof_cal_inst/cal_stop
+add wave -noupdate /tb_tdc/tdc_top_dut/tof_cal_inst/out_valid
+add wave -noupdate /tb_tdc/tdc_top_dut/tof_cal_inst/dec_valid
+add wave -noupdate /tb_tdc/tdc_top_dut/tof_cal_inst/cnt
+add wave -noupdate /tb_tdc/tdc_top_dut/tof_cal_inst/TDC_Onum
+add wave -noupdate /tb_tdc/tdc_top_dut/tof_cal_inst/counter_in
+add wave -noupdate /tb_tdc/tdc_top_dut/tof_cal_inst/range
+add wave -noupdate /tb_tdc/tdc_top_dut/tof_cal_inst/tof
+add wave -noupdate /tb_tdc/tdc_top_dut/tof_cal_inst/decode
+add wave -noupdate /tb_tdc/tdc_top_dut/tof_cal_inst/norbuf
+add wave -noupdate /tb_tdc/tdc_top_dut/tof_cal_inst/sel1
+add wave -noupdate /tb_tdc/tdc_top_dut/tof_cal_inst/sel2
+add wave -noupdate /tb_tdc/tdc_top_dut/tof_cal_inst/sel3
+add wave -noupdate /tb_tdc/tdc_top_dut/tof_cal_inst/dec_shift
+add wave -noupdate /tb_tdc/tdc_top_dut/tof_cal_inst/start_dec_data
+add wave -noupdate /tb_tdc/tdc_top_dut/tof_cal_inst/comp
+add wave -noupdate /tb_tdc/tdc_top_dut/tof_cal_inst/comp_done
+add wave -noupdate /tb_tdc/tdc_top_dut/tof_cal_inst/comp_done_d
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {24000 ns} 0} {{Cursor 3} {44244 ns} 0}
-quietly wave cursor active 1
+WaveRestoreCursors {{Cursor 1} {33113 ns} 0} {{Cursor 3} {50413 ns} 0}
+quietly wave cursor active 2
 configure wave -namecolwidth 155
 configure wave -valuecolwidth 420
 configure wave -justifyvalue left
@@ -70,4 +90,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ns
 update
-WaveRestoreZoom {0 ns} {68796 ns}
+WaveRestoreZoom {19408 ns} {67047 ns}
