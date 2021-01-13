@@ -1,9 +1,8 @@
 `timescale 1ns/1ns
-module tb_tdc;
+module tb_tdc_his;
 
     reg          clk_i;
     reg  [31:0]  DLL_Phase;
-    reg          clk5; 
     reg          clk;
     reg          rst_n; 
     reg          rst;
@@ -17,12 +16,19 @@ module tb_tdc;
     wire [1 :0]  TDC_Onum; 
     wire         TDC_Olast;
     wire         TDC_Ovalid; 
-    reg          TDC_Oready;
+    wire         TDC_Oready;
     wire         TDC_INT;
     reg  [14:0]  TDC_Range;
     reg          photon;
     wire         rst_auto;
 
+    //histogram signal
+    reg          HIS_En;
+    reg  [3 :0]  HIS_TH;
+    reg  [15:0]  HIS_Ibatch;
+    wire [14:0]  HIS_Odata;
+    reg 		 HIS_Oready; //! from core logic
+    wire         HIS_Ovalid;
 
 tdc_top tdc_top_dut(
     .DLL_Phase          (DLL_Phase),
@@ -41,7 +47,7 @@ tdc_top tdc_top_dut(
     .TDC_Olast          (TDC_Olast), //output last data signal
     .TDC_Ovalid         (TDC_Ovalid), //output data valid signal
     
-    .TDC_Oready         (TDC_Oready), //output data ready signal
+    .TDC_Oready         (TDC_Oready), //input data ready signal
     
     .TDC_INT            (TDC_INT), //output interrupt signal
     .rst_auto           (rst_auto)
@@ -52,6 +58,22 @@ spad_module spad_module_dut(
     .trig(TDC_trigger),
     .time_gate(TDC_tgate)
 );
+histogram histogram_dut(
+     .clk           (clk),
+     .rstn          (rst_n),
+     .HIS_En        (HIS_En), //高电平有效
+     .HIS_TH        (HIS_TH),
+     .TDC_Oint      (TDC_Oint),
+     .HIS_Ibatch    (HIS_Ibatch), //1:1:20
+     .TDC_Odata     (TDC_Odata),
+     .TDC_Ovalid    (TDC_Ovalid),
+     .TDC_Oready    (TDC_Oready),//当前设计为TDC_Oready=HIS_En
+     .HIS_Odata     (HIS_Odata), //当前设计只输出最大值
+     .HIS_Oready    (HIS_Oready), //
+     .HIS_Ovalid    (HIS_Ovalid), //当前设计当输出有效时，拉高，直到输出握手结束
+     .TDC_Onum      (TDC_Onum)
+);
+
 initial begin
     begin
         clk_i = 0;
@@ -60,16 +82,21 @@ initial begin
         rst = 1;
         TDC_start = 0;
         TDC_spaden = 0;
-        TDC_Oready = 1; //!todo
-        TDC_Range = 15'b00000_11111_11100; // TDC_Range = 15'b xxxx;
+        TDC_Range = 15'b00000_11111_11100;
+        HIS_En = 1;
+        HIS_TH = 5; //! intensity
+        HIS_Ibatch = 100; //! num
+        HIS_Oready = 1; // from core logic
+
     // start 1:
         #5   rst_n = 0;
              rst = 0;
         #20  rst_n = 1;
              rst = 1;
         #100;
-        //#28 TDC_start = 1;
-        @ (posedge clk)
+    //===========================================================
+        tdc_start();
+/*         @ (posedge clk)
              TDC_start = 1;
         #640 TDC_start = 0;
 
@@ -102,32 +129,8 @@ initial begin
         #200 photon = 1;
              TDC_spaden = 16'b1111_1111_1111_1111;
         #50 photon = 0;
-
-        #50000;
-        ///////////////////////////////
-        
-        /* @ (negedge rst_auto);
-        #628 ;
-        @ (posedge clk)
-             TDC_start = 1;
-        #640 TDC_start = 0;
-
-        #800 photon = 1;
-             TDC_spaden = 16'b0000_0000_0000_1111;
-        #50 photon = 0;
-
-        #30000;
-        
-        @ (posedge clk)
-             TDC_start = 1;
-        #640 TDC_start = 0;
-        #30000; */
-
-        //---------------
-        // #20000;
-        //! from this
-        //#59750;
-        @ (posedge clk)
+        //--------------- */
+/*         @ (posedge clk)
         #120
              TDC_start = 1;
         #640 TDC_start = 0;
@@ -150,7 +153,7 @@ initial begin
         #200 photon = 1;
              TDC_spaden = 16'b0000_0000_0000_0111;
         #50 photon = 0;
-        #75000;
+        #75000; */
     //----------------------------------------------------------------------------------------------
 
         $finish;
@@ -158,7 +161,30 @@ initial begin
 end
 
 
+task photon_trigger;
+    begin
+        #800 photon = 1;
+             TDC_spaden = {$random} % 65536; //random num (0 <= num <= 65535)
+        #50  photon = 0;
+    end
+endtask
 
+task tdc_start;
+    reg   [7:0] delay;
+    begin    
+        delay = {$random} % 256;
+        @ (posedge clk);
+        #delay  
+                TDC_start = 1;
+        #640    TDC_start = 0;
+
+        photon_trigger();
+        @ (negedge rst_auto);
+        #1000;
+        photon_trigger();
+        #50000;
+    end
+endtask
 //-------------------------------------------------------------------------------------
 always #5 clk_i = !clk_i;
 always #320 clk = !clk;

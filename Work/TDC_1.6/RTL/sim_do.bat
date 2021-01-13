@@ -1,1 +1,1 @@
-modelsim -do sim_tdc.do
+modelsim -do sim.do

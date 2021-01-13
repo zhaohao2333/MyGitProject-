@@ -33,6 +33,9 @@ wire [14:0]	HIS_Odata	;	//当前设计只输出最大值
 reg		    HIS_Oready	;	//
 wire   		HIS_Ovalid	;	//当前设计当输出有效时，拉高，直到输出握手结束
 wire		HIS_hs;
+wire [1 :0] TDC_Onum;
+
+
 assign		HIS_hs=HIS_Oready&HIS_Ovalid;
 
 
@@ -95,7 +98,7 @@ begin
 TDC_Odata  <= test_data[cnt];
 TDC_Ovalid<=1;
 cnt <= cnt+1;
-TDC_Oint<=4'd6;
+TDC_Oint<=4'd6; //! todo
 end
 
 else if (cnt==10000)
@@ -120,7 +123,8 @@ TDC_Ovalid,
 TDC_Oready,//当前设计为TDC_Oready=HIS_En
 HIS_Odata,//当前设计只输出最大值
 HIS_Oready,//
-HIS_Ovalid//当前设计当输出有效时，拉高，直到输出握手结束
+HIS_Ovalid,//当前设计当输出有效时，拉高，直到输出握手结束
+TDC_Onum
 );
 
 endmodule

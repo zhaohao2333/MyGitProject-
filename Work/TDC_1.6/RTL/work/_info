@@ -8,34 +8,72 @@ z2
 !i10f 100
 cModel Technology
 Z0 dD:/Workplace/Work/TDC_1.6/RTL
-vdecode
-!s110 1610366658
-!i10b 1
-!s100 47egIjCD]IV>Zbm0z4BX@3
-I[YNV5>bZDecd52T6h`Zgc1
+vcount_max
 Z1 VDg1SIo80bB@j0V0VzS_@n1
+r1
+!s85 0
+31
+!i10b 1
+!s100 DN8Mco=S_3an;d_IhE13E1
+Id<N3Qm]j:J@Sj`cARdm8c0
+R0
+w1610519299
+8count_max.v
+Fcount_max.v
+L0 27
+Z2 OL;L;10.4;61
+Z3 !s108 1610528475.872000
+Z4 !s107 tof_cal.v|tdc_top.v|tb_tdc_his.v|tb_tdc.v|sync.v|spad_model.v|int_cal.v|histogram.v|decode.v|count_max.v|
+Z5 !s90 -reportprogress|300|count_max.v|decode.v|histogram.v|int_cal.v|spad_model.v|sync.v|tb_tdc.v|tb_tdc_his.v|tdc_top.v|tof_cal.v|
+!i113 0
+Z6 o-L mtiAvm -L mtiOvm -L mtiUvm -L mtiUPF
+vdecode
+Z7 !s110 1610528475
+!i10b 1
+!s100 8[:@HKO@nCl0URH?5VK9f1
+I1D4J3m]f125fjUQ[o9Fae0
+R1
 R0
 w1609301176
 8decode.v
 Fdecode.v
 L0 1
-Z2 OL;L;10.4;61
+R2
 r1
 !s85 0
 31
-Z3 !s108 1610366658.531000
-Z4 !s107 tof_cal.v|tdc_top.v|tb_tdc.v|sync.v|spad_model.v|int_cal.v|decode.v|
-Z5 !s90 -reportprogress|300|decode.v|int_cal.v|spad_model.v|sync.v|tb_tdc.v|tdc_top.v|tof_cal.v|
+R3
+R4
+R5
 !i113 0
-Z6 o-L mtiAvm -L mtiOvm -L mtiUvm -L mtiUPF
+R6
+vhistogram
+R1
+r1
+!s85 0
+31
+!i10b 1
+!s100 nGIl`0giYG4QkO_B=ZGKY3
+IBQnGWIz@gdoJo_N;:;37C1
+R0
+w1610519294
+8histogram.v
+Fhistogram.v
+L0 25
+R2
+R3
+R4
+R5
+!i113 0
+R6
 vint_cal
 R1
 r1
 !s85 0
 31
 !i10b 1
-!s100 n6kY8]C`CBIn>gz]L74FD0
-Ia8GdOK4n0zQalVc6HZYgg3
+!s100 81_bF`9nz[J37O@aHak0N3
+IE0oU:XnlCXdbH4N0?iZ8M1
 R0
 w1610090302
 8int_cal.v
@@ -86,17 +124,37 @@ R5
 !i113 0
 R6
 vtb_tdc
+R7
+!i10b 1
+!s100 V=JHQ2cY6`eR^]K2X6cc^2
+I?979@Nf:EocN:zPdTzJ352
+R1
+R0
+w1610503202
+8tb_tdc.v
+Ftb_tdc.v
+L0 2
+R2
+r1
+!s85 0
+31
+R3
+R4
+R5
+!i113 0
+R6
+vtb_tdc_his
 R1
 r1
 !s85 0
 31
 !i10b 1
-!s100 :2Cd@HFI3:nMcGYRiMM5c0
-I4L72M]N0gTMfBR=L6:U`I3
+!s100 EmJYKOfZ1W>QjGIDEmBd=1
+IlnD[LW3<4[]OAM;i=k:lQ0
 R0
-w1610361793
-8tb_tdc.v
-Ftb_tdc.v
+w1610528462
+8tb_tdc_his.v
+Ftb_tdc_his.v
 L0 2
 R2
 R3
@@ -110,10 +168,10 @@ r1
 !s85 0
 31
 !i10b 1
-!s100 c41hT9z8TBeKa6Q2X[Lg43
-I32]l[>5R0OGY^3W^`UOOC1
+!s100 7D5`>kNe4KVZ^JgGFC2W>0
+I]MO5iPF?W9nNODnP42kmU2
 R0
-w1610366649
+w1610501416
 8tdc_top.v
 Ftdc_top.v
 L0 2

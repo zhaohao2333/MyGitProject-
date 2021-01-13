@@ -713,8 +713,8 @@ always @(posedge clk or negedge rst_n) begin
                 TDC_Ovalid <= 0;
             end
             DATA0: begin
-                TDC_Odata <= 0;
-                TDC_Olast <= 0;
+                TDC_Odata <= 15'b11111_11111_11111;
+                TDC_Olast <= 1;
                 TDC_Oint  <= 0;
                 TDC_Ovalid <= 1;
             end
