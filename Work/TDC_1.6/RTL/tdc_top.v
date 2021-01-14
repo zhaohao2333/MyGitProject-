@@ -47,7 +47,6 @@ wire         hs;
 reg  [6:0]   n_state;
 reg  [6:0]   c_state;
 reg          Ovalid, Ovalid_d, Ovalid_d1, Ovalid_d2, Ovalid_d3;
-reg          trigger_d;
 reg          trans_done;
 reg          tri_ign;
 reg          clr_n;
@@ -66,7 +65,6 @@ wire        cal_stop;
 wire        out_valid;
 reg         cal_en;
 reg  [3 :0] int_data_o[2:0]; 
-reg  [15:0] cal_data;
 wire [3 :0] int_out;
 reg         int_valid;
 

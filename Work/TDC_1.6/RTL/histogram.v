@@ -177,7 +177,7 @@ case (CS)
 	S3: begin
 	TDC_hs_set_num=HIS_Ibatch1;
 	count_max_en=(TDC_Odata[14:7]=={count_max_out_first,count_max_out_second})?((TDC_Oint>=HIS_TH)?((TDC_hs==1&&HIS_En==1)?1'b1:1'b0):1'b0):1'b0;
-	Q_4bit=TDC_Odata[6:3];
+	Q_4bit=TDC_Odata[6:3];// 有一位重合？
 		if (count_max_hs) 
 			begin 
 			NS = S4;

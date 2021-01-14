@@ -13,604 +13,18 @@
 # //  FURTHERMORE, THIS INFORMATION IS PROHIBITED FROM DISCLOSURE UNDER
 # //  THE TRADE SECRETS ACT, 18 U.S.C. SECTION 1905.
 # //
-# do sim_tdc.do
+# do sim.do
 # ** Warning: (vlib-34) Library already exists at "work".
 # 
 # Model Technology ModelSim SE-64 vmap 10.4 Lib Mapping Utility 2014.12 Dec  3 2014
 # vmap -modelsim_quiet work work 
 # Modifying modelsim.ini
 # Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
-# Start time: 18:49:26 on Jan 11,2021
-# vlog -reportprogress 300 decode.v int_cal.v spad_model.v sync.v tb_tdc.v tdc_top.v tof_cal.v 
-# -- Compiling module decode
-# -- Compiling module int_cal
-# -- Compiling module spad_module
-# -- Compiling module sync
-# -- Compiling module tb_tdc
-# -- Compiling module tdc_top
-# -- Compiling module tof_cal
-# ** Error: (vlog-13069) tof_cal.v(144): near "always": syntax error, unexpected always.
-# 
-# ** Error: (vlog-13069) tof_cal.v(149): near "else": syntax error, unexpected else.
-# 
-# End time: 18:49:26 on Jan 11,2021, Elapsed time: 0:00:00
-# Errors: 2, Warnings: 0
-# ** Error: D:/modeltech64_10.4/win64/vlog failed.
-# Error in macro ./sim_tdc.do line 18
-# D:/modeltech64_10.4/win64/vlog failed.
-#     while executing
-# "vlog *.v"
-do sim_tdc.do
-# ** Warning: (vlib-34) Library already exists at "work".
-# 
-# Model Technology ModelSim SE-64 vmap 10.4 Lib Mapping Utility 2014.12 Dec  3 2014
-# vmap -modelsim_quiet work work 
-# Modifying modelsim.ini
-# Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
-# Start time: 18:50:46 on Jan 11,2021
-# vlog -reportprogress 300 decode.v int_cal.v spad_model.v sync.v tb_tdc.v tdc_top.v tof_cal.v 
-# -- Compiling module decode
-# -- Compiling module int_cal
-# -- Compiling module spad_module
-# -- Compiling module sync
-# -- Compiling module tb_tdc
-# -- Compiling module tdc_top
-# -- Compiling module tof_cal
-# ** Error: (vlog-13069) tof_cal.v(144): near "always": syntax error, unexpected always.
-# 
-# ** Error: (vlog-13069) tof_cal.v(149): near "else": syntax error, unexpected else.
-# 
-# End time: 18:50:46 on Jan 11,2021, Elapsed time: 0:00:00
-# Errors: 2, Warnings: 0
-# ** Error: D:/modeltech64_10.4/win64/vlog failed.
-# Error in macro ./sim_tdc.do line 18
-# D:/modeltech64_10.4/win64/vlog failed.
-#     while executing
-# "vlog *.v"
-do sim_tdc.do
-# ** Warning: (vlib-34) Library already exists at "work".
-# 
-# Model Technology ModelSim SE-64 vmap 10.4 Lib Mapping Utility 2014.12 Dec  3 2014
-# vmap -modelsim_quiet work work 
-# Modifying modelsim.ini
-# Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
-# Start time: 18:53:08 on Jan 11,2021
-# vlog -reportprogress 300 decode.v int_cal.v spad_model.v sync.v tb_tdc.v tdc_top.v tof_cal.v 
-# -- Compiling module decode
-# -- Compiling module int_cal
-# -- Compiling module spad_module
-# -- Compiling module sync
-# -- Compiling module tb_tdc
-# -- Compiling module tdc_top
-# -- Compiling module tof_cal
-# 
-# Top level modules:
-# 	decode
-# 	tb_tdc
-# End time: 18:53:08 on Jan 11,2021, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-# vsim -gui -do "sim_tdc.do" 
-# Start time: 18:53:08 on Jan 11,2021
-# ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
-# 
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.tb_tdc
-# Loading work.tb_tdc
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.tdc_top
-# Loading work.tdc_top
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.sync
-# Loading work.sync
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.tof_cal
-# Loading work.tof_cal
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.int_cal
-# Loading work.int_cal
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.spad_module
-# Loading work.spad_module
-# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
-# 
-#           File in use by: Administrator  Hostname: ZHAOHAO  ProcessID: 2668
-# 
-#           Attempting to use alternate WLF file "./wlftsm1fvi".
-# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
-# 
-#           Using alternate file: ./wlftsm1fvi
-# 
-# ** Error: (vish-4014) No objects found matching '/tb_tdc/tdc_top_dut/start_data_out'.
-# Executing ONERROR command at macro ./sim_tdc.do line 41
-# ** Error: (vish-4014) No objects found matching '/tb_tdc/tdc_top_dut/stop_data_out'.
-# Executing ONERROR command at macro ./sim_tdc.do line 43
-# ** Note: $finish    : tb_tdc.v(154)
-#    Time: 64665 ns  Iteration: 0  Instance: /tb_tdc
-# 1
-# Break in Module tb_tdc at tb_tdc.v line 154
-add wave -position end  /tb_tdc/tdc_top_dut/stop_reg
-do sim_tdc.do
-# ** Warning: (vlib-34) Library already exists at "work".
-# 
-# Model Technology ModelSim SE-64 vmap 10.4 Lib Mapping Utility 2014.12 Dec  3 2014
-# vmap -modelsim_quiet work work 
-# Modifying modelsim.ini
-# Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
-# Start time: 18:57:51 on Jan 11,2021
-# vlog -reportprogress 300 decode.v int_cal.v spad_model.v sync.v tb_tdc.v tdc_top.v tof_cal.v 
-# -- Compiling module decode
-# -- Compiling module int_cal
-# -- Compiling module spad_module
-# -- Compiling module sync
-# -- Compiling module tb_tdc
-# -- Compiling module tdc_top
-# -- Compiling module tof_cal
-# 
-# Top level modules:
-# 	decode
-# 	tb_tdc
-# End time: 18:57:51 on Jan 11,2021, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-# vsim 
-# Start time: 18:57:51 on Jan 11,2021
-# ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
-# 
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.tb_tdc
-# Loading work.tb_tdc
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.tdc_top
-# Loading work.tdc_top
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.sync
-# Loading work.sync
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.tof_cal
-# Loading work.tof_cal
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.int_cal
-# Loading work.int_cal
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.spad_module
-# Loading work.spad_module
-# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
-# 
-#           File in use by: Administrator  Hostname: ZHAOHAO  ProcessID: 2668
-# 
-#           Attempting to use alternate WLF file "./wlftt6ygtg".
-# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
-# 
-#           Using alternate file: ./wlftt6ygtg
-# 
-# ** Error: (vish-4014) No objects found matching '/tb_tdc/tdc_top_dut/start_data_out'.
-# Executing ONERROR command at macro ./sim_tdc.do line 41
-# ** Error: (vish-4014) No objects found matching '/tb_tdc/tdc_top_dut/stop_data_out'.
-# Executing ONERROR command at macro ./sim_tdc.do line 43
-# ** Error: (vish-4014) No objects found matching '/tb_tdc/tdc_top_dut/tof_data_in'.
-# Executing ONERROR command at macro ./sim_tdc.do line 68
-# ** Note: $finish    : tb_tdc.v(154)
-#    Time: 64665 ns  Iteration: 0  Instance: /tb_tdc
-# 1
-# Break in Module tb_tdc at tb_tdc.v line 154
-add wave -position end sim:/tb_tdc/tdc_top_dut/tof_cal_inst/*
-write format wave -window .main_pane.wave.interior.cs.body.pw.wf D:/Workplace/Work/TDC_1.6/RTL/wave.do
-write format wave -window .main_pane.wave.interior.cs.body.pw.wf D:/Workplace/Work/TDC_1.6/RTL/wave.do
-do sim_tdc.do
-# ** Warning: (vlib-34) Library already exists at "work".
-# 
-# Model Technology ModelSim SE-64 vmap 10.4 Lib Mapping Utility 2014.12 Dec  3 2014
-# vmap -modelsim_quiet work work 
-# Modifying modelsim.ini
-# Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
-# Start time: 19:00:41 on Jan 11,2021
-# vlog -reportprogress 300 decode.v int_cal.v spad_model.v sync.v tb_tdc.v tdc_top.v tof_cal.v 
-# -- Compiling module decode
-# -- Compiling module int_cal
-# -- Compiling module spad_module
-# -- Compiling module sync
-# -- Compiling module tb_tdc
-# -- Compiling module tdc_top
-# -- Compiling module tof_cal
-# 
-# Top level modules:
-# 	decode
-# 	tb_tdc
-# End time: 19:00:41 on Jan 11,2021, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-# vsim 
-# Start time: 19:00:41 on Jan 11,2021
-# ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
-# 
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.tb_tdc
-# Loading work.tb_tdc
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.tdc_top
-# Loading work.tdc_top
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.sync
-# Loading work.sync
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.tof_cal
-# Loading work.tof_cal
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.int_cal
-# Loading work.int_cal
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.spad_module
-# Loading work.spad_module
-# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
-# 
-#           File in use by: Administrator  Hostname: ZHAOHAO  ProcessID: 2668
-# 
-#           Attempting to use alternate WLF file "./wlfty5xzmq".
-# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
-# 
-#           Using alternate file: ./wlfty5xzmq
-# 
-# ** Note: $finish    : tb_tdc.v(154)
-#    Time: 64665 ns  Iteration: 0  Instance: /tb_tdc
-# 1
-# Break in Module tb_tdc at tb_tdc.v line 154
-# Causality operation skipped due to absence of debug database file
-do sim_tdc.do
-# ** Warning: (vlib-34) Library already exists at "work".
-# 
-# Model Technology ModelSim SE-64 vmap 10.4 Lib Mapping Utility 2014.12 Dec  3 2014
-# vmap -modelsim_quiet work work 
-# Modifying modelsim.ini
-# Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
-# Start time: 19:49:18 on Jan 11,2021
-# vlog -reportprogress 300 decode.v int_cal.v spad_model.v sync.v tb_tdc.v tdc_top.v tof_cal.v 
-# -- Compiling module decode
-# -- Compiling module int_cal
-# -- Compiling module spad_module
-# -- Compiling module sync
-# -- Compiling module tb_tdc
-# -- Compiling module tdc_top
-# -- Compiling module tof_cal
-# 
-# Top level modules:
-# 	decode
-# 	tb_tdc
-# End time: 19:49:18 on Jan 11,2021, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-# vsim 
-# Start time: 19:49:18 on Jan 11,2021
-# ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
-# 
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.tb_tdc
-# Loading work.tb_tdc
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.tdc_top
-# Loading work.tdc_top
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.sync
-# Loading work.sync
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.tof_cal
-# Loading work.tof_cal
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.int_cal
-# Loading work.int_cal
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.spad_module
-# Loading work.spad_module
-# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
-# 
-#           File in use by: Administrator  Hostname: ZHAOHAO  ProcessID: 2668
-# 
-#           Attempting to use alternate WLF file "./wlft4qvcgn".
-# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
-# 
-#           Using alternate file: ./wlft4qvcgn
-# 
-# ** Note: $finish    : tb_tdc.v(154)
-#    Time: 64665 ns  Iteration: 0  Instance: /tb_tdc
-# 1
-# Break in Module tb_tdc at tb_tdc.v line 154
-do sim_tdc.do
-# ** Warning: (vlib-34) Library already exists at "work".
-# 
-# Model Technology ModelSim SE-64 vmap 10.4 Lib Mapping Utility 2014.12 Dec  3 2014
-# vmap -modelsim_quiet work work 
-# Modifying modelsim.ini
-# Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
-# Start time: 20:03:21 on Jan 11,2021
-# vlog -reportprogress 300 decode.v int_cal.v spad_model.v sync.v tb_tdc.v tdc_top.v tof_cal.v 
-# -- Compiling module decode
-# -- Compiling module int_cal
-# -- Compiling module spad_module
-# -- Compiling module sync
-# -- Compiling module tb_tdc
-# -- Compiling module tdc_top
-# -- Compiling module tof_cal
-# 
-# Top level modules:
-# 	decode
-# 	tb_tdc
-# End time: 20:03:21 on Jan 11,2021, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-# vsim 
-# Start time: 20:03:21 on Jan 11,2021
-# ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
-# 
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.tb_tdc
-# Loading work.tb_tdc
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.tdc_top
-# Loading work.tdc_top
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.sync
-# Loading work.sync
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.tof_cal
-# Loading work.tof_cal
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.int_cal
-# Loading work.int_cal
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.spad_module
-# Loading work.spad_module
-# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
-# 
-#           File in use by: Administrator  Hostname: ZHAOHAO  ProcessID: 2668
-# 
-#           Attempting to use alternate WLF file "./wlftv5xivk".
-# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
-# 
-#           Using alternate file: ./wlftv5xivk
-# 
-# ** Note: $finish    : tb_tdc.v(154)
-#    Time: 64665 ns  Iteration: 0  Instance: /tb_tdc
-# 1
-# Break in Module tb_tdc at tb_tdc.v line 154
-do sim_tdc.do
-# ** Warning: (vlib-34) Library already exists at "work".
-# 
-# Model Technology ModelSim SE-64 vmap 10.4 Lib Mapping Utility 2014.12 Dec  3 2014
-# vmap -modelsim_quiet work work 
-# Modifying modelsim.ini
-# Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
-# Start time: 20:04:18 on Jan 11,2021
-# vlog -reportprogress 300 decode.v int_cal.v spad_model.v sync.v tb_tdc.v tdc_top.v tof_cal.v 
-# -- Compiling module decode
-# -- Compiling module int_cal
-# -- Compiling module spad_module
-# -- Compiling module sync
-# -- Compiling module tb_tdc
-# -- Compiling module tdc_top
-# -- Compiling module tof_cal
-# 
-# Top level modules:
-# 	decode
-# 	tb_tdc
-# End time: 20:04:18 on Jan 11,2021, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-# vsim 
-# Start time: 20:04:18 on Jan 11,2021
-# ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
-# 
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.tb_tdc
-# Loading work.tb_tdc
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.tdc_top
-# Loading work.tdc_top
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.sync
-# Loading work.sync
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.tof_cal
-# Loading work.tof_cal
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.int_cal
-# Loading work.int_cal
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.spad_module
-# Loading work.spad_module
-# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
-# 
-#           File in use by: Administrator  Hostname: ZHAOHAO  ProcessID: 2668
-# 
-#           Attempting to use alternate WLF file "./wlftrtfx51".
-# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
-# 
-#           Using alternate file: ./wlftrtfx51
-# 
-# ** Note: $finish    : tb_tdc.v(154)
-#    Time: 64665 ns  Iteration: 0  Instance: /tb_tdc
-# 1
-# Break in Module tb_tdc at tb_tdc.v line 154
-do sim_tdc.do
-# ** Warning: (vlib-34) Library already exists at "work".
-# 
-# Model Technology ModelSim SE-64 vmap 10.4 Lib Mapping Utility 2014.12 Dec  3 2014
-# vmap -modelsim_quiet work work 
-# Modifying modelsim.ini
-# Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
-# Start time: 09:48:43 on Jan 13,2021
-# vlog -reportprogress 300 decode.v int_cal.v spad_model.v sync.v tb_tdc.v tdc_top.v tof_cal.v 
-# -- Compiling module decode
-# -- Compiling module int_cal
-# -- Compiling module spad_module
-# -- Compiling module sync
-# -- Compiling module tb_tdc
-# -- Compiling module tdc_top
-# -- Compiling module tof_cal
-# 
-# Top level modules:
-# 	decode
-# 	tb_tdc
-# End time: 09:48:43 on Jan 13,2021, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-# vsim 
-# Start time: 09:48:43 on Jan 13,2021
-# ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
-# 
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.tb_tdc
-# Loading work.tb_tdc
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.tdc_top
-# Loading work.tdc_top
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.sync
-# Loading work.sync
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.tof_cal
-# Loading work.tof_cal
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.int_cal
-# Loading work.int_cal
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.spad_module
-# Loading work.spad_module
-# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
-# 
-#           File in use by: Administrator  Hostname: ZHAOHAO  ProcessID: 2668
-# 
-#           Attempting to use alternate WLF file "./wlft49c87k".
-# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
-# 
-#           Using alternate file: ./wlft49c87k
-# 
-# ** Note: $finish    : tb_tdc.v(154)
-#    Time: 227585 ns  Iteration: 0  Instance: /tb_tdc
-# 1
-# Break in Module tb_tdc at tb_tdc.v line 154
-do sim_tdc.do
-# ** Warning: (vlib-34) Library already exists at "work".
-# 
-# Model Technology ModelSim SE-64 vmap 10.4 Lib Mapping Utility 2014.12 Dec  3 2014
-# vmap -modelsim_quiet work work 
-# Modifying modelsim.ini
-# Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
-# Start time: 10:00:21 on Jan 13,2021
-# vlog -reportprogress 300 decode.v int_cal.v spad_model.v sync.v tb_tdc.v tdc_top.v tof_cal.v 
-# -- Compiling module decode
-# -- Compiling module int_cal
-# -- Compiling module spad_module
-# -- Compiling module sync
-# -- Compiling module tb_tdc
-# -- Compiling module tdc_top
-# -- Compiling module tof_cal
-# 
-# Top level modules:
-# 	decode
-# 	tb_tdc
-# End time: 10:00:21 on Jan 13,2021, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-# vsim 
-# Start time: 10:00:21 on Jan 13,2021
-# ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
-# 
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.tb_tdc
-# Loading work.tb_tdc
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.tdc_top
-# Loading work.tdc_top
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.sync
-# Loading work.sync
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.tof_cal
-# Loading work.tof_cal
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.int_cal
-# Loading work.int_cal
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.spad_module
-# Loading work.spad_module
-# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
-# 
-#           File in use by: Administrator  Hostname: ZHAOHAO  ProcessID: 2668
-# 
-#           Attempting to use alternate WLF file "./wlftfxrmne".
-# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
-# 
-#           Using alternate file: ./wlftfxrmne
-# 
-# ** Note: $finish    : tb_tdc.v(156)
-#    Time: 227585 ns  Iteration: 0  Instance: /tb_tdc
-# 1
-# Break in Module tb_tdc at tb_tdc.v line 156
-do sim.do
-# ** Warning: (vlib-34) Library already exists at "work".
-# 
-# Model Technology ModelSim SE-64 vmap 10.4 Lib Mapping Utility 2014.12 Dec  3 2014
-# vmap -modelsim_quiet work work 
-# Modifying modelsim.ini
-# Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
-# Start time: 16:50:08 on Jan 13,2021
-# vlog -reportprogress 300 count_max.v decode.v histogram.v int_cal.v spad_model.v sync.v tb_tdc.v tb_tdc_his.v tdc_top.v tof_cal.v 
+# Start time: 16:14:19 on Jan 14,2021
+# vlog -reportprogress 300 count_max.v decode.v decoder.v histogram.v int_cal.v spad_model.v sync.v tb_tdc.v tb_tdc_his.v tdc_top.v tof_cal.v 
 # -- Compiling module count_max
 # -- Compiling module decode
-# -- Compiling module histogram
-# -- Compiling module int_cal
-# -- Compiling module spad_module
-# -- Compiling module sync
-# -- Compiling module tb_tdc
-# -- Compiling module tb_tdc_his
-# ** Error: tb_tdc_his.v(175): Can't have packed array of integer type.
-# ** Error: tb_tdc_his.v(175): Declarations not allowed in unnamed block.
-# -- Compiling module tdc_top
-# -- Compiling module tof_cal
-# End time: 16:50:08 on Jan 13,2021, Elapsed time: 0:00:00
-# Errors: 2, Warnings: 0
-# ** Error: D:/modeltech64_10.4/win64/vlog failed.
-# Error in macro ./sim.do line 18
-# D:/modeltech64_10.4/win64/vlog failed.
-#     while executing
-# "vlog *.v"
-do sim.do
-# ** Warning: (vlib-34) Library already exists at "work".
-# 
-# Model Technology ModelSim SE-64 vmap 10.4 Lib Mapping Utility 2014.12 Dec  3 2014
-# vmap -modelsim_quiet work work 
-# Modifying modelsim.ini
-# Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
-# Start time: 16:50:28 on Jan 13,2021
-# vlog -reportprogress 300 count_max.v decode.v histogram.v int_cal.v spad_model.v sync.v tb_tdc.v tb_tdc_his.v tdc_top.v tof_cal.v 
-# -- Compiling module count_max
-# -- Compiling module decode
-# -- Compiling module histogram
-# -- Compiling module int_cal
-# -- Compiling module spad_module
-# -- Compiling module sync
-# -- Compiling module tb_tdc
-# -- Compiling module tb_tdc_his
-# ** Error: tb_tdc_his.v(175): Declarations not allowed in unnamed block.
-# -- Compiling module tdc_top
-# -- Compiling module tof_cal
-# End time: 16:50:28 on Jan 13,2021, Elapsed time: 0:00:00
-# Errors: 1, Warnings: 0
-# ** Error: D:/modeltech64_10.4/win64/vlog failed.
-# Error in macro ./sim.do line 18
-# D:/modeltech64_10.4/win64/vlog failed.
-#     while executing
-# "vlog *.v"
-do sim.do
-# ** Warning: (vlib-34) Library already exists at "work".
-# 
-# Model Technology ModelSim SE-64 vmap 10.4 Lib Mapping Utility 2014.12 Dec  3 2014
-# vmap -modelsim_quiet work work 
-# Modifying modelsim.ini
-# Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
-# Start time: 16:52:44 on Jan 13,2021
-# vlog -reportprogress 300 count_max.v decode.v histogram.v int_cal.v spad_model.v sync.v tb_tdc.v tb_tdc_his.v tdc_top.v tof_cal.v 
-# -- Compiling module count_max
-# -- Compiling module decode
-# -- Compiling module histogram
-# -- Compiling module int_cal
-# -- Compiling module spad_module
-# -- Compiling module sync
-# -- Compiling module tb_tdc
-# -- Compiling module tb_tdc_his
-# ** Error: tb_tdc_his.v(175): Can't have packed array of integer type.
-# ** Error: tb_tdc_his.v(175): Declarations not allowed in unnamed block.
-# -- Compiling module tdc_top
-# -- Compiling module tof_cal
-# End time: 16:52:44 on Jan 13,2021, Elapsed time: 0:00:00
-# Errors: 2, Warnings: 0
-# ** Error: D:/modeltech64_10.4/win64/vlog failed.
-# Error in macro ./sim.do line 18
-# D:/modeltech64_10.4/win64/vlog failed.
-#     while executing
-# "vlog *.v"
-do sim.do
-# ** Warning: (vlib-34) Library already exists at "work".
-# 
-# Model Technology ModelSim SE-64 vmap 10.4 Lib Mapping Utility 2014.12 Dec  3 2014
-# vmap -modelsim_quiet work work 
-# Modifying modelsim.ini
-# Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
-# Start time: 16:53:26 on Jan 13,2021
-# vlog -reportprogress 300 count_max.v decode.v histogram.v int_cal.v spad_model.v sync.v tb_tdc.v tb_tdc_his.v tdc_top.v tof_cal.v 
-# -- Compiling module count_max
-# -- Compiling module decode
-# -- Compiling module histogram
-# -- Compiling module int_cal
-# -- Compiling module spad_module
-# -- Compiling module sync
-# -- Compiling module tb_tdc
-# -- Compiling module tb_tdc_his
-# ** Error: tb_tdc_his.v(175): Declarations not allowed in unnamed block.
-# -- Compiling module tdc_top
-# -- Compiling module tof_cal
-# End time: 16:53:26 on Jan 13,2021, Elapsed time: 0:00:00
-# Errors: 1, Warnings: 0
-# ** Error: D:/modeltech64_10.4/win64/vlog failed.
-# Error in macro ./sim.do line 18
-# D:/modeltech64_10.4/win64/vlog failed.
-#     while executing
-# "vlog *.v"
-do sim.do
-# ** Warning: (vlib-34) Library already exists at "work".
-# 
-# Model Technology ModelSim SE-64 vmap 10.4 Lib Mapping Utility 2014.12 Dec  3 2014
-# vmap -modelsim_quiet work work 
-# Modifying modelsim.ini
-# Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
-# Start time: 16:54:33 on Jan 13,2021
-# vlog -reportprogress 300 count_max.v decode.v histogram.v int_cal.v spad_model.v sync.v tb_tdc.v tb_tdc_his.v tdc_top.v tof_cal.v 
-# -- Compiling module count_max
-# -- Compiling module decode
+# -- Compiling module decoder
 # -- Compiling module histogram
 # -- Compiling module int_cal
 # -- Compiling module spad_module
@@ -622,12 +36,13 @@ do sim.do
 # 
 # Top level modules:
 # 	decode
+# 	decoder
 # 	tb_tdc
 # 	tb_tdc_his
-# End time: 16:54:33 on Jan 13,2021, Elapsed time: 0:00:00
+# End time: 16:14:19 on Jan 14,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
-# vsim 
-# Start time: 16:54:33 on Jan 13,2021
+# vsim -gui -do "sim.do" 
+# Start time: 16:14:19 on Jan 14,2021
 # ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
 # 
 # Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.tb_tdc_his
@@ -646,33 +61,22 @@ do sim.do
 # Loading work.histogram
 # Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.count_max
 # Loading work.count_max
-# ** Warning: (vsim-3015) tb_tdc_his.v(62): [PCDPC] - Port size (9) does not match connection size (16) for port 'HIS_Ibatch'. The port definition is at: histogram.v(31).
-#    Time: 0 ps  Iteration: 0  Instance: /tb_tdc_his/histogram_dut File: histogram.v
-# ** Note: $finish    : tb_tdc_his.v(160)
-#    Time: 4745 ns  Iteration: 0  Instance: /tb_tdc_his
-# 1
-# Break in Module tb_tdc_his at tb_tdc_his.v line 160
-add wave -r /*
+# ** Warning: (vsim-3015) tb_tdc_his.v(63): [PCDPC] - Port size (9) does not match connection size (16) for port 'HIS_Ibatch'. The port definition is at: histogram.v(31).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_tdc_his/histogram_dut File: histogram.v
 # ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
 # 
 #           File in use by: Administrator  Hostname: ZHAOHAO  ProcessID: 2668
 # 
-#           Attempting to use alternate WLF file "./wlft842fqk".
+#           Attempting to use alternate WLF file "./wlftssdz6f".
 # ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
 # 
-#           Using alternate file: ./wlft842fqk
+#           Using alternate file: ./wlftssdz6f
 # 
-write format wave -window .main_pane.wave.interior.cs.body.pw.wf D:/Workplace/Work/TDC_1.6/RTL/wave.do
-restart
-# ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
-# 
-# ** Warning: (vsim-3015) tb_tdc_his.v(62): [PCDPC] - Port size (9) does not match connection size (16) for port 'HIS_Ibatch'. The port definition is at: histogram.v(31).
-#    Time: 0 ps  Iteration: 0  Instance: /tb_tdc_his/histogram_dut File: histogram.v
-run -all
-# ** Note: $finish    : tb_tdc_his.v(160)
-#    Time: 4745 ns  Iteration: 0  Instance: /tb_tdc_his
+# ** Note: $finish    : tb_tdc_his.v(104)
+#    Time: 472107 ns  Iteration: 0  Instance: /tb_tdc_his
 # 1
-# Break in Module tb_tdc_his at tb_tdc_his.v line 160
+# Break in Module tb_tdc_his at tb_tdc_his.v line 104
+write format wave -window .main_pane.wave.interior.cs.body.pw.wf D:/Workplace/Work/TDC_1.6/RTL/wave.do
 do sim.do
 # ** Warning: (vlib-34) Library already exists at "work".
 # 
@@ -680,10 +84,11 @@ do sim.do
 # vmap -modelsim_quiet work work 
 # Modifying modelsim.ini
 # Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
-# Start time: 17:01:15 on Jan 13,2021
-# vlog -reportprogress 300 count_max.v decode.v histogram.v int_cal.v spad_model.v sync.v tb_tdc.v tb_tdc_his.v tdc_top.v tof_cal.v 
+# Start time: 16:19:53 on Jan 14,2021
+# vlog -reportprogress 300 count_max.v decode.v decoder.v histogram.v int_cal.v spad_model.v sync.v tb_tdc.v tb_tdc_his.v tdc_top.v tof_cal.v 
 # -- Compiling module count_max
 # -- Compiling module decode
+# -- Compiling module decoder
 # -- Compiling module histogram
 # -- Compiling module int_cal
 # -- Compiling module spad_module
@@ -695,12 +100,13 @@ do sim.do
 # 
 # Top level modules:
 # 	decode
+# 	decoder
 # 	tb_tdc
 # 	tb_tdc_his
-# End time: 17:01:15 on Jan 13,2021, Elapsed time: 0:00:00
+# End time: 16:19:53 on Jan 14,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vsim 
-# Start time: 17:01:15 on Jan 13,2021
+# Start time: 16:19:53 on Jan 14,2021
 # ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
 # 
 # Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.tb_tdc_his
@@ -719,20 +125,18 @@ do sim.do
 # Loading work.histogram
 # Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.count_max
 # Loading work.count_max
-# ** Warning: (vsim-3015) tb_tdc_his.v(61): [PCDPC] - Port size (9) does not match connection size (16) for port 'HIS_Ibatch'. The port definition is at: histogram.v(31).
-#    Time: 0 ps  Iteration: 0  Instance: /tb_tdc_his/histogram_dut File: histogram.v
+# ** Warning: (vsim-3015) tb_tdc_his.v(63): [PCDPC] - Port size (9) does not match connection size (16) for port 'HIS_Ibatch'. The port definition is at: histogram.v(31).
+#    Time: 0 ns  Iteration: 0  Instance: /tb_tdc_his/histogram_dut File: histogram.v
 # ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
 # 
 #           File in use by: Administrator  Hostname: ZHAOHAO  ProcessID: 2668
 # 
-#           Attempting to use alternate WLF file "./wlftm87q0n".
+#           Attempting to use alternate WLF file "./wlftnxjsrv".
 # ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
 # 
-#           Using alternate file: ./wlftm87q0n
+#           Using alternate file: ./wlftnxjsrv
 # 
-# ** Error: (vish-4014) No objects found matching '/tb_tdc_his/clk5'.
-# Executing ONERROR command at macro ./sim.do line 30
-# ** Note: $finish    : tb_tdc_his.v(159)
-#    Time: 55065 ns  Iteration: 0  Instance: /tb_tdc_his
+# ** Note: $finish    : tb_tdc_his.v(104)
+#    Time: 3753220 ns  Iteration: 0  Instance: /tb_tdc_his
 # 1
-# Break in Module tb_tdc_his at tb_tdc_his.v line 159
+# Break in Module tb_tdc_his at tb_tdc_his.v line 104

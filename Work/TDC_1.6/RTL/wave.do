@@ -1,9 +1,5 @@
 onerror {resume}
 quietly WaveActivateNextPane {} 0
-add wave -noupdate /tb_tdc_his/clk_i
-add wave -noupdate /tb_tdc_his/DLL_Phase
-add wave -noupdate /tb_tdc_his/clk5
-add wave -noupdate /tb_tdc_his/clk
 add wave -noupdate /tb_tdc_his/rst_n
 add wave -noupdate /tb_tdc_his/rst
 add wave -noupdate /tb_tdc_his/TDC_start
@@ -26,24 +22,7 @@ add wave -noupdate /tb_tdc_his/HIS_Ibatch
 add wave -noupdate /tb_tdc_his/HIS_Odata
 add wave -noupdate /tb_tdc_his/HIS_Oready
 add wave -noupdate /tb_tdc_his/HIS_Ovalid
-add wave -noupdate /tb_tdc_his/tdc_start/delay
-add wave -noupdate /tb_tdc_his/tdc_top_dut/DLL_Phase
-add wave -noupdate /tb_tdc_his/tdc_top_dut/clk5
-add wave -noupdate /tb_tdc_his/tdc_top_dut/clk
-add wave -noupdate /tb_tdc_his/tdc_top_dut/rst_n
-add wave -noupdate /tb_tdc_his/tdc_top_dut/TDC_start
-add wave -noupdate /tb_tdc_his/tdc_top_dut/TDC_trigger
-add wave -noupdate /tb_tdc_his/tdc_top_dut/TDC_spaden
-add wave -noupdate /tb_tdc_his/tdc_top_dut/TDC_tgate
-add wave -noupdate /tb_tdc_his/tdc_top_dut/TDC_Range
-add wave -noupdate /tb_tdc_his/tdc_top_dut/TDC_Odata
-add wave -noupdate /tb_tdc_his/tdc_top_dut/TDC_Oint
-add wave -noupdate /tb_tdc_his/tdc_top_dut/TDC_Onum
-add wave -noupdate /tb_tdc_his/tdc_top_dut/TDC_Olast
-add wave -noupdate /tb_tdc_his/tdc_top_dut/TDC_Ovalid
-add wave -noupdate /tb_tdc_his/tdc_top_dut/TDC_Oready
-add wave -noupdate /tb_tdc_his/tdc_top_dut/TDC_INT
-add wave -noupdate /tb_tdc_his/tdc_top_dut/rst_auto
+add wave -noupdate -radix decimal /tb_tdc_his/tdc_start/delay
 add wave -noupdate /tb_tdc_his/tdc_top_dut/start_reg_out
 add wave -noupdate /tb_tdc_his/tdc_top_dut/stop_reg_out
 add wave -noupdate /tb_tdc_his/tdc_top_dut/counter_in
@@ -61,7 +40,6 @@ add wave -noupdate /tb_tdc_his/tdc_top_dut/Ovalid_d
 add wave -noupdate /tb_tdc_his/tdc_top_dut/Ovalid_d1
 add wave -noupdate /tb_tdc_his/tdc_top_dut/Ovalid_d2
 add wave -noupdate /tb_tdc_his/tdc_top_dut/Ovalid_d3
-add wave -noupdate /tb_tdc_his/tdc_top_dut/trigger_d
 add wave -noupdate /tb_tdc_his/tdc_top_dut/trans_done
 add wave -noupdate /tb_tdc_his/tdc_top_dut/tri_ign
 add wave -noupdate /tb_tdc_his/tdc_top_dut/clr_n
@@ -76,7 +54,6 @@ add wave -noupdate /tb_tdc_his/tdc_top_dut/range
 add wave -noupdate /tb_tdc_his/tdc_top_dut/cal_stop
 add wave -noupdate /tb_tdc_his/tdc_top_dut/out_valid
 add wave -noupdate /tb_tdc_his/tdc_top_dut/cal_en
-add wave -noupdate /tb_tdc_his/tdc_top_dut/cal_data
 add wave -noupdate /tb_tdc_his/tdc_top_dut/int_out
 add wave -noupdate /tb_tdc_his/tdc_top_dut/int_valid
 add wave -noupdate /tb_tdc_his/tdc_top_dut/decode_in
@@ -88,13 +65,10 @@ add wave -noupdate /tb_tdc_his/tdc_top_dut/tof_cal_stop
 add wave -noupdate /tb_tdc_his/tdc_top_dut/sync_inst0/s
 add wave -noupdate /tb_tdc_his/tdc_top_dut/sync_inst0/TDC_trigger
 add wave -noupdate /tb_tdc_his/tdc_top_dut/sync_inst0/rst_n
-add wave -noupdate /tb_tdc_his/tdc_top_dut/sync_inst0/sync_clk
 add wave -noupdate /tb_tdc_his/tdc_top_dut/sync_inst0/sync
-add wave -noupdate /tb_tdc_his/tdc_top_dut/sync_inst0/sync_clk_i
 add wave -noupdate /tb_tdc_his/tdc_top_dut/sync_inst0/stop_0
 add wave -noupdate /tb_tdc_his/tdc_top_dut/sync_inst0/stop_1
 add wave -noupdate /tb_tdc_his/tdc_top_dut/sync_inst0/vout
-add wave -noupdate /tb_tdc_his/tdc_top_dut/tof_cal_inst/clk
 add wave -noupdate /tb_tdc_his/tdc_top_dut/tof_cal_inst/rst_n
 add wave -noupdate /tb_tdc_his/tdc_top_dut/tof_cal_inst/decode_in
 add wave -noupdate /tb_tdc_his/tdc_top_dut/tof_cal_inst/tof_data_in
@@ -117,8 +91,6 @@ add wave -noupdate /tb_tdc_his/tdc_top_dut/tof_cal_inst/start_dec_data
 add wave -noupdate /tb_tdc_his/tdc_top_dut/tof_cal_inst/comp
 add wave -noupdate /tb_tdc_his/tdc_top_dut/tof_cal_inst/comp_done
 add wave -noupdate /tb_tdc_his/tdc_top_dut/tof_cal_inst/comp_done_d
-add wave -noupdate /tb_tdc_his/tdc_top_dut/int_cal_inst/clk
-add wave -noupdate /tb_tdc_his/tdc_top_dut/int_cal_inst/rst_n
 add wave -noupdate /tb_tdc_his/tdc_top_dut/int_cal_inst/INT
 add wave -noupdate /tb_tdc_his/tdc_top_dut/int_cal_inst/cal_en
 add wave -noupdate /tb_tdc_his/tdc_top_dut/int_cal_inst/int_out
@@ -134,8 +106,6 @@ add wave -noupdate /tb_tdc_his/spad_module_dut/photon
 add wave -noupdate /tb_tdc_his/spad_module_dut/rst_auto
 add wave -noupdate /tb_tdc_his/spad_module_dut/trig
 add wave -noupdate /tb_tdc_his/spad_module_dut/time_gate
-add wave -noupdate /tb_tdc_his/histogram_dut/clk
-add wave -noupdate /tb_tdc_his/histogram_dut/rstn
 add wave -noupdate /tb_tdc_his/histogram_dut/HIS_En
 add wave -noupdate /tb_tdc_his/histogram_dut/HIS_TH
 add wave -noupdate /tb_tdc_his/histogram_dut/TDC_Oint
@@ -170,8 +140,6 @@ add wave -noupdate /tb_tdc_his/histogram_dut/FSM_en
 add wave -noupdate /tb_tdc_his/histogram_dut/NS
 add wave -noupdate /tb_tdc_his/histogram_dut/CS
 add wave -noupdate /tb_tdc_his/histogram_dut/judge_out
-add wave -noupdate /tb_tdc_his/histogram_dut/uut/clk
-add wave -noupdate /tb_tdc_his/histogram_dut/uut/rstn
 add wave -noupdate /tb_tdc_his/histogram_dut/uut/Q_4bit
 add wave -noupdate /tb_tdc_his/histogram_dut/uut/count_max_en
 add wave -noupdate /tb_tdc_his/histogram_dut/uut/count_max_Oready
@@ -213,8 +181,8 @@ add wave -noupdate /tb_tdc_his/histogram_dut/uut/bin_cnt_15
 add wave -noupdate /tb_tdc_his/histogram_dut/uut/bin_cnt_all
 add wave -noupdate /tb_tdc_his/histogram_dut/uut/d
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {4744180 ps} 0}
-quietly wave cursor active 1
+WaveRestoreCursors {{Cursor 1} {416798 ns} 0} {{Cursor 2} {7410 ns} 0}
+quietly wave cursor active 2
 configure wave -namecolwidth 434
 configure wave -valuecolwidth 100
 configure wave -justifyvalue left
@@ -227,6 +195,6 @@ configure wave -gridoffset 0
 configure wave -gridperiod 1
 configure wave -griddelta 40
 configure wave -timeline 0
-configure wave -timelineunits ps
+configure wave -timelineunits ns
 update
-WaveRestoreZoom {4743753 ps} {4744836 ps}
+WaveRestoreZoom {0 ns} {495712 ns}

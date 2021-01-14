@@ -29,6 +29,8 @@ module tb_tdc_his;
     wire [14:0]  HIS_Odata;
     reg 		 HIS_Oready; //! from core logic
     wire         HIS_Ovalid;
+    reg          start;
+    reg  [19:0]  core_cnt;
 
 tdc_top tdc_top_dut(
     .DLL_Phase          (DLL_Phase),
@@ -85,7 +87,7 @@ initial begin
         TDC_Range = 15'b00000_11111_11100;
         HIS_En = 1;
         HIS_TH = 5; //! intensity
-        HIS_Ibatch = 100; //! num
+        HIS_Ibatch = 10; //! num
         HIS_Oready = 1; // from core logic
 
     // start 1:
@@ -95,93 +97,44 @@ initial begin
              rst = 1;
         #100;
     //===========================================================
-        tdc_start();
-/*         @ (posedge clk)
-             TDC_start = 1;
-        #640 TDC_start = 0;
-
-        #800 photon = 1;
-             TDC_spaden = 16'b0000_0000_0000_1111;
-        #50  photon = 0;
-
-        @ (negedge rst_auto);
-        #200 photon = 1;
-             TDC_spaden = 16'b0000_0000_1111_1111;
-        #50 photon = 0;
-        @ (negedge rst_auto);
-        #200 photon = 1;
-             TDC_spaden = 16'b0000_1111_1111_1111;
-        #50 photon = 0;
-        @ (negedge rst_auto);
-        #200 photon = 1;
-             TDC_spaden = 16'b1111_1111_1111_1111;
-        #50 photon = 0;
-
-        #5500;
-        #200 photon = 1;
-             TDC_spaden = 16'b1111_1111_1111_1111;
-        #50 photon = 0;
-        @ (negedge rst_auto);
-        #200 photon = 1;
-             TDC_spaden = 16'b1111_1111_1111_1111;
-        #50 photon = 0;
-        @ (negedge rst_auto);
-        #200 photon = 1;
-             TDC_spaden = 16'b1111_1111_1111_1111;
-        #50 photon = 0;
-        //--------------- */
-/*         @ (posedge clk)
-        #120
-             TDC_start = 1;
-        #640 TDC_start = 0;
-
-        #75000;
-        @ (posedge clk)
-        #200
-             TDC_start = 1;
-        #640 TDC_start = 0;
-        #200 photon = 1;
-             TDC_spaden = 16'b1111_1111_1111_1111;
-        #50 photon = 0;
-        @ (negedge rst_auto);
-
-        #7830;
-             photon = 1;
-             TDC_spaden = 16'b0000_0000_0000_0011;
-        #50 photon = 0;
-        @ (negedge rst_auto);
-        #200 photon = 1;
-             TDC_spaden = 16'b0000_0000_0000_0111;
-        #50 photon = 0;
-        #75000; */
-    //----------------------------------------------------------------------------------------------
-
+        start = 1;
+        repeat(10) begin
+            tdc_start();
+        end
         $finish;
     end
 end
 
-
 task photon_trigger;
     begin
-        #800 photon = 1;
+        #200 photon = 1;
              TDC_spaden = {$random} % 65536; //random num (0 <= num <= 65535)
         #50  photon = 0;
     end
 endtask
 
 task tdc_start;
-    reg   [7:0] delay;
+    reg   [15:0] delay;
     begin    
-        delay = {$random} % 256;
-        @ (posedge clk);
+        delay = {$random} % 1001;
+        /* @ (posedge clk);
         #delay  
                 TDC_start = 1;
         #640    TDC_start = 0;
+ */
+        @ (posedge TDC_start);
+        #delay;
+        photon_trigger();
 
-        photon_trigger();
         @ (negedge rst_auto);
-        #1000;
+        #delay;
         photon_trigger();
+
+        @ (negedge rst_auto);
+        #delay;
+        if(delay >= 500)
+            photon_trigger();
+
         #50000;
     end
 endtask
@@ -197,6 +150,31 @@ always @(posedge clk_i or negedge rst) begin
     else begin
         DLL_Phase <= {DLL_Phase[0], DLL_Phase[31:1]};
     end
+end
+
+//generate TDC_start signal
+always @(posedge clk or negedge rst) begin
+    if (!rst) begin
+        core_cnt <= 0;
+    end
+    else if (start) begin
+        if (core_cnt == 640) begin
+            core_cnt <= 0;
+        end
+        else
+            core_cnt <= core_cnt + 1;
+    end
+end
+
+always @(posedge clk or negedge rst) begin
+    if (!rst) begin
+        TDC_start <= 0;
+    end
+    else if (core_cnt == 10) begin
+        TDC_start <= 1;
+    end
+    else
+        TDC_start <= 0;
 end
 
 endmodule
