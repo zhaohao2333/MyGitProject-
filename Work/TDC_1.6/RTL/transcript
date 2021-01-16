@@ -1,27 +1,16 @@
-# Reading D:/modeltech64_10.4/tcl/vsim/pref.tcl
-# //  ModelSim SE-64 10.4 Dec  3 2014 
+# Reading D:/modeltech_10.0c/tcl/vsim/pref.tcl 
+# //  ModelSim SE 10.0c Jul 21 2011 
 # //
-# //  Copyright 1991-2014 Mentor Graphics Corporation
+# //  Copyright 1991-2011 Mentor Graphics Corporation
 # //  All Rights Reserved.
 # //
 # //  THIS WORK CONTAINS TRADE SECRET AND PROPRIETARY INFORMATION
 # //  WHICH IS THE PROPERTY OF MENTOR GRAPHICS CORPORATION OR ITS
 # //  LICENSORS AND IS SUBJECT TO LICENSE TERMS.
-# //  THIS DOCUMENT CONTAINS TRADE SECRETS AND COMMERCIAL OR FINANCIAL
-# //  INFORMATION THAT ARE PRIVILEGED, CONFIDENTIAL, AND EXEMPT FROM
-# //  DISCLOSURE UNDER THE FREEDOM OF INFORMATION ACT, 5 U.S.C. SECTION 552.
-# //  FURTHERMORE, THIS INFORMATION IS PROHIBITED FROM DISCLOSURE UNDER
-# //  THE TRADE SECRETS ACT, 18 U.S.C. SECTION 1905.
 # //
-# do sim.do
-# ** Warning: (vlib-34) Library already exists at "work".
-# 
-# Model Technology ModelSim SE-64 vmap 10.4 Lib Mapping Utility 2014.12 Dec  3 2014
-# vmap -modelsim_quiet work work 
+# do sim.do 
 # Modifying modelsim.ini
-# Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
-# Start time: 16:14:19 on Jan 14,2021
-# vlog -reportprogress 300 count_max.v decode.v decoder.v histogram.v int_cal.v spad_model.v sync.v tb_tdc.v tb_tdc_his.v tdc_top.v tof_cal.v 
+# Model Technology ModelSim SE vlog 10.0c Compiler 2011.07 Jul 21 2011
 # -- Compiling module count_max
 # -- Compiling module decode
 # -- Compiling module decoder
@@ -39,104 +28,852 @@
 # 	decoder
 # 	tb_tdc
 # 	tb_tdc_his
-# End time: 16:14:19 on Jan 14,2021, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-# vsim -gui -do "sim.do" 
-# Start time: 16:14:19 on Jan 14,2021
-# ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
-# 
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.tb_tdc_his
+# vsim -novopt work.tb_tdc_his 
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.tb_tdc_his
 # Loading work.tb_tdc_his
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.tdc_top
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.tdc_top
 # Loading work.tdc_top
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.sync
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.sync
 # Loading work.sync
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.tof_cal
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.tof_cal
 # Loading work.tof_cal
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.int_cal
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.int_cal
 # Loading work.int_cal
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.spad_module
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.spad_module
 # Loading work.spad_module
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.histogram
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.histogram
 # Loading work.histogram
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.count_max
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.count_max
 # Loading work.count_max
-# ** Warning: (vsim-3015) tb_tdc_his.v(63): [PCDPC] - Port size (9) does not match connection size (16) for port 'HIS_Ibatch'. The port definition is at: histogram.v(31).
-#    Time: 0 ns  Iteration: 0  Instance: /tb_tdc_his/histogram_dut File: histogram.v
 # ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
-# 
-#           File in use by: Administrator  Hostname: ZHAOHAO  ProcessID: 2668
-# 
-#           Attempting to use alternate WLF file "./wlftssdz6f".
+#           File in use by:   Hostname:   ProcessID: 3
+#           Attempting to use alternate WLF file "./wlft337b1g".
 # ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
-# 
-#           Using alternate file: ./wlftssdz6f
-# 
-# ** Note: $finish    : tb_tdc_his.v(104)
-#    Time: 472107 ns  Iteration: 0  Instance: /tb_tdc_his
-# 1
-# Break in Module tb_tdc_his at tb_tdc_his.v line 104
-write format wave -window .main_pane.wave.interior.cs.body.pw.wf D:/Workplace/Work/TDC_1.6/RTL/wave.do
-do sim.do
-# ** Warning: (vlib-34) Library already exists at "work".
-# 
-# Model Technology ModelSim SE-64 vmap 10.4 Lib Mapping Utility 2014.12 Dec  3 2014
-# vmap -modelsim_quiet work work 
-# Modifying modelsim.ini
-# Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
-# Start time: 16:19:53 on Jan 14,2021
-# vlog -reportprogress 300 count_max.v decode.v decoder.v histogram.v int_cal.v spad_model.v sync.v tb_tdc.v tb_tdc_his.v tdc_top.v tof_cal.v 
-# -- Compiling module count_max
-# -- Compiling module decode
-# -- Compiling module decoder
-# -- Compiling module histogram
-# -- Compiling module int_cal
-# -- Compiling module spad_module
-# -- Compiling module sync
-# -- Compiling module tb_tdc
-# -- Compiling module tb_tdc_his
-# -- Compiling module tdc_top
-# -- Compiling module tof_cal
-# 
-# Top level modules:
-# 	decode
-# 	decoder
-# 	tb_tdc
-# 	tb_tdc_his
-# End time: 16:19:53 on Jan 14,2021, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-# vsim 
-# Start time: 16:19:53 on Jan 14,2021
-# ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
-# 
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.tb_tdc_his
-# Loading work.tb_tdc_his
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.tdc_top
-# Loading work.tdc_top
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.sync
-# Loading work.sync
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.tof_cal
-# Loading work.tof_cal
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.int_cal
-# Loading work.int_cal
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.spad_module
-# Loading work.spad_module
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.histogram
-# Loading work.histogram
-# Refreshing D:/Workplace/Work/TDC_1.6/RTL/work.count_max
-# Loading work.count_max
-# ** Warning: (vsim-3015) tb_tdc_his.v(63): [PCDPC] - Port size (9) does not match connection size (16) for port 'HIS_Ibatch'. The port definition is at: histogram.v(31).
-#    Time: 0 ns  Iteration: 0  Instance: /tb_tdc_his/histogram_dut File: histogram.v
-# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
-# 
-#           File in use by: Administrator  Hostname: ZHAOHAO  ProcessID: 2668
-# 
-#           Attempting to use alternate WLF file "./wlftnxjsrv".
-# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
-# 
-#           Using alternate file: ./wlftnxjsrv
-# 
+#           Using alternate file: ./wlft337b1g
+# ** Warning: (vsim-3015) tb_tdc_his.v(77): [PCDPC] - Port size (9 or 9) does not match connection size (16) for port 'HIS_Ibatch'. The port definition is at: histogram.v(31).
+#         Region: /tb_tdc_his/histogram_dut
+# ** Error: (vish-4014) No objects found matching '/tb_tdc_his/TDC_INT'.
+# Executing ONERROR command at macro ./sim.do line 40
 # ** Note: $finish    : tb_tdc_his.v(104)
 #    Time: 3753220 ns  Iteration: 0  Instance: /tb_tdc_his
 # 1
 # Break in Module tb_tdc_his at tb_tdc_his.v line 104
+# Simulation Breakpoint: 1
+# Break in Module tb_tdc_his at tb_tdc_his.v line 104
+# MACRO ./sim.do PAUSED at line 236
+do sim.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# Modifying modelsim.ini
+# Model Technology ModelSim SE vlog 10.0c Compiler 2011.07 Jul 21 2011
+# -- Compiling module count_max
+# -- Compiling module decode
+# -- Compiling module decoder
+# -- Compiling module histogram
+# -- Compiling module int_cal
+# -- Compiling module spad_module
+# -- Compiling module sync
+# -- Compiling module tb_tdc
+# -- Compiling module tb_tdc_his
+# -- Compiling module tdc_top
+# -- Compiling module tof_cal
+# 
+# Top level modules:
+# 	decode
+# 	decoder
+# 	tb_tdc
+# 	tb_tdc_his
+# vsim -novopt work.tb_tdc_his 
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.tb_tdc_his
+# Loading work.tb_tdc_his
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.tdc_top
+# Loading work.tdc_top
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.sync
+# Loading work.sync
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.tof_cal
+# Loading work.tof_cal
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.int_cal
+# Loading work.int_cal
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.spad_module
+# Loading work.spad_module
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.histogram
+# Loading work.histogram
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.count_max
+# Loading work.count_max
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by:   Hostname:   ProcessID: 3
+#           Attempting to use alternate WLF file "./wlft17wnhd".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlft17wnhd
+# ** Warning: (vsim-3015) tb_tdc_his.v(77): [PCDPC] - Port size (9 or 9) does not match connection size (16) for port 'HIS_Ibatch'. The port definition is at: histogram.v(31).
+#         Region: /tb_tdc_his/histogram_dut
+# ** Error: (vish-4014) No objects found matching '/tb_tdc_his/TDC_INT'.
+# Executing ONERROR command at macro ./sim.do line 40
+# ** Note: $finish    : tb_tdc_his.v(104)
+#    Time: 71097 ns  Iteration: 0  Instance: /tb_tdc_his
+# 1
+# Break in Module tb_tdc_his at tb_tdc_his.v line 104
+# Simulation Breakpoint: 1
+# Break in Module tb_tdc_his at tb_tdc_his.v line 104
+# MACRO ./sim.do PAUSED at line 236
+do sim.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# Modifying modelsim.ini
+# Model Technology ModelSim SE vlog 10.0c Compiler 2011.07 Jul 21 2011
+# -- Compiling module count_max
+# -- Compiling module decode
+# -- Compiling module decoder
+# -- Compiling module histogram
+# -- Compiling module int_cal
+# -- Compiling module spad_module
+# -- Compiling module sync
+# -- Compiling module tb_tdc
+# -- Compiling module tb_tdc_his
+# -- Compiling module tdc_top
+# -- Compiling module tof_cal
+# 
+# Top level modules:
+# 	decode
+# 	decoder
+# 	tb_tdc
+# 	tb_tdc_his
+# vsim -novopt work.tb_tdc_his 
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.tb_tdc_his
+# Loading work.tb_tdc_his
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.tdc_top
+# Loading work.tdc_top
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.sync
+# Loading work.sync
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.tof_cal
+# Loading work.tof_cal
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.int_cal
+# Loading work.int_cal
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.spad_module
+# Loading work.spad_module
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.histogram
+# Loading work.histogram
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.count_max
+# Loading work.count_max
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by:   Hostname:   ProcessID: 3
+#           Attempting to use alternate WLF file "./wlftm618wc".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlftm618wc
+# ** Warning: (vsim-3015) tb_tdc_his.v(77): [PCDPC] - Port size (9 or 9) does not match connection size (16) for port 'HIS_Ibatch'. The port definition is at: histogram.v(31).
+#         Region: /tb_tdc_his/histogram_dut
+# ** Error: (vish-4014) No objects found matching '/tb_tdc_his/TDC_INT'.
+# Executing ONERROR command at macro ./sim.do line 40
+# ** Note: $finish    : tb_tdc_his.v(104)
+#    Time: 171097 ns  Iteration: 0  Instance: /tb_tdc_his
+# 1
+# Break in Module tb_tdc_his at tb_tdc_his.v line 104
+# Simulation Breakpoint: 1
+# Break in Module tb_tdc_his at tb_tdc_his.v line 104
+# MACRO ./sim.do PAUSED at line 236
+do sim.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# Modifying modelsim.ini
+# Model Technology ModelSim SE vlog 10.0c Compiler 2011.07 Jul 21 2011
+# -- Compiling module count_max
+# -- Compiling module decode
+# -- Compiling module decoder
+# -- Compiling module histogram
+# -- Compiling module int_cal
+# -- Compiling module spad_module
+# -- Compiling module sync
+# -- Compiling module tb_tdc
+# -- Compiling module tb_tdc_his
+# -- Compiling module tdc_top
+# -- Compiling module tof_cal
+# 
+# Top level modules:
+# 	decode
+# 	decoder
+# 	tb_tdc
+# 	tb_tdc_his
+# vsim -novopt work.tb_tdc_his 
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.tb_tdc_his
+# Loading work.tb_tdc_his
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.tdc_top
+# Loading work.tdc_top
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.sync
+# Loading work.sync
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.tof_cal
+# Loading work.tof_cal
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.int_cal
+# Loading work.int_cal
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.spad_module
+# Loading work.spad_module
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.histogram
+# Loading work.histogram
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.count_max
+# Loading work.count_max
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by:   Hostname:   ProcessID: 3
+#           Attempting to use alternate WLF file "./wlft5dmz4e".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlft5dmz4e
+# ** Warning: (vsim-3015) tb_tdc_his.v(77): [PCDPC] - Port size (9 or 9) does not match connection size (16) for port 'HIS_Ibatch'. The port definition is at: histogram.v(31).
+#         Region: /tb_tdc_his/histogram_dut
+# ** Error: (vish-4014) No objects found matching '/tb_tdc_his/TDC_INT'.
+# Executing ONERROR command at macro ./sim.do line 40
+# ** Note: $finish    : tb_tdc_his.v(104)
+#    Time: 170777 ns  Iteration: 0  Instance: /tb_tdc_his
+# 1
+# Break in Module tb_tdc_his at tb_tdc_his.v line 104
+# Simulation Breakpoint: 1
+# Break in Module tb_tdc_his at tb_tdc_his.v line 104
+# MACRO ./sim.do PAUSED at line 236
+do sim.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# Modifying modelsim.ini
+# Model Technology ModelSim SE vlog 10.0c Compiler 2011.07 Jul 21 2011
+# -- Compiling module count_max
+# -- Compiling module decode
+# -- Compiling module decoder
+# -- Compiling module histogram
+# -- Compiling module int_cal
+# -- Compiling module spad_module
+# -- Compiling module sync
+# -- Compiling module tb_tdc
+# -- Compiling module tb_tdc_his
+# -- Compiling module tdc_top
+# -- Compiling module tof_cal
+# 
+# Top level modules:
+# 	decode
+# 	decoder
+# 	tb_tdc
+# 	tb_tdc_his
+# vsim -novopt work.tb_tdc_his 
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.tb_tdc_his
+# Loading work.tb_tdc_his
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.tdc_top
+# Loading work.tdc_top
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.sync
+# Loading work.sync
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.tof_cal
+# Loading work.tof_cal
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.int_cal
+# Loading work.int_cal
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.spad_module
+# Loading work.spad_module
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.histogram
+# Loading work.histogram
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.count_max
+# Loading work.count_max
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by:   Hostname:   ProcessID: 3
+#           Attempting to use alternate WLF file "./wlfts9dnxr".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlfts9dnxr
+# ** Warning: (vsim-3015) tb_tdc_his.v(77): [PCDPC] - Port size (9 or 9) does not match connection size (16) for port 'HIS_Ibatch'. The port definition is at: histogram.v(31).
+#         Region: /tb_tdc_his/histogram_dut
+# ** Error: (vish-4014) No objects found matching '/tb_tdc_his/TDC_INT'.
+# Executing ONERROR command at macro ./sim.do line 40
+# ** Note: $finish    : tb_tdc_his.v(104)
+#    Time: 170777 ns  Iteration: 0  Instance: /tb_tdc_his
+# 1
+# Break in Module tb_tdc_his at tb_tdc_his.v line 104
+# Simulation Breakpoint: 1
+# Break in Module tb_tdc_his at tb_tdc_his.v line 104
+# MACRO ./sim.do PAUSED at line 236
+do sim.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# Modifying modelsim.ini
+# Model Technology ModelSim SE vlog 10.0c Compiler 2011.07 Jul 21 2011
+# -- Compiling module count_max
+# -- Compiling module decode
+# -- Compiling module decoder
+# -- Compiling module histogram
+# -- Compiling module int_cal
+# -- Compiling module spad_module
+# -- Compiling module sync
+# -- Compiling module tb_tdc
+# -- Compiling module tb_tdc_his
+# -- Compiling module tdc_top
+# -- Compiling module tof_cal
+# 
+# Top level modules:
+# 	decode
+# 	decoder
+# 	tb_tdc
+# 	tb_tdc_his
+# vsim -novopt work.tb_tdc_his 
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.tb_tdc_his
+# Loading work.tb_tdc_his
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.tdc_top
+# Loading work.tdc_top
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.sync
+# Loading work.sync
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.tof_cal
+# Loading work.tof_cal
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.int_cal
+# Loading work.int_cal
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.spad_module
+# Loading work.spad_module
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.histogram
+# Loading work.histogram
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.count_max
+# Loading work.count_max
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by:   Hostname:   ProcessID: 3
+#           Attempting to use alternate WLF file "./wlftdwnj30".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlftdwnj30
+# ** Warning: (vsim-3015) tb_tdc_his.v(77): [PCDPC] - Port size (9 or 9) does not match connection size (16) for port 'HIS_Ibatch'. The port definition is at: histogram.v(31).
+#         Region: /tb_tdc_his/histogram_dut
+# ** Error: (vish-4014) No objects found matching '/tb_tdc_his/TDC_INT'.
+# Executing ONERROR command at macro ./sim.do line 40
+# ** Note: $finish    : tb_tdc_his.v(104)
+#    Time: 170777 ns  Iteration: 0  Instance: /tb_tdc_his
+# 1
+# Break in Module tb_tdc_his at tb_tdc_his.v line 104
+# Simulation Breakpoint: 1
+# Break in Module tb_tdc_his at tb_tdc_his.v line 104
+# MACRO ./sim.do PAUSED at line 236
+# Causality operation skipped due to absense of debug database file
+do sim.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# Modifying modelsim.ini
+# Model Technology ModelSim SE vlog 10.0c Compiler 2011.07 Jul 21 2011
+# -- Compiling module count_max
+# -- Compiling module decode
+# -- Compiling module decoder
+# -- Compiling module histogram
+# -- Compiling module int_cal
+# -- Compiling module spad_module
+# -- Compiling module sync
+# -- Compiling module tb_tdc
+# -- Compiling module tb_tdc_his
+# -- Compiling module tdc_top
+# ** Error: tdc_top.v(197): Undefined variable: num_cnt.
+# -- Compiling module tof_cal
+# ** Error: D:/modeltech_10.0c/win32/vlog failed.
+# Executing ONERROR command at macro ./sim.do line 18
+# vsim -novopt work.tb_tdc_his 
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.tb_tdc_his
+# Loading work.tb_tdc_his
+# Loading work.tdc_top
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.sync
+# Loading work.sync
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.tof_cal
+# Loading work.tof_cal
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.int_cal
+# Loading work.int_cal
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.spad_module
+# Loading work.spad_module
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.histogram
+# Loading work.histogram
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.count_max
+# Loading work.count_max
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by:   Hostname:   ProcessID: 3
+#           Attempting to use alternate WLF file "./wlftxbyr9t".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlftxbyr9t
+# ** Warning: (vsim-3017) tdc_top.v(297): [TFMPC] - Too few port connections. Expected 14, found 12.
+#         Region: /tb_tdc_his/tdc_top_dut/tof_cal_inst
+# ** Error: (vsim-3063) tdc_top.v(297): Port 'TDC_Onum' not found in the connected module (10th connection).
+#         Region: /tb_tdc_his/tdc_top_dut/tof_cal_inst
+# ** Warning: (vsim-3722) tdc_top.v(297): [TFMPC] - Missing connection for port 'num_cnt'.
+# ** Warning: (vsim-3722) tdc_top.v(297): [TFMPC] - Missing connection for port 'tof_num_cnt'.
+# ** Warning: (vsim-3722) tdc_top.v(297): [TFMPC] - Missing connection for port 'tri_en'.
+# ** Warning: (vsim-3015) tb_tdc_his.v(77): [PCDPC] - Port size (9 or 9) does not match connection size (16) for port 'HIS_Ibatch'. The port definition is at: histogram.v(31).
+#         Region: /tb_tdc_his/histogram_dut
+# Error loading design
+# Error: Error loading design 
+#        Pausing macro execution 
+# MACRO ./sim.do PAUSED at line 22
+do sim.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# Modifying modelsim.ini
+# Model Technology ModelSim SE vlog 10.0c Compiler 2011.07 Jul 21 2011
+# -- Compiling module count_max
+# -- Compiling module decode
+# -- Compiling module decoder
+# -- Compiling module histogram
+# -- Compiling module int_cal
+# -- Compiling module spad_module
+# -- Compiling module sync
+# -- Compiling module tb_tdc
+# -- Compiling module tb_tdc_his
+# -- Compiling module tdc_top
+# -- Compiling module tof_cal
+# 
+# Top level modules:
+# 	decode
+# 	decoder
+# 	tb_tdc
+# 	tb_tdc_his
+# vsim -novopt work.tb_tdc_his 
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.tb_tdc_his
+# Loading work.tb_tdc_his
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.tdc_top
+# Loading work.tdc_top
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.sync
+# Loading work.sync
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.tof_cal
+# Loading work.tof_cal
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.int_cal
+# Loading work.int_cal
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.spad_module
+# Loading work.spad_module
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.histogram
+# Loading work.histogram
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.count_max
+# Loading work.count_max
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by:   Hostname:   ProcessID: 3
+#           Attempting to use alternate WLF file "./wlft6681q9".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlft6681q9
+# ** Warning: (vsim-3015) tb_tdc_his.v(77): [PCDPC] - Port size (9 or 9) does not match connection size (16) for port 'HIS_Ibatch'. The port definition is at: histogram.v(31).
+#         Region: /tb_tdc_his/histogram_dut
+# ** Error: (vish-4014) No objects found matching '/tb_tdc_his/TDC_INT'.
+# Executing ONERROR command at macro ./sim.do line 40
+# ** Error: (vish-4014) No objects found matching '/tb_tdc_his/tdc_top_dut/tof_cal_inst/TDC_Onum'.
+# Executing ONERROR command at macro ./sim.do line 105
+# ** Note: $finish    : tb_tdc_his.v(104)
+#    Time: 170777 ns  Iteration: 0  Instance: /tb_tdc_his
+# 1
+# Break in Module tb_tdc_his at tb_tdc_his.v line 104
+# Simulation Breakpoint: 1
+# Break in Module tb_tdc_his at tb_tdc_his.v line 104
+# MACRO ./sim.do PAUSED at line 236
+do sim.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# Modifying modelsim.ini
+# Model Technology ModelSim SE vlog 10.0c Compiler 2011.07 Jul 21 2011
+# -- Compiling module count_max
+# -- Compiling module decode
+# -- Compiling module decoder
+# -- Compiling module histogram
+# -- Compiling module int_cal
+# -- Compiling module spad_module
+# -- Compiling module sync
+# -- Compiling module tb_tdc
+# -- Compiling module tb_tdc_his
+# -- Compiling module tdc_top
+# -- Compiling module tof_cal
+# 
+# Top level modules:
+# 	decode
+# 	decoder
+# 	tb_tdc
+# 	tb_tdc_his
+# vsim -novopt work.tb_tdc_his 
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.tb_tdc_his
+# Loading work.tb_tdc_his
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.tdc_top
+# Loading work.tdc_top
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.sync
+# Loading work.sync
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.tof_cal
+# Loading work.tof_cal
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.int_cal
+# Loading work.int_cal
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.spad_module
+# Loading work.spad_module
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.histogram
+# Loading work.histogram
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.count_max
+# Loading work.count_max
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by:   Hostname:   ProcessID: 3
+#           Attempting to use alternate WLF file "./wlftj12s9i".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlftj12s9i
+# ** Warning: (vsim-3015) tb_tdc_his.v(77): [PCDPC] - Port size (9 or 9) does not match connection size (16) for port 'HIS_Ibatch'. The port definition is at: histogram.v(31).
+#         Region: /tb_tdc_his/histogram_dut
+# ** Error: (vish-4014) No objects found matching '/tb_tdc_his/TDC_INT'.
+# Executing ONERROR command at macro ./sim.do line 40
+# ** Error: (vish-4014) No objects found matching '/tb_tdc_his/tdc_top_dut/tof_cal_inst/TDC_Onum'.
+# Executing ONERROR command at macro ./sim.do line 105
+# ** Note: $finish    : tb_tdc_his.v(104)
+#    Time: 170777 ns  Iteration: 0  Instance: /tb_tdc_his
+# 1
+# Break in Module tb_tdc_his at tb_tdc_his.v line 104
+# Simulation Breakpoint: 1
+# Break in Module tb_tdc_his at tb_tdc_his.v line 104
+# MACRO ./sim.do PAUSED at line 236
+do sim.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# Modifying modelsim.ini
+# Model Technology ModelSim SE vlog 10.0c Compiler 2011.07 Jul 21 2011
+# -- Compiling module count_max
+# -- Compiling module decode
+# -- Compiling module decoder
+# -- Compiling module histogram
+# -- Compiling module int_cal
+# -- Compiling module spad_module
+# -- Compiling module sync
+# -- Compiling module tb_tdc
+# -- Compiling module tb_tdc_his
+# -- Compiling module tdc_top
+# -- Compiling module tof_cal
+# 
+# Top level modules:
+# 	decode
+# 	decoder
+# 	tb_tdc
+# 	tb_tdc_his
+# vsim -novopt work.tb_tdc_his 
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.tb_tdc_his
+# Loading work.tb_tdc_his
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.tdc_top
+# Loading work.tdc_top
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.sync
+# Loading work.sync
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.tof_cal
+# Loading work.tof_cal
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.int_cal
+# Loading work.int_cal
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.spad_module
+# Loading work.spad_module
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.histogram
+# Loading work.histogram
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.count_max
+# Loading work.count_max
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by:   Hostname:   ProcessID: 3
+#           Attempting to use alternate WLF file "./wlftq4281d".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlftq4281d
+# ** Warning: (vsim-3015) tb_tdc_his.v(77): [PCDPC] - Port size (9 or 9) does not match connection size (16) for port 'HIS_Ibatch'. The port definition is at: histogram.v(31).
+#         Region: /tb_tdc_his/histogram_dut
+# ** Error: (vish-4014) No objects found matching '/tb_tdc_his/TDC_INT'.
+# Executing ONERROR command at macro ./sim.do line 40
+# ** Error: (vish-4014) No objects found matching '/tb_tdc_his/tdc_top_dut/tof_cal_inst/TDC_Onum'.
+# Executing ONERROR command at macro ./sim.do line 105
+# ** Note: $finish    : tb_tdc_his.v(104)
+#    Time: 165337 ns  Iteration: 0  Instance: /tb_tdc_his
+# 1
+# Break in Module tb_tdc_his at tb_tdc_his.v line 104
+# Simulation Breakpoint: 1
+# Break in Module tb_tdc_his at tb_tdc_his.v line 104
+# MACRO ./sim.do PAUSED at line 236
+do sim.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# Modifying modelsim.ini
+# Model Technology ModelSim SE vlog 10.0c Compiler 2011.07 Jul 21 2011
+# -- Compiling module count_max
+# -- Compiling module decode
+# -- Compiling module decoder
+# -- Compiling module histogram
+# -- Compiling module int_cal
+# -- Compiling module spad_module
+# -- Compiling module sync
+# -- Compiling module tb_tdc
+# -- Compiling module tb_tdc_his
+# -- Compiling module tdc_top
+# -- Compiling module tof_cal
+# 
+# Top level modules:
+# 	decode
+# 	decoder
+# 	tb_tdc
+# 	tb_tdc_his
+# vsim -novopt work.tb_tdc_his 
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.tb_tdc_his
+# Loading work.tb_tdc_his
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.tdc_top
+# Loading work.tdc_top
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.sync
+# Loading work.sync
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.tof_cal
+# Loading work.tof_cal
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.int_cal
+# Loading work.int_cal
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.spad_module
+# Loading work.spad_module
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.histogram
+# Loading work.histogram
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.count_max
+# Loading work.count_max
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by:   Hostname:   ProcessID: 3
+#           Attempting to use alternate WLF file "./wlftr41jdd".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlftr41jdd
+# ** Warning: (vsim-3015) tb_tdc_his.v(77): [PCDPC] - Port size (9 or 9) does not match connection size (16) for port 'HIS_Ibatch'. The port definition is at: histogram.v(31).
+#         Region: /tb_tdc_his/histogram_dut
+# ** Error: (vish-4014) No objects found matching '/tb_tdc_his/TDC_INT'.
+# Executing ONERROR command at macro ./sim.do line 40
+# ** Error: (vish-4014) No objects found matching '/tb_tdc_his/tdc_top_dut/tof_cal_inst/TDC_Onum'.
+# Executing ONERROR command at macro ./sim.do line 105
+# ** Note: $finish    : tb_tdc_his.v(104)
+#    Time: 166837 ns  Iteration: 0  Instance: /tb_tdc_his
+# 1
+# Break in Module tb_tdc_his at tb_tdc_his.v line 104
+# Simulation Breakpoint: 1
+# Break in Module tb_tdc_his at tb_tdc_his.v line 104
+# MACRO ./sim.do PAUSED at line 236
+do sim.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# Modifying modelsim.ini
+# Model Technology ModelSim SE vlog 10.0c Compiler 2011.07 Jul 21 2011
+# -- Compiling module count_max
+# -- Compiling module decode
+# -- Compiling module decoder
+# -- Compiling module histogram
+# -- Compiling module int_cal
+# -- Compiling module spad_module
+# -- Compiling module sync
+# -- Compiling module tb_tdc
+# -- Compiling module tb_tdc_his
+# -- Compiling module tdc_top
+# -- Compiling module tof_cal
+# 
+# Top level modules:
+# 	decode
+# 	decoder
+# 	tb_tdc
+# 	tb_tdc_his
+# vsim -novopt work.tb_tdc_his 
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.tb_tdc_his
+# Loading work.tb_tdc_his
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.tdc_top
+# Loading work.tdc_top
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.sync
+# Loading work.sync
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.tof_cal
+# Loading work.tof_cal
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.int_cal
+# Loading work.int_cal
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.spad_module
+# Loading work.spad_module
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.histogram
+# Loading work.histogram
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.count_max
+# Loading work.count_max
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by:   Hostname:   ProcessID: 3
+#           Attempting to use alternate WLF file "./wlftrfh2ng".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlftrfh2ng
+# ** Warning: (vsim-3015) tb_tdc_his.v(77): [PCDPC] - Port size (9 or 9) does not match connection size (16) for port 'HIS_Ibatch'. The port definition is at: histogram.v(31).
+#         Region: /tb_tdc_his/histogram_dut
+# ** Error: (vish-4014) No objects found matching '/tb_tdc_his/TDC_INT'.
+# Executing ONERROR command at macro ./sim.do line 40
+# ** Error: (vish-4014) No objects found matching '/tb_tdc_his/tdc_top_dut/tof_cal_inst/TDC_Onum'.
+# Executing ONERROR command at macro ./sim.do line 105
+# ** Note: $finish    : tb_tdc_his.v(104)
+#    Time: 575766 ns  Iteration: 0  Instance: /tb_tdc_his
+# 1
+# Break in Module tb_tdc_his at tb_tdc_his.v line 104
+# Simulation Breakpoint: 1
+# Break in Module tb_tdc_his at tb_tdc_his.v line 104
+# MACRO ./sim.do PAUSED at line 236
+do sim.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# Modifying modelsim.ini
+# Model Technology ModelSim SE vlog 10.0c Compiler 2011.07 Jul 21 2011
+# -- Compiling module count_max
+# -- Compiling module decode
+# -- Compiling module decoder
+# -- Compiling module histogram
+# -- Compiling module int_cal
+# -- Compiling module spad_module
+# -- Compiling module sync
+# -- Compiling module tb_tdc
+# -- Compiling module tb_tdc_his
+# -- Compiling module tdc_top
+# -- Compiling module tof_cal
+# 
+# Top level modules:
+# 	decode
+# 	decoder
+# 	tb_tdc
+# 	tb_tdc_his
+# vsim -novopt work.tb_tdc_his 
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.tb_tdc_his
+# Loading work.tb_tdc_his
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.tdc_top
+# Loading work.tdc_top
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.sync
+# Loading work.sync
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.tof_cal
+# Loading work.tof_cal
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.int_cal
+# Loading work.int_cal
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.spad_module
+# Loading work.spad_module
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.histogram
+# Loading work.histogram
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.count_max
+# Loading work.count_max
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by:   Hostname:   ProcessID: 3
+#           Attempting to use alternate WLF file "./wlftb0bza1".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlftb0bza1
+# ** Warning: (vsim-3015) tb_tdc_his.v(77): [PCDPC] - Port size (9 or 9) does not match connection size (16) for port 'HIS_Ibatch'. The port definition is at: histogram.v(31).
+#         Region: /tb_tdc_his/histogram_dut
+# ** Error: (vish-4014) No objects found matching '/tb_tdc_his/TDC_INT'.
+# Executing ONERROR command at macro ./sim.do line 40
+# ** Error: (vish-4014) No objects found matching '/tb_tdc_his/tdc_top_dut/tof_cal_inst/TDC_Onum'.
+# Executing ONERROR command at macro ./sim.do line 105
+# ** Note: $finish    : tb_tdc_his.v(106)
+#    Time: 947200 ns  Iteration: 0  Instance: /tb_tdc_his
+# 1
+# Break in Module tb_tdc_his at tb_tdc_his.v line 106
+# Simulation Breakpoint: 1
+# Break in Module tb_tdc_his at tb_tdc_his.v line 106
+# MACRO ./sim.do PAUSED at line 236
+do sim.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# Modifying modelsim.ini
+# Model Technology ModelSim SE vlog 10.0c Compiler 2011.07 Jul 21 2011
+# -- Compiling module count_max
+# -- Compiling module decode
+# -- Compiling module decoder
+# -- Compiling module histogram
+# -- Compiling module int_cal
+# -- Compiling module spad_module
+# -- Compiling module sync
+# -- Compiling module tb_tdc
+# -- Compiling module tb_tdc_his
+# -- Compiling module tdc_top
+# -- Compiling module tof_cal
+# 
+# Top level modules:
+# 	decode
+# 	decoder
+# 	tb_tdc
+# 	tb_tdc_his
+# vsim -novopt work.tb_tdc_his 
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.tb_tdc_his
+# Loading work.tb_tdc_his
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.tdc_top
+# Loading work.tdc_top
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.sync
+# Loading work.sync
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.tof_cal
+# Loading work.tof_cal
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.int_cal
+# Loading work.int_cal
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.spad_module
+# Loading work.spad_module
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.histogram
+# Loading work.histogram
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.count_max
+# Loading work.count_max
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by:   Hostname:   ProcessID: 3
+#           Attempting to use alternate WLF file "./wlftr0kw8j".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlftr0kw8j
+# ** Warning: (vsim-3015) tb_tdc_his.v(77): [PCDPC] - Port size (9 or 9) does not match connection size (16) for port 'HIS_Ibatch'. The port definition is at: histogram.v(31).
+#         Region: /tb_tdc_his/histogram_dut
+# ** Error: (vish-4014) No objects found matching '/tb_tdc_his/TDC_INT'.
+# Executing ONERROR command at macro ./sim.do line 40
+# ** Error: (vish-4014) No objects found matching '/tb_tdc_his/tdc_top_dut/tof_cal_inst/TDC_Onum'.
+# Executing ONERROR command at macro ./sim.do line 105
+# ** Note: $finish    : tb_tdc_his.v(106)
+#    Time: 947200 ns  Iteration: 0  Instance: /tb_tdc_his
+# 1
+# Break in Module tb_tdc_his at tb_tdc_his.v line 106
+# Simulation Breakpoint: 1
+# Break in Module tb_tdc_his at tb_tdc_his.v line 106
+# MACRO ./sim.do PAUSED at line 236
+do sim.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# Modifying modelsim.ini
+# Model Technology ModelSim SE vlog 10.0c Compiler 2011.07 Jul 21 2011
+# -- Compiling module count_max
+# -- Compiling module decode
+# -- Compiling module decoder
+# -- Compiling module histogram
+# -- Compiling module int_cal
+# -- Compiling module spad_module
+# -- Compiling module sync
+# -- Compiling module tb_tdc
+# -- Compiling module tb_tdc_his
+# -- Compiling module tdc_top
+# -- Compiling module tof_cal
+# 
+# Top level modules:
+# 	decode
+# 	decoder
+# 	tb_tdc
+# 	tb_tdc_his
+# vsim -novopt work.tb_tdc_his 
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.tb_tdc_his
+# Loading work.tb_tdc_his
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.tdc_top
+# Loading work.tdc_top
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.sync
+# Loading work.sync
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.tof_cal
+# Loading work.tof_cal
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.int_cal
+# Loading work.int_cal
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.spad_module
+# Loading work.spad_module
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.histogram
+# Loading work.histogram
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.count_max
+# Loading work.count_max
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by:   Hostname:   ProcessID: 3
+#           Attempting to use alternate WLF file "./wlftdefjyx".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlftdefjyx
+# ** Warning: (vsim-3015) tb_tdc_his.v(77): [PCDPC] - Port size (9 or 9) does not match connection size (16) for port 'HIS_Ibatch'. The port definition is at: histogram.v(31).
+#         Region: /tb_tdc_his/histogram_dut
+# ** Error: (vish-4014) No objects found matching '/tb_tdc_his/TDC_INT'.
+# Executing ONERROR command at macro ./sim.do line 40
+# ** Error: (vish-4014) No objects found matching '/tb_tdc_his/tdc_top_dut/tof_cal_inst/TDC_Onum'.
+# Executing ONERROR command at macro ./sim.do line 105
+# ** Note: $finish    : tb_tdc_his.v(106)
+#    Time: 947200 ns  Iteration: 0  Instance: /tb_tdc_his
+# 1
+# Break in Module tb_tdc_his at tb_tdc_his.v line 106
+# Simulation Breakpoint: 1
+# Break in Module tb_tdc_his at tb_tdc_his.v line 106
+# MACRO ./sim.do PAUSED at line 236
+do sim.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# Modifying modelsim.ini
+# Model Technology ModelSim SE vlog 10.0c Compiler 2011.07 Jul 21 2011
+# -- Compiling module count_max
+# -- Compiling module decode
+# -- Compiling module decoder
+# -- Compiling module histogram
+# -- Compiling module int_cal
+# -- Compiling module spad_module
+# -- Compiling module sync
+# -- Compiling module tb_tdc
+# -- Compiling module tb_tdc_his
+# -- Compiling module tdc_top
+# -- Compiling module tof_cal
+# 
+# Top level modules:
+# 	decode
+# 	decoder
+# 	tb_tdc
+# 	tb_tdc_his
+# vsim -novopt work.tb_tdc_his 
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.tb_tdc_his
+# Loading work.tb_tdc_his
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.tdc_top
+# Loading work.tdc_top
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.sync
+# Loading work.sync
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.tof_cal
+# Loading work.tof_cal
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.int_cal
+# Loading work.int_cal
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.spad_module
+# Loading work.spad_module
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.histogram
+# Loading work.histogram
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_1.6\RTL\work.count_max
+# Loading work.count_max
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by:   Hostname:   ProcessID: 3
+#           Attempting to use alternate WLF file "./wlfts9xnny".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlfts9xnny
+# ** Warning: (vsim-3015) tb_tdc_his.v(77): [PCDPC] - Port size (9 or 9) does not match connection size (16) for port 'HIS_Ibatch'. The port definition is at: histogram.v(31).
+#         Region: /tb_tdc_his/histogram_dut

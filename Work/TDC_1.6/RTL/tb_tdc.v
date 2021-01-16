@@ -18,7 +18,7 @@ module tb_tdc;
     wire         TDC_Olast;
     wire         TDC_Ovalid; 
     reg          TDC_Oready;
-    wire         TDC_INT;
+    //wire         TDC_INT;
     reg  [14:0]  TDC_Range;
     reg          photon;
     wire         rst_auto;
@@ -43,7 +43,7 @@ tdc_top tdc_top_dut(
     
     .TDC_Oready         (TDC_Oready), //output data ready signal
     
-    .TDC_INT            (TDC_INT), //output interrupt signal
+    //.TDC_INT            (TDC_INT), //output interrupt signal
     .rst_auto           (rst_auto)
 );
 spad_module spad_module_dut(

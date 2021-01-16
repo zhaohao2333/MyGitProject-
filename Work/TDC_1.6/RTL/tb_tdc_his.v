@@ -17,7 +17,7 @@ module tb_tdc_his;
     wire         TDC_Olast;
     wire         TDC_Ovalid; 
     wire         TDC_Oready;
-    wire         TDC_INT;
+    //wire         TDC_INT;
     reg  [14:0]  TDC_Range;
     reg          photon;
     wire         rst_auto;
@@ -51,7 +51,7 @@ tdc_top tdc_top_dut(
     
     .TDC_Oready         (TDC_Oready), //input data ready signal
     
-    .TDC_INT            (TDC_INT), //output interrupt signal
+    //.TDC_INT            (TDC_INT), //output interrupt signal
     .rst_auto           (rst_auto)
 );
 spad_module spad_module_dut(
@@ -84,7 +84,7 @@ initial begin
         rst = 1;
         TDC_start = 0;
         TDC_spaden = 0;
-        TDC_Range = 15'b00000_11111_11100;
+        TDC_Range = 15'b00000_00001_01000; //10080
         HIS_En = 1;
         HIS_TH = 5; //! intensity
         HIS_Ibatch = 10; //! num
@@ -98,16 +98,18 @@ initial begin
         #100;
     //===========================================================
         start = 1;
-        repeat(10) begin
+        repeat(2) begin
             tdc_start();
         end
+        @ (posedge TDC_start);
+        #120000;
         $finish;
     end
 end
 
 task photon_trigger;
     begin
-        #200 photon = 1;
+        #100 photon = 1;
              TDC_spaden = {$random} % 65536; //random num (0 <= num <= 65535)
         #50  photon = 0;
     end
@@ -123,7 +125,9 @@ task tdc_start;
         #640    TDC_start = 0;
  */
         @ (posedge TDC_start);
-        #delay;
+        //#delay;
+        //#3870;
+
         photon_trigger();
 
         @ (negedge rst_auto);
@@ -132,10 +136,11 @@ task tdc_start;
 
         @ (negedge rst_auto);
         #delay;
+        #1500;
         if(delay >= 500)
             photon_trigger();
 
-        #50000;
+        #100000;
     end
 endtask
 //-------------------------------------------------------------------------------------

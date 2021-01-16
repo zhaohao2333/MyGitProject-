@@ -1,4 +1,3 @@
-`define TEST
 module tdc_top (
     input  wire [31:0]  DLL_Phase,
     input  wire         clk5, //500 Mhz for cnt, DLL_Phase[0]
@@ -15,7 +14,7 @@ module tdc_top (
     output reg          TDC_Olast, // output last data signal
     output reg          TDC_Ovalid, // output data valid signal
     input  wire         TDC_Oready, //output data ready signal
-    output reg          TDC_INT,
+    //output reg          TDC_INT,
     output wire         rst_auto
 );
 //-------------------------------------------------------------------
@@ -74,7 +73,9 @@ wire        tof_out_valid;
 wire        dec_valid;
 reg  [2 :0] cnt;
 wire        tof_cal_stop;
-
+wire [1 :0] tof_num_cnt;
+wire        tri_en;
+reg  [1 :0] num_cnt;
 //-------------------------------------------------------------------
 assign rst_auto = (!TDC_tgate) & sync;
 
@@ -120,7 +121,7 @@ always @(posedge clk5 or negedge rst_n) begin
         counter <= 0;
         cnt_start_d <= 0;
     end
-    else if(counter == range[14:5]) begin
+    else if(counter >= range[14:5]) begin
         counter <= 0;
         cnt_start_d <= cnt_start;
     end
@@ -194,13 +195,13 @@ end */
 
 always @(negedge TDC_trigger or negedge rst) begin // rst
     if (!rst) begin
-        TDC_Onum <= 0;
+        num_cnt <= 0;
     end
     else if (tri_ign) begin
-        TDC_Onum <= TDC_Onum;
+        num_cnt <= num_cnt;
     end
-    else if (TDC_Onum <= 2) begin
-        TDC_Onum <= TDC_Onum + 1;
+    else if (num_cnt <= 2) begin
+        num_cnt <= num_cnt + 1;
     end
 end
 
@@ -217,22 +218,22 @@ always @(negedge TDC_trigger or negedge rst) begin //rst
         INT[0]  <= 0;
     end
     else if(!tri_ign) begin
-        if (TDC_Onum == 0) begin
+        if (num_cnt == 0) begin
             counter_reg[0] <= counter_reg_out;
             stop_reg[0] <= stop_reg_out;
             INT[0]  <= light_level;
         end
-        else if (TDC_Onum == 1) begin
+        else if (num_cnt == 1) begin
             counter_reg[1] <= counter_reg_out;
             stop_reg[1] <= stop_reg_out;
             INT[1]  <= light_level;
         end
-        else if (TDC_Onum == 2) begin
+        else if (num_cnt == 2) begin
             counter_reg[2] <= counter_reg_out;
             stop_reg[2] <= stop_reg_out;
             INT[2]  <= light_level;
         end
-        else if (TDC_Onum == 3) begin
+        else if (num_cnt == 3) begin
             counter_reg[0] <= counter_reg[0];
             counter_reg[1] <= counter_reg[1];
             counter_reg[2] <= counter_reg[2];
@@ -272,15 +273,12 @@ assign rst = rst_n & clr_n;
 always @(posedge clk5 or negedge rst_n) begin //clk 500 Mhz
     if (!rst_n) begin
         Ovalid <= 0;
-        TDC_INT <= 0;
     end
-    else if (counter == range[14:5]) begin //! range
+    else if (counter >= range[14:5]) begin //! range
         Ovalid <= 1;
-        TDC_INT <= 1;
     end
     else if (trans_done) begin
         Ovalid <= 0;
-        TDC_INT <= 0; //! wait for clr signal from core logic
     end
 end
 //-------------------------------------------------------------------
@@ -295,10 +293,26 @@ tof_cal tof_cal_inst(
     .out_valid          (tof_out_valid),
     .dec_valid          (dec_valid),
     .cnt                (cnt),
-    .TDC_Onum           (TDC_Onum),
+    .num_cnt            (num_cnt),
     .counter_in         (counter_in),
-    .range              (range)
+    .range              (range),
+    .tof_num_cnt        (tof_num_cnt),
+    .tri_en             (tri_en)
 );
+
+//assign TDC_Onum = tof_num_cnt;
+always @(posedge clk or negedge rst_n) begin
+    if (!rst_n) begin
+        TDC_Onum <= 0;
+    end
+    else if (num_cnt == 0) begin
+        TDC_Onum <= 0;
+    end
+    else
+        TDC_Onum <= tof_num_cnt;
+end
+
+assign tri_en = Ovalid_d2 & !Ovalid_d3;
 
 always @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
@@ -308,7 +322,7 @@ always @(posedge clk or negedge rst_n) begin
         cnt <= 0;
     end
     else if (Ovalid_d2 & !Ovalid_d3) begin
-        if (TDC_Onum == 0) begin
+        if (num_cnt == 0) begin
             tof_cal_en <= 0;
             decode_in <= 0;
             counter_in <= 0;
@@ -327,7 +341,7 @@ always @(posedge clk or negedge rst_n) begin
         end
     end
     else if (tof_out_valid) begin
-        if (TDC_Onum == 1) begin
+        if (num_cnt == 1) begin
             if (cnt == 1) begin
                 tof_cal_en <= 1;
                 decode_in <= stop_reg[0];
@@ -340,7 +354,7 @@ always @(posedge clk or negedge rst_n) begin
                 cnt <= 0;
             end
         end
-        else if (TDC_Onum == 2) begin
+        else if (num_cnt == 2) begin
             if (cnt == 1) begin
                 tof_cal_en <= 1;
                 decode_in <= stop_reg[0];
@@ -358,7 +372,7 @@ always @(posedge clk or negedge rst_n) begin
                 cnt <= 0;
             end
         end
-        else if (TDC_Onum == 3) begin
+        else if (num_cnt == 3) begin
             if (cnt == 1) begin
                 tof_cal_en <= 1;
                 decode_in <= stop_reg[0];
@@ -391,12 +405,12 @@ always @(posedge clk or negedge rst_n) begin //! todo reset
         tof_data[0] <= 0;
     end
     else if (tof_out_valid)begin
-        if (TDC_Onum == 1) begin
+        if (num_cnt == 1) begin
             if (cnt == 2) begin
                 tof_data[0] <= tof;
             end
         end
-        else if (TDC_Onum == 2) begin
+        else if (num_cnt == 2) begin
             if (cnt == 2) begin
                 tof_data[0] <= tof;
             end
@@ -404,7 +418,7 @@ always @(posedge clk or negedge rst_n) begin //! todo reset
                 tof_data[1] <= tof;
             end
         end
-        else if (TDC_Onum == 3) begin
+        else if (num_cnt == 3) begin
             if (cnt == 2) begin
                 tof_data[0] <= tof;
             end
@@ -438,7 +452,7 @@ always @(posedge clk or negedge rst_n) begin
         num <= 0;
     end
     else if (Ovalid_d2 & !Ovalid_d3) begin
-        if (TDC_Onum == 0) begin
+        if (num_cnt == 0) begin
             cal_en <= 0;
             int_in <= 0;
         end
@@ -454,12 +468,12 @@ always @(posedge clk or negedge rst_n) begin
         end
     end
     else if (out_valid) begin
-        if (TDC_Onum == 1) begin
+        if (num_cnt == 1) begin
             cal_en <= 0;
             int_in <= 0;
             num <= 0;
         end
-        else if (TDC_Onum == 2) begin
+        else if (num_cnt == 2) begin
             if (num == 0) begin
                 cal_en <= 1;
                 int_in <= INT[1];
@@ -471,7 +485,7 @@ always @(posedge clk or negedge rst_n) begin
                 num <= 0;
             end
         end
-        else if (TDC_Onum == 3) begin
+        else if (num_cnt == 3) begin
             if (num == 0) begin
                 cal_en <= 1;
                 int_in <= INT[1];
@@ -499,7 +513,7 @@ always @(posedge clk or negedge rst_n) begin
         shift_tri <= 0;
     end
     else if (Ovalid_d2 & !Ovalid_d3) begin
-        if (TDC_Onum == 0) begin
+        if (num_cnt == 0) begin
             shift_tri <= 0;
         end
         else begin
@@ -507,10 +521,10 @@ always @(posedge clk or negedge rst_n) begin
         end
     end
     else if (out_valid) begin
-        if (TDC_Onum == 1) begin
+        if (num_cnt == 1) begin
             shift_tri <= 0;
         end
-        else if (TDC_Onum == 2) begin
+        else if (num_cnt == 2) begin
             if (num == 0) begin
                 shift_tri <= 1;
             end
@@ -518,7 +532,7 @@ always @(posedge clk or negedge rst_n) begin
                 shift_tri <= 0;
             end
         end
-        else if (TDC_Onum == 3) begin
+        else if (num_cnt == 3) begin
             if (num == 0) begin
                 shift_tri <= 1;
             end
@@ -541,10 +555,10 @@ always @(posedge clk or negedge rst_n) begin //! todo reset
         int_data_o[0] <= 0;
     end
     else if (out_valid)begin
-        if (TDC_Onum == 1) begin
+        if (num_cnt == 1) begin
             int_data_o[0] <= int_out;
         end
-        else if (TDC_Onum == 2) begin
+        else if (num_cnt == 2) begin
             if (num == 0) begin
                 int_data_o[0] <= int_out;
             end
@@ -552,7 +566,7 @@ always @(posedge clk or negedge rst_n) begin //! todo reset
                 int_data_o[1] <= int_out;
             end
         end
-        else if (TDC_Onum == 3) begin
+        else if (num_cnt == 3) begin
             if (num == 0) begin
                 int_data_o[0] <= int_out;
             end
@@ -575,21 +589,21 @@ always @(posedge clk or negedge rst_n) begin
     else if (int_valid) begin
         int_valid <= 0;
     end
-    else if (TDC_Onum == 0) begin
+    else if (num_cnt == 0) begin
         if (Ovalid_d2 & !Ovalid_d3) begin
             int_valid <= 1;
         end
     end
     else if (out_valid)begin
-        if (TDC_Onum == 1) begin
+        if (num_cnt == 1) begin
             int_valid <= 1;
         end
-        else if (TDC_Onum == 2) begin
+        else if (num_cnt == 2) begin
             if (num == 1) begin
                 int_valid <= 1;
             end
         end
-        else if (TDC_Onum == 3) begin
+        else if (num_cnt == 3) begin
             if (num == 2) begin
                 int_valid <= 1;
             end
@@ -666,13 +680,13 @@ always @(*) begin
     case (c_state)
         IDLE: 
             if (hs) begin
-                if (TDC_Onum == 0)
+                if ((num_cnt == 0)||(tof_num_cnt == 0))
                     n_state = DATA0;
-                else if (TDC_Onum == 1)
+                else if (tof_num_cnt == 1)
                     n_state = DATA1;
-                else if (TDC_Onum == 2)
+                else if (tof_num_cnt == 2)
                     n_state = DATA2;
-                else if (TDC_Onum == 3)
+                else if (tof_num_cnt == 3)
                     n_state = DATA3;
             end
         DATA0:

@@ -9,9 +9,11 @@ module tof_cal (
     output reg          out_valid,
     output reg          dec_valid,
     input  wire [2:0]   cnt,
-    input  wire [1:0]   TDC_Onum,
+    input  wire [1:0]   num_cnt,
     input  wire [9:0]   counter_in,
-    input  wire [14:0]  range
+    input  wire [14:0]  range,
+    output reg  [1:0]   tof_num_cnt,
+    input  wire         tri_en
 );
 
 reg     [14:0]  tof;
@@ -228,13 +230,20 @@ end
 always @(posedge clk or negedge rst_n) begin //valid
     if (!rst_n) begin
         tof_data_in <= 0;
+        tof_num_cnt <= 0;
+    end
+    else if (tri_en) begin
+        tof_num_cnt <= num_cnt;
     end
     else if (comp_done_d) begin
         if (tof <= range) begin  //! reset
             tof_data_in <= tof;
+            tof_num_cnt <= tof_num_cnt;
         end
-        else
+        else begin
             tof_data_in <= 15'b11111_11111_11111;
+            tof_num_cnt <= tof_num_cnt - 1;
+        end
     end
 end
 
