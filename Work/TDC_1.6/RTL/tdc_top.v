@@ -45,8 +45,7 @@ wire         cnt_en;
 wire         hs;
 reg  [6:0]   n_state;
 reg  [6:0]   c_state;
-reg          Ovalid, Ovalid_d, Ovalid_d1, Ovalid_d2, Ovalid_d3;
-reg          trans_done;
+reg          Ovalid, Ovalid_d1, Ovalid_d2, Ovalid_d3;
 reg          tri_ign;
 reg          clr_n;
 wire         rst;
@@ -76,7 +75,20 @@ wire        tof_cal_stop;
 wire [1 :0] tof_num_cnt;
 wire        tri_en;
 reg  [1 :0] num_cnt;
+reg         busy;
 //-------------------------------------------------------------------
+always @(posedge clk or negedge rst_n) begin
+    if (!rst_n) begin
+        busy <= 0;
+    end
+    else if (TDC_start) begin
+        busy <= 1;
+    end
+    else if (TDC_Olast) begin
+        busy <= 0;
+    end
+end
+
 assign rst_auto = (!TDC_tgate) & sync;
 
 always @(posedge TDC_start or negedge rst_n) begin
@@ -84,7 +96,7 @@ always @(posedge TDC_start or negedge rst_n) begin
         start_reg_out <= 32'h0000_0000;
         cnt_start <= 1'b0;
     end
-    else begin
+    else if (!busy) begin
         start_reg_out <= DLL_Phase;
         cnt_start <= ~cnt_start;
     end
@@ -134,7 +146,7 @@ always @(posedge clk or negedge rst_n) begin //250 Mhz
     if (!rst_n) begin
         range <= 15'b00000_11111_11100;//! for test
     end
-    else if (TDC_start) begin
+    else if (TDC_start & !busy) begin
         range <= TDC_Range;
     end
 end
@@ -274,10 +286,10 @@ always @(posedge clk5 or negedge rst_n) begin //clk 500 Mhz
     if (!rst_n) begin
         Ovalid <= 0;
     end
-    else if (counter >= range[14:5]) begin //! range
+    else if (counter >= range[14:5]) begin
         Ovalid <= 1;
     end
-    else if (trans_done) begin
+    else if (TDC_Olast) begin
         Ovalid <= 0;
     end
 end
@@ -615,10 +627,10 @@ end
 
 always @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
-        Ovalid_d <= 0;
+        Ovalid_d1 <= 0;
     end
     else begin
-        Ovalid_d <= Ovalid;
+        Ovalid_d1 <= Ovalid;
     end
 end
 
@@ -627,7 +639,7 @@ always @(posedge clk or negedge rst_n) begin
         Ovalid_d2 <= 0;
     end
     else begin
-        Ovalid_d2 <= Ovalid_d;
+        Ovalid_d2 <= Ovalid_d1;
     end
 end
 
@@ -640,28 +652,6 @@ always @(posedge clk or negedge rst_n) begin
     end
 end
 
-always @(posedge clk or negedge rst_n) begin
-    if (!rst_n) begin
-        Ovalid_d1 <= 0;
-    end
-    else if ((n_state == DATA2_1)||(n_state == DATA1)||(n_state == DATA3_2)||(n_state == DATA0)) begin
-        Ovalid_d1 <= 0;
-    end
-    else if (!trans_done) begin
-        Ovalid_d1 <= Ovalid_d;
-    end
-end
-
-always @(posedge clk or negedge rst_n) begin
-    if (!rst_n) begin
-        trans_done <= 0;
-    end
-    else if (trans_done) 
-        trans_done <= 0;
-    else if ((n_state == DATA2_1)||(n_state == DATA1)||(n_state == DATA3_2)||(n_state == DATA0)) begin
-        trans_done <= 1;
-    end
-end
 
 //-------------------------fsm-----------------------------------------------//
 always @(posedge clk or negedge rst_n) begin

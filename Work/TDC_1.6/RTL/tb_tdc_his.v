@@ -128,7 +128,7 @@ task tdc_start;
         //#delay;
         //#3870;
 
-        photon_trigger();
+        /* photon_trigger();
 
         @ (negedge rst_auto);
         #delay;
@@ -138,9 +138,9 @@ task tdc_start;
         #delay;
         #1500;
         if(delay >= 500)
-            photon_trigger();
+            photon_trigger(); */
 
-        #100000;
+        #200000;
     end
 endtask
 //-------------------------------------------------------------------------------------
