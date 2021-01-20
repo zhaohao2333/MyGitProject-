@@ -4,7 +4,7 @@ entity tof_cal is
     port(
         clk             : in     vl_logic;
         rst_n           : in     vl_logic;
-        decode_in       : in     vl_logic_vector(31 downto 0);
+        decode_in       : in     vl_logic_vector(15 downto 0);
         tof_data_in     : out    vl_logic_vector(14 downto 0);
         cal_en          : in     vl_logic;
         cal_stop        : out    vl_logic;

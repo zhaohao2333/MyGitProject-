@@ -27,7 +27,8 @@ entity tdc_top is
         TDC_Olast       : out    vl_logic;
         TDC_Ovalid      : out    vl_logic;
         TDC_Oready      : in     vl_logic;
-        rst_auto        : out    vl_logic
+        rst_auto        : out    vl_logic;
+        busy            : out    vl_logic
     );
     attribute mti_svvh_generic_type : integer;
     attribute mti_svvh_generic_type of IDLE : constant is 1;

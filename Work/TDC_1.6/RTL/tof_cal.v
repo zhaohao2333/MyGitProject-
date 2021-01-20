@@ -1,8 +1,7 @@
 module tof_cal (
     input  wire         clk,
     input  wire         rst_n,
-    input  wire [31:0]  decode_in,
-
+    input  wire [15:0]  decode_in,
     output reg  [14:0]  tof_data_in,
     input  wire         cal_en,
     output reg          cal_stop,
@@ -15,17 +14,17 @@ module tof_cal (
     output reg  [1:0]   tof_num_cnt,
     input  wire         tri_en
 );
-
+//-------------------------------------------------------
 reg     [14:0]  tof;
 reg     [4 :0]  decode;
-reg     [31:0]  norbuf;
+reg     [15:0]  norbuf;
 reg     [7 :0]  sel1;
 reg     [3 :0]  sel2;
 reg     [1 :0]  sel3;
 reg     [4 :0]  dec_shift;
 reg     [4 :0]  start_dec_data;
 reg             comp, comp_done, comp_done_d;
-
+//-------------------------------------------------------
 // 1 stage
 always @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
@@ -33,8 +32,8 @@ always @(posedge clk or negedge rst_n) begin
         decode[4] <= 0;
     end
     else if (cal_en) begin
-        norbuf <= decode_in ^ {decode_in[0], decode_in[31:1]};
-        decode[4] <= decode_in[16];
+        norbuf <= decode_in ^ {~decode_in[0], decode_in[15:1]};
+        decode[4] <= decode_in[15];
     end
 end
 
@@ -65,7 +64,6 @@ always @(posedge clk or negedge rst_n) begin //valid
         cal_stop <= dec_shift[1];
     end
 end
-    
 //2 stage
 always @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
@@ -131,19 +129,16 @@ always @(posedge clk or negedge rst_n) begin
         end
     end
 end
-
 //get decode out data
 always @(posedge clk or negedge rst_n) begin //valid
     if (!rst_n) begin
         start_dec_data <= 0;
     end
-    else if (dec_valid) begin //! todo reset
+    else if (dec_valid) begin
         if (cnt == 1)
             start_dec_data <= decode;
     end
 end
-
-
 
 always @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
@@ -167,20 +162,17 @@ always @(posedge clk or negedge rst_n) begin
         end
     end
 end
-
-
 // calculate tof data
-
-always @(posedge clk or negedge rst_n) begin //valid
+always @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
         tof[4:0] <= 0;
     end
     else if (comp_done) begin //! todo reset
-        tof[4:0] = decode - start_dec_data;
+        tof[4:0] <= decode - start_dec_data;
     end
 end
 
-always @(posedge clk or negedge rst_n) begin //valid
+always @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
         tof[14:5] <= 0;
     end
@@ -200,7 +192,7 @@ always @(posedge clk or negedge rst_n) begin //valid
     end
 end
 
-always @(posedge clk or negedge rst_n) begin //valid
+always @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
         comp_done_d <= 0;
     end
@@ -236,7 +228,7 @@ always @(posedge clk or negedge rst_n) begin //valid
         tof_num_cnt <= num_cnt;
     end
     else if (comp_done_d) begin
-        if (tof <= range) begin  //! reset
+        if (tof <= range) begin
             tof_data_in <= tof;
             tof_num_cnt <= tof_num_cnt;
         end

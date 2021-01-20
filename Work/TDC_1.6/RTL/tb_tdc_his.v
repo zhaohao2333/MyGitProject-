@@ -21,6 +21,7 @@ module tb_tdc_his;
     reg  [14:0]  TDC_Range;
     reg          photon;
     wire         rst_auto;
+    wire         busy;
 
     //histogram signal
     reg          HIS_En;
@@ -52,7 +53,8 @@ tdc_top tdc_top_dut(
     .TDC_Oready         (TDC_Oready), //input data ready signal
     
     //.TDC_INT            (TDC_INT), //output interrupt signal
-    .rst_auto           (rst_auto)
+    .rst_auto           (rst_auto),
+    .busy               (busy)
 );
 spad_module spad_module_dut(
     .photon(photon),  //posdege for photon arrival
@@ -84,7 +86,7 @@ initial begin
         rst = 1;
         TDC_start = 0;
         TDC_spaden = 0;
-        TDC_Range = 15'b00000_00001_01000; //10080
+        TDC_Range = 15'b00000_11111_01000; //10080
         HIS_En = 1;
         HIS_TH = 5; //! intensity
         HIS_Ibatch = 10; //! num
@@ -128,7 +130,7 @@ task tdc_start;
         //#delay;
         //#3870;
 
-        /* photon_trigger();
+        photon_trigger();
 
         @ (negedge rst_auto);
         #delay;
@@ -138,7 +140,7 @@ task tdc_start;
         #delay;
         #1500;
         if(delay >= 500)
-            photon_trigger(); */
+            photon_trigger();
 
         #200000;
     end

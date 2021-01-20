@@ -22,6 +22,7 @@ module tb_tdc;
     reg  [14:0]  TDC_Range;
     reg          photon;
     wire         rst_auto;
+    wire         busy;
 
 
 tdc_top tdc_top_dut(
@@ -44,7 +45,8 @@ tdc_top tdc_top_dut(
     .TDC_Oready         (TDC_Oready), //output data ready signal
     
     //.TDC_INT            (TDC_INT), //output interrupt signal
-    .rst_auto           (rst_auto)
+    .rst_auto           (rst_auto),
+    .busy               (busy)
 );
 spad_module spad_module_dut(
     .photon(photon),  //posdege for photon arrival
