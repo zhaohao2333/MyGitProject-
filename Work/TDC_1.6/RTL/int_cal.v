@@ -58,7 +58,7 @@ always @(posedge clk or negedge rst_n) begin //clk 250 Mhz
         INT_shift <= INT;
     end
     else if (cal_en) begin
-        if (cnt == 16)
+        if (cnt == 16)                   //! cnt and INT_shift
             INT_shift <= 0;
         else
             INT_shift <= {INT_shift[0], INT_shift[15:1]};
@@ -94,7 +94,8 @@ end
 always @(posedge clk or negedge rst_n) begin //1
     if (!rst_n) begin
         int_out <= 0;
-    end if (data_en) begin
+    end
+    else if (data_en) begin
         int_out <= int_data - 1;
     end
 end

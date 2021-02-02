@@ -69,7 +69,12 @@ wire        tof_cal_stop;
 wire [1 :0] tof_num_cnt;
 wire        tri_en;
 reg  [1 :0] num_cnt;
+wire        TDC_tgate_n;
+wire        TDC_trigger_n;
 //-------------------------------------------------------
+assign TDC_tgate_n = !TDC_tgate;
+assign TDC_trigger_n = !TDC_trigger;
+
 always @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
         busy <= 0;
@@ -82,7 +87,7 @@ always @(posedge clk or negedge rst_n) begin
     end
 end
 
-assign rst_auto = (!TDC_tgate) & sync;
+assign rst_auto = TDC_tgate_n & sync;
 
 always @(posedge TDC_start or negedge rst_n) begin
     if (!rst_n) begin
@@ -110,7 +115,7 @@ always @(posedge TDC_trigger or negedge rst_n) begin
     end
 end
 
-always @(negedge TDC_tgate or negedge rst_n) begin
+always @(posedge TDC_tgate_n or negedge rst_n) begin
     if (!rst_n) begin
         light_level <= 0;
     end
@@ -178,7 +183,7 @@ always @(posedge clk or negedge rst_n) begin
         clr_n <= 1;
 end
 
-always @(negedge TDC_trigger or negedge rst) begin //! rst
+always @(posedge TDC_trigger_n or negedge rst) begin //! rst
     if (!rst) begin
         num_cnt <= 0;
     end
@@ -190,7 +195,7 @@ always @(negedge TDC_trigger or negedge rst) begin //! rst
     end
 end
 //-------------------------------------------------------
-always @(negedge TDC_trigger or negedge rst_n) begin
+always @(posedge TDC_trigger_n or negedge rst_n) begin
     if (!rst_n) begin
         counter_reg[2] <= 0;
         counter_reg[1] <= 0;

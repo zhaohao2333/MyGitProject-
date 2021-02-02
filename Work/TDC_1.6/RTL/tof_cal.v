@@ -167,7 +167,7 @@ always @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
         tof[4:0] <= 0;
     end
-    else if (comp_done) begin //! todo reset
+    else if (comp_done) begin
         tof[4:0] <= decode - start_dec_data;
     end
 end
