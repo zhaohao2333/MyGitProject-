@@ -75,9 +75,10 @@ wire        TDC_trigger_n;
 //-------------------------------------------------------
 reg  [15:0] start_phase_latch;
 reg  [15:0] stop_phase_latch;   
-reg  [ 1:0] com_mid, com_high;
+reg  [ 1:0] com_high_d, com_high;
 reg         com_low;
-reg           overflow;
+reg         overflow;
+reg  [ 4:0] cnt_low;
 //-------------------------------------------------------
 assign TDC_tgate_n = !TDC_tgate;
 assign TDC_trigger_n = !TDC_trigger;
@@ -165,29 +166,32 @@ always @(posedge clk5 or negedge rst_n) begin
     if(!rst_n) begin
         com_high <= 2'b00;
     end
-    else if(counter[9:6] > range_dd[14:11]) begin
+    else if(counter[9:5] > range_dd[14:10]) begin
         com_high <= 2'b01;
     end
-    else if(counter[9:6] == range_dd[14:11]) begin
+    else if(counter[9:5] == range_dd[14:10]) begin
         com_high <= 2'b10;
     end
-    else if(counter[9:6] < range_dd[14:11]) begin
+    else if(counter[9:5] < range_dd[14:10]) begin
         com_high <= 2'b00;
     end
 end
 
 always @(posedge clk5 or negedge rst_n) begin
     if(!rst_n) begin
-        com_mid <= 2'b00;
+        cnt_low <= 0;
     end
-    else if(counter[5:3] > range_dd[10:8]) begin
-        com_mid <= 2'b01;
+    else begin
+        cnt_low <= counter[4:0];
     end
-    else if(counter[5:3] == range_dd[10:8]) begin
-        com_mid <= 2'b10;
+end
+
+always @(posedge clk5 or negedge rst_n) begin
+    if(!rst_n) begin
+        com_high_d <= 0;
     end
-    else if(counter[5:3] < range_dd[10:8]) begin
-        com_mid <= 2'b00;
+    else begin
+        com_high_d <= com_high;
     end
 end
 
@@ -195,23 +199,23 @@ always @(posedge clk5 or negedge rst_n) begin
     if(!rst_n) begin
         com_low <= 0;
     end
-    else if(counter[2:0] >= range_dd[7:5]) begin
+    else if(cnt_low >= range_dd[9:5]) begin
         com_low <= 1;
     end
-    else if(counter[2:0] < range_dd[7:5]) begin
+    else if(cnt_low < range_dd[9:5]) begin
         com_low <= 0;
     end
 end
 
 
 //assign overflow = (com_high[0]) || (com_high[1] & com_low[0]);
-//assign overflow = (com_high[0]) || (com_high[1] & com_mid[0]) || (com_high[1] & com_mid[1] & com_low);
+
 always @(posedge clk5 or negedge rst_n) begin
     if(!rst_n) begin
         overflow <= 0;
     end
     else begin
-        overflow <= (com_high[0]) || (com_high[1] & com_mid[0]) || (com_high[1] & com_mid[1] & com_low);
+        overflow <= (com_high_d[0]) || (com_high_d[1] & com_low);
     end
 end
 //---------------coarse counter--------------------------
