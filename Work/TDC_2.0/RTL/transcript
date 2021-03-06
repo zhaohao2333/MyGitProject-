@@ -679,3 +679,10 @@ do sim.do
 #           Using alternate file: ./wlftm7868m
 # ** Warning: (vsim-3015) tb_tdc_his.v(79): [PCDPC] - Port size (9 or 9) does not match connection size (16) for port 'HIS_Ibatch'. The port definition is at: histogram.v(31).
 #         Region: /tb_tdc_his/histogram_dut
+# ** Note: $finish    : tb_tdc_his.v(108)
+#    Time: 947200 ns  Iteration: 0  Instance: /tb_tdc_his
+# 1
+# Break in Module tb_tdc_his at tb_tdc_his.v line 108
+# Simulation Breakpoint: 1
+# Break in Module tb_tdc_his at tb_tdc_his.v line 108
+# MACRO ./sim.do PAUSED at line 259

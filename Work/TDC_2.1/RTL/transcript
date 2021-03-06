@@ -1,0 +1,64 @@
+# Reading D:/modeltech_10.0c/tcl/vsim/pref.tcl 
+# //  ModelSim SE 10.0c Jul 21 2011 
+# //
+# //  Copyright 1991-2011 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  THIS WORK CONTAINS TRADE SECRET AND PROPRIETARY INFORMATION
+# //  WHICH IS THE PROPERTY OF MENTOR GRAPHICS CORPORATION OR ITS
+# //  LICENSORS AND IS SUBJECT TO LICENSE TERMS.
+# //
+# do sim.do 
+# ** Warning: (vlib-34) Library already exists at "work".
+# Modifying modelsim.ini
+# Model Technology ModelSim SE vlog 10.0c Compiler 2011.07 Jul 21 2011
+# -- Compiling module count_max
+# -- Compiling module decode
+# -- Compiling module decoder
+# -- Compiling module histogram
+# -- Compiling module int_cal
+# -- Compiling module spad_module
+# -- Compiling module sync
+# -- Compiling module tb_tdc
+# -- Compiling module tb_tdc_his
+# -- Compiling module tdc_top
+# -- Compiling module tof_cal
+# 
+# Top level modules:
+# 	decode
+# 	decoder
+# 	tb_tdc
+# 	tb_tdc_his
+# vsim -novopt work.tb_tdc_his 
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_2.1\RTL\work.tb_tdc_his
+# Loading work.tb_tdc_his
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_2.1\RTL\work.tdc_top
+# Loading work.tdc_top
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_2.1\RTL\work.sync
+# Loading work.sync
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_2.1\RTL\work.tof_cal
+# Loading work.tof_cal
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_2.1\RTL\work.int_cal
+# Loading work.int_cal
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_2.1\RTL\work.spad_module
+# Loading work.spad_module
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_2.1\RTL\work.histogram
+# Loading work.histogram
+# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\TDC_2.1\RTL\work.count_max
+# Loading work.count_max
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by:   Hostname:   ProcessID: 3
+#           Attempting to use alternate WLF file "./wlftmgsrwa".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlftmgsrwa
+# ** Warning: (vsim-3015) tb_tdc_his.v(79): [PCDPC] - Port size (9 or 9) does not match connection size (16) for port 'HIS_Ibatch'. The port definition is at: histogram.v(31).
+#         Region: /tb_tdc_his/histogram_dut
+# ** Error: (vish-4014) No objects found matching '/tb_tdc_his/tdc_top_dut/Ovalid'.
+# Executing ONERROR command at macro ./sim.do line 85
+# ** Note: $finish    : tb_tdc_his.v(108)
+#    Time: 947200 ns  Iteration: 0  Instance: /tb_tdc_his
+# 1
+# Break in Module tb_tdc_his at tb_tdc_his.v line 108
+# Simulation Breakpoint: 1
+# Break in Module tb_tdc_his at tb_tdc_his.v line 108
+# MACRO ./sim.do PAUSED at line 289
