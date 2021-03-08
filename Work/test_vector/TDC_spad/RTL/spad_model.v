@@ -23,7 +23,7 @@ module spad_module(
 
 	integer file_out;
 	initial begin
-    	file_out = $fopen("vector_1.txt","r");
+    	file_out = $fopen("D:\Workplace\Work\test_vector\vector\2\vector_1.txt","r");
     	if (!file_out) begin
         	$display("can't open file");
         	$finish;
@@ -32,7 +32,7 @@ module spad_module(
 
 	integer file_out1;
 	initial begin
-    	file_out1 = $fopen("vector_int.txt","r");
+    	file_out1 = $fopen("D:\Workplace\Work\test_vector\vector\2\vector_int.txt","r");
     	if (!file_out1) begin
         	$display("can't open file");
         	$finish;
