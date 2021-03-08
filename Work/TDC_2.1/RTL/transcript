@@ -48,9 +48,9 @@
 # Loading work.count_max
 # ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
 #           File in use by:   Hostname:   ProcessID: 3
-#           Attempting to use alternate WLF file "./wlftmgsrwa".
+#           Attempting to use alternate WLF file "./wlftk40aa3".
 # ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
-#           Using alternate file: ./wlftmgsrwa
+#           Using alternate file: ./wlftk40aa3
 # ** Warning: (vsim-3015) tb_tdc_his.v(79): [PCDPC] - Port size (9 or 9) does not match connection size (16) for port 'HIS_Ibatch'. The port definition is at: histogram.v(31).
 #         Region: /tb_tdc_his/histogram_dut
 # ** Error: (vish-4014) No objects found matching '/tb_tdc_his/tdc_top_dut/Ovalid'.
@@ -62,3 +62,4 @@
 # Simulation Breakpoint: 1
 # Break in Module tb_tdc_his at tb_tdc_his.v line 108
 # MACRO ./sim.do PAUSED at line 289
+# Causality operation skipped due to absense of debug database file
