@@ -23,7 +23,7 @@ module spad_module(
 
 	integer file_out;
 	initial begin
-    	file_out = $fopen("D:\Workplace\Work\test_vector\vector\2\vector_1.txt","r");
+    	file_out = $fopen("D:\Workplace\Work\test_vector\vector\2\vector_delay.txt","r");
     	if (!file_out) begin
         	$display("can't open file");
         	$finish;
@@ -50,7 +50,7 @@ module spad_module(
         	delay3 = ({$random} % 10); */
 			//$fdisplay(file_out, "%d %d %d", delay1,delay1+delay2+10,delay1+delay2+delay3+20);
 			$fscanf(file_out,"%b %b %b",delay1,delay2,delay3);
-			//$readmemb("vector_range150.txt",mem,0,99);
+			//$readmemb("vector_delay.txt",mem,0,99);
 			//------------------------------------------
 			//--------- range = 2048 ns ----------------
 			#(delay1*0.0625)

@@ -88,7 +88,7 @@ initial begin
         rst_n = 1;
         rst = 1;
         TDC_start = 0;
-        TDC_Range = 15'b11111_11111_01000; //10080
+        TDC_Range = 15'b11111_11111_11000; //
         HIS_En = 1;
         HIS_TH = 5; //! intensity
         HIS_Ibatch = 10; //! num
