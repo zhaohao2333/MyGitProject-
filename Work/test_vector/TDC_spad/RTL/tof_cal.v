@@ -75,12 +75,12 @@ always @(posedge clk or negedge rst_n) begin
         decode[3] <= 0;  
     end
     else if (cal_en) begin
-        if (norbuf[15:8] == 0) begin
-            sel1 <= norbuf[7:0];
+        if (norbuf[14:7] == 0) begin
+            sel1 <= {norbuf[6:0],norbuf[15]};
             decode[3] <= 1;
         end
         else begin
-            sel1 <= norbuf[15:8];
+            sel1 <= norbuf[14:7];
             decode[3] <= 0;
         end
     end

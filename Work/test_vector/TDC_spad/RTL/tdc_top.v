@@ -1,5 +1,5 @@
 module tdc_top (
-    input  wire [31:0]  DLL_Phase,  //reverse with signal ck
+    input  wire [15:0]  DLL_Phase,  //reverse with signal ck
     input  wire         clk5,       //500 Mhz for cnt, DLL_Phase[0]
     input  wire         clk,        //250 Mhz for logic
     input  wire         rst_n,      //from external PIN, active low
@@ -100,39 +100,23 @@ assign rst_auto = TDC_tgate_n & sync;
 
 always @(posedge TDC_start or negedge rst_n) begin
     if (!rst_n) begin
-        //start_reg_out <= 16'h0000;
         cnt_start <= 1'b0;
     end
     else if (!busy) begin             
-        //start_reg_out <= DLL_Phase[16:1];
         cnt_start <= ~cnt_start;
     end
 end
 
-/* always @(posedge TDC_trigger or negedge rst_n) begin
-    if (!rst_n) begin
-        stop_reg_out <= 0;
-        tri_ign <= 1;
-    end
-    else if (~cnt_en) begin
-        stop_reg_out <= 0;
-        tri_ign <= 1;
-    end
-    else begin
-        stop_reg_out <= DLL_Phase[16:1];
-        tri_ign <= 0;
-    end
-end */
 //--------------phase latch-----------------------------
 always @(*) begin
     if (!TDC_start) begin
-        start_phase_latch = DLL_Phase[16:1];
+        start_phase_latch = DLL_Phase;
     end
 end
 
 always @(*) begin
     if (!TDC_trigger) begin
-        stop_phase_latch = DLL_Phase[16:1];
+        stop_phase_latch = DLL_Phase;
     end
 end
 //--------------phase sync module-----------------------
