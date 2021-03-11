@@ -34,7 +34,7 @@ module tb_spad;
     reg  [19:0]  core_cnt;
 
 tdc_top tdc_top_dut(
-    .DLL_Phase          (DLL_Phase),
+    .DLL_Phase          (DLL_Phase[16:1]),
     .clk5               (DLL_Phase[0]), //500 Mhz for cnt, DLL_Phase[0]
     .clk                (clk), //250 Mhz for logic, axi stream logic
     .rst_n              (rst_n), //from external PIN, active low
@@ -88,7 +88,7 @@ initial begin
         rst_n = 1;
         rst = 1;
         TDC_start = 0;
-        TDC_Range = 15'b11111_11111_11000; //
+        TDC_Range = 15'b01001_11000_10000; //
         HIS_En = 1;
         HIS_TH = 5; //! intensity
         HIS_Ibatch = 10; //! num
@@ -102,7 +102,7 @@ initial begin
     //===========================================================
         start = 1;
         @ (posedge TDC_start);
-        #5000;
+        #50000;
         $finish;
     end
 end
