@@ -88,7 +88,7 @@ initial begin
         rst_n = 1;
         rst = 1;
         TDC_start = 0;
-        TDC_Range = 15'b01001_11000_10000; //
+        TDC_Range = 15'b10011_11010_01100; //
         HIS_En = 1;
         HIS_TH = 5; //! intensity
         HIS_Ibatch = 10; //! num
@@ -142,7 +142,7 @@ always @(posedge clk or negedge rst) begin
     if (!rst) begin
         TDC_start <= 0;
     end
-    else if (core_cnt == 10) begin
+    else if ((core_cnt == 10)||(core_cnt == 11)) begin
         TDC_start <= 1;
     end
     else

@@ -79,6 +79,7 @@ reg  [8:0]  range_d_high, range_dd_high, range_d_low, range_dd_low;
 reg         overflow_low, overflow_high;
 reg         clk5_2;
 wire        clk5_2_i;
+reg         start_d;
 //wire        trigger_clk;
 //-------------------------------------------------------
 assign TDC_tgate_n = !TDC_tgate;
@@ -120,11 +121,20 @@ always @(*) begin
     end
 end
 //--------------phase sync module-----------------------
-always @(posedge clk5 or negedge rst_n) begin //clk 5
+always @(posedge clk or negedge rst_n) begin
+    if (!rst_n) begin
+        start_d <= 0;
+    end
+    else begin
+        start_d <= TDC_start;
+    end
+end
+
+always @(posedge clk or negedge rst_n) begin //clk 250M
     if (!rst_n) begin
         start_reg_out <= 0;
     end
-    else if (TDC_start) begin          //clk5 
+    else if (TDC_start & !start_d) begin
         start_reg_out <= start_phase_latch;
     end
 end
@@ -137,6 +147,9 @@ always @(posedge clk5 or negedge rst_n) begin //clk 5
         stop_reg_out <= stop_phase_latch;
     end
 end
+//----------------------------------------------------
+//! stop_reg_out 直接用 TDC_tgate_n 来采，此时一定是稳定的
+//! sync 等于 vout0 的关键是 s = 1时，vout0和vout1相同
 //--------------intensity module------------------------
 always @(posedge TDC_tgate_n or negedge rst_n) begin
     if (!rst_n) begin

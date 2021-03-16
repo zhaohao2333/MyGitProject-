@@ -23,7 +23,7 @@ module spad_module(
 
 	integer file_out;
 	initial begin
-    	file_out = $fopen("vector_delay_v3.txt","r");
+    	file_out = $fopen("vector_delay_v1.txt","r");
     	if (!file_out) begin
         	$display("can't open file");
         	$finish;

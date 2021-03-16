@@ -12,7 +12,7 @@ entity tdc_top is
         DATA0           : vl_logic_vector(0 to 6) := (Hi1, Hi0, Hi0, Hi0, Hi0, Hi0, Hi0)
     );
     port(
-        DLL_Phase       : in     vl_logic_vector(31 downto 0);
+        DLL_Phase       : in     vl_logic_vector(15 downto 0);
         clk5            : in     vl_logic;
         clk             : in     vl_logic;
         rst_n           : in     vl_logic;
