@@ -80,6 +80,7 @@ reg         overflow_low, overflow_high;
 reg         clk5_2;
 wire        clk5_2_i;
 reg         start_d;
+reg         tri_ign;
 //wire        trigger_clk;
 //-------------------------------------------------------
 assign TDC_tgate_n = !TDC_tgate;
@@ -150,6 +151,7 @@ end
 //----------------------------------------------------
 //! stop_reg_out 直接用 TDC_tgate_n 来采，此时一定是稳定的
 //! sync 等于 vout0 的关键是 s = 1时，vout0和vout1相同
+//! cnt_en 仅在trigger低电平时变化
 //--------------intensity module------------------------
 always @(posedge TDC_tgate_n or negedge rst_n) begin
     if (!rst_n) begin
@@ -310,13 +312,24 @@ always @(posedge clk or negedge rst_n) begin
 end
 
 //assign trigger_clk = TDC_trigger_n & cnt_en;
+always @(posedge TDC_trigger or negedge rst_n) begin
+    if (!rst_n) begin
+        tri_ign <= 1;
+    end
+    else if (~cnt_en) begin //! todo
+        tri_ign <= 1;
+    end
+    else begin
+        tri_ign <= 0;
+    end
+end
 
 always @(posedge TDC_trigger_n or negedge rst) begin //! rst
     if (!rst) begin
         num_cnt <= 0;
     end
-    //else if (tri_ign) begin
-    else if (!cnt_en) begin
+    else if (tri_ign) begin
+    //else if (!cnt_en) begin
         num_cnt <= num_cnt;
     end
     else if (num_cnt <= 2) begin
@@ -336,8 +349,8 @@ always @(posedge TDC_trigger_n or negedge rst_n) begin
         INT[1]  <= 0;
         INT[0]  <= 0;
     end
-    //else if(!tri_ign) begin
-    else if (cnt_en) begin
+    else if(!tri_ign) begin
+    //else if (cnt_en) begin
         if (num_cnt == 0) begin
             counter_reg[0] <= counter_reg_out;
             stop_reg[0] <= stop_reg_out;
@@ -392,7 +405,7 @@ tof_cal tof_cal_inst(
     .dec_valid          (dec_valid),
     .cnt                (cnt),
     .num_cnt            (num_cnt),
-    .counter_in         (counter_in), //! 
+    .counter_in         (counter_in),
     .range              (range),
     .tof_num_cnt        (tof_num_cnt),
     .tri_en             (tri_en)
