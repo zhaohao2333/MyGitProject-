@@ -5,7 +5,7 @@
     n1 = randi([2 5],1,N);
     n2 = randi([2 6],1,N);
 %-------------------设定range--------------------
-    range = 10000;
+    range = 20100;
 %-----------------------------------------------
     delay_data1 = 0.0625 * a1;
     delay_data2 = delay_data1 + 11 + n1;
@@ -23,13 +23,13 @@
     input_bin1 = cellstr(input_bin); %竖排
     %input_bin2 = reshape(input_bin1, 1, 3 * N); %转换为横排格式
     %writecell(input_bin2,'D:\Workplace\Work\test_vector\vector\test\vector_delay.txt','Delimiter',' ');
-    writecell(input_bin1,'D:\Workplace\Work\test_vector\vector\range\vector_delay_v3.txt','Delimiter',' ');
+    writecell(input_bin1,'D:\Workplace\Work\test_vector\vector\range\vector_delay_v2.txt','Delimiter',' ');
 %-----------------------------------------------
-    x1 = find(delay_data1 >= range * 0.0625);
+    x1 = find(delay_data1 > range * 0.0625);
     delay_data1(x1) = 32767 * 0.0625; 
-    x2 = find(delay_data2 >= range * 0.0625);
+    x2 = find(delay_data2 > range * 0.0625);
     delay_data2(x2) = 0;
-    x3 = find(delay_data3 >= range * 0.0625);
+    x3 = find(delay_data3 > range * 0.0625);
     delay_data3(x3) = 0;
 %--------------产生输出tof vector------------------ 
     delay_1 = [delay_data1;
@@ -43,7 +43,7 @@
     data_bin1 = cellstr(data_bin);
     %data_bin2 = reshape(data_bin1,1,[ ]);
     %writecell(data_bin2,'D:\Workplace\Work\test_vector\vector\test\vector_tof.txt','Delimiter',' ');
-    writecell(data_bin1,'D:\Workplace\Work\test_vector\vector\range\vector_tof_v3.txt','Delimiter',' ');
+    writecell(data_bin1,'D:\Workplace\Work\test_vector\vector\range\vector_tof_v2.txt','Delimiter',' ');
     %----------------------------------------------    
 %     int_data = randi([1 65535],1,300);
 %     int_bin = dec2bin(int_data,16);

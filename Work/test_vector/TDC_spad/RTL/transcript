@@ -1,17 +1,27 @@
-# Reading D:/modeltech_10.0c/tcl/vsim/pref.tcl 
-# //  ModelSim SE 10.0c Jul 21 2011 
+# Reading D:/modeltech64_10.4/tcl/vsim/pref.tcl
+# //  ModelSim SE-64 10.4 Dec  3 2014 
 # //
-# //  Copyright 1991-2011 Mentor Graphics Corporation
+# //  Copyright 1991-2014 Mentor Graphics Corporation
 # //  All Rights Reserved.
 # //
 # //  THIS WORK CONTAINS TRADE SECRET AND PROPRIETARY INFORMATION
 # //  WHICH IS THE PROPERTY OF MENTOR GRAPHICS CORPORATION OR ITS
 # //  LICENSORS AND IS SUBJECT TO LICENSE TERMS.
+# //  THIS DOCUMENT CONTAINS TRADE SECRETS AND COMMERCIAL OR FINANCIAL
+# //  INFORMATION THAT ARE PRIVILEGED, CONFIDENTIAL, AND EXEMPT FROM
+# //  DISCLOSURE UNDER THE FREEDOM OF INFORMATION ACT, 5 U.S.C. SECTION 552.
+# //  FURTHERMORE, THIS INFORMATION IS PROHIBITED FROM DISCLOSURE UNDER
+# //  THE TRADE SECRETS ACT, 18 U.S.C. SECTION 1905.
 # //
-# do sim.do 
+# do sim.do
 # ** Warning: (vlib-34) Library already exists at "work".
+# 
+# Model Technology ModelSim SE-64 vmap 10.4 Lib Mapping Utility 2014.12 Dec  3 2014
+# vmap -modelsim_quiet work work 
 # Modifying modelsim.ini
-# Model Technology ModelSim SE vlog 10.0c Compiler 2011.07 Jul 21 2011
+# Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  3 2014
+# Start time: 18:43:45 on Mar 19,2021
+# vlog -reportprogress 300 count_max.v decoder.v histogram.v int_cal.v spad_module.v sync.v tb_spad.v tb_tdc.v tb_tdc_his.v tdc_top.v tof_cal.v 
 # -- Compiling module count_max
 # -- Compiling module decoder
 # -- Compiling module histogram
@@ -29,100 +39,49 @@
 # 	tb_spad
 # 	tb_tdc
 # 	tb_tdc_his
-# vsim -novopt work.tb_spad 
-# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\test_vector\TDC_spad\RTL\work.tb_spad
-# Loading work.tb_spad
-# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\test_vector\TDC_spad\RTL\work.tdc_top
-# Loading work.tdc_top
-# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\test_vector\TDC_spad\RTL\work.sync
-# Loading work.sync
-# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\test_vector\TDC_spad\RTL\work.tof_cal
-# Loading work.tof_cal
-# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\test_vector\TDC_spad\RTL\work.int_cal
-# Loading work.int_cal
-# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\test_vector\TDC_spad\RTL\work.spad_module
-# Loading work.spad_module
-# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\test_vector\TDC_spad\RTL\work.histogram
-# Loading work.histogram
-# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\test_vector\TDC_spad\RTL\work.count_max
-# Loading work.count_max
-# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
-#           File in use by:   Hostname:   ProcessID: 3
-#           Attempting to use alternate WLF file "./wlft9r6s2d".
-# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
-#           Using alternate file: ./wlft9r6s2d
-# ** Warning: (vsim-PLI-3691) spad_module.v(52): Expected a system task, not a system function '$fscanf'.
-#         Region: /tb_spad/spad_module_dut/photon_gen
-# ** Warning: (vsim-PLI-3691) spad_module.v(82): Expected a system task, not a system function '$fscanf'.
-#         Region: /tb_spad/spad_module_dut
-# ** Warning: (vsim-3017) tb_spad.v(66): [TFMPC] - Too few port connections. Expected 6, found 5.
-#         Region: /tb_spad/spad_module_dut
-# ** Warning: (vsim-3722) tb_spad.v(66): [TFMPC] - Missing connection for port 'clk_250M'.
-# ** Warning: (vsim-3015) tb_spad.v(82): [PCDPC] - Port size (9 or 9) does not match connection size (16) for port 'HIS_Ibatch'. The port definition is at: histogram.v(31).
-#         Region: /tb_spad/histogram_dut
-# ** Note: $finish    : tb_spad.v(106)
-#    Time: 50066 ns  Iteration: 0  Instance: /tb_spad
-# 1
-# Break in Module tb_spad at tb_spad.v line 106
-# Simulation Breakpoint: 1
-# Break in Module tb_spad at tb_spad.v line 106
-# MACRO ./sim.do PAUSED at line 294
-do sim.do
-# ** Warning: (vlib-34) Library already exists at "work".
-# Modifying modelsim.ini
-# Model Technology ModelSim SE vlog 10.0c Compiler 2011.07 Jul 21 2011
-# -- Compiling module count_max
-# -- Compiling module decoder
-# -- Compiling module histogram
-# -- Compiling module int_cal
-# -- Compiling module spad_module
-# -- Compiling module sync
-# -- Compiling module tb_spad
-# -- Compiling module tb_tdc
-# -- Compiling module tb_tdc_his
-# -- Compiling module tdc_top
-# -- Compiling module tof_cal
+# End time: 18:43:46 on Mar 19,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# vsim -gui -do "sim.do" 
+# Start time: 18:43:46 on Mar 19,2021
+# ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
 # 
-# Top level modules:
-# 	decoder
-# 	tb_spad
-# 	tb_tdc
-# 	tb_tdc_his
-# vsim -novopt work.tb_spad 
-# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\test_vector\TDC_spad\RTL\work.tb_spad
+# Refreshing D:/Workplace/Work/test_vector/TDC_spad/RTL/work.tb_spad
 # Loading work.tb_spad
-# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\test_vector\TDC_spad\RTL\work.tdc_top
+# Refreshing D:/Workplace/Work/test_vector/TDC_spad/RTL/work.tdc_top
 # Loading work.tdc_top
-# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\test_vector\TDC_spad\RTL\work.sync
+# Refreshing D:/Workplace/Work/test_vector/TDC_spad/RTL/work.sync
 # Loading work.sync
-# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\test_vector\TDC_spad\RTL\work.tof_cal
+# Refreshing D:/Workplace/Work/test_vector/TDC_spad/RTL/work.tof_cal
 # Loading work.tof_cal
-# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\test_vector\TDC_spad\RTL\work.int_cal
+# Refreshing D:/Workplace/Work/test_vector/TDC_spad/RTL/work.int_cal
 # Loading work.int_cal
-# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\test_vector\TDC_spad\RTL\work.spad_module
+# Refreshing D:/Workplace/Work/test_vector/TDC_spad/RTL/work.spad_module
 # Loading work.spad_module
-# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\test_vector\TDC_spad\RTL\work.histogram
+# Refreshing D:/Workplace/Work/test_vector/TDC_spad/RTL/work.histogram
 # Loading work.histogram
-# Refreshing C:\Users\zhaohao\Desktop\workspace\MyGitProject-\Work\test_vector\TDC_spad\RTL\work.count_max
+# Refreshing D:/Workplace/Work/test_vector/TDC_spad/RTL/work.count_max
 # Loading work.count_max
-# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
-#           File in use by:   Hostname:   ProcessID: 3
-#           Attempting to use alternate WLF file "./wlft2mk4bx".
-# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
-#           Using alternate file: ./wlft2mk4bx
 # ** Warning: (vsim-PLI-3691) spad_module.v(52): Expected a system task, not a system function '$fscanf'.
-#         Region: /tb_spad/spad_module_dut/photon_gen
+#    Time: 0 fs  Iteration: 0  Region: /tb_spad/spad_module_dut/photon_gen File: spad_module.v
 # ** Warning: (vsim-PLI-3691) spad_module.v(82): Expected a system task, not a system function '$fscanf'.
-#         Region: /tb_spad/spad_module_dut
-# ** Warning: (vsim-3017) tb_spad.v(66): [TFMPC] - Too few port connections. Expected 6, found 5.
-#         Region: /tb_spad/spad_module_dut
-# ** Warning: (vsim-3722) tb_spad.v(66): [TFMPC] - Missing connection for port 'clk_250M'.
-# ** Warning: (vsim-3015) tb_spad.v(82): [PCDPC] - Port size (9 or 9) does not match connection size (16) for port 'HIS_Ibatch'. The port definition is at: histogram.v(31).
-#         Region: /tb_spad/histogram_dut
+#    Time: 0 fs  Iteration: 0  Instance: /tb_spad/spad_module_dut File: spad_module.v
+# ** Warning: (vsim-3017) tb_spad.v(59): [TFMPC] - Too few port connections. Expected 6, found 5.
+#    Time: 0 fs  Iteration: 0  Instance: /tb_spad/spad_module_dut File: spad_module.v
+# ** Warning: (vsim-3722) tb_spad.v(59): [TFMPC] - Missing connection for port 'clk_250M'.
+# ** Warning: (vsim-3015) tb_spad.v(68): [PCDPC] - Port size (9) does not match connection size (16) for port 'HIS_Ibatch'. The port definition is at: histogram.v(31).
+#    Time: 0 fs  Iteration: 0  Instance: /tb_spad/histogram_dut File: histogram.v
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+# 
+#           File in use by: Administrator  Hostname: ZHAOHAO  ProcessID: 2668
+# 
+#           Attempting to use alternate WLF file "./wlfty0cm2e".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+# 
+#           Using alternate file: ./wlfty0cm2e
+# 
 # ** Note: $finish    : tb_spad.v(106)
 #    Time: 50066 ns  Iteration: 0  Instance: /tb_spad
 # 1
 # Break in Module tb_spad at tb_spad.v line 106
-# Simulation Breakpoint: 1
-# Break in Module tb_spad at tb_spad.v line 106
-# MACRO ./sim.do PAUSED at line 294
+# End time: 19:21:32 on Mar 19,2021, Elapsed time: 0:37:46
+# Errors: 0, Warnings: 8
