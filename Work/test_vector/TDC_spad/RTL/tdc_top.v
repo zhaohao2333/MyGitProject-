@@ -82,6 +82,9 @@ wire        clk5_2_i;
 reg         start_d;
 reg         tri_ign;
 //wire        trigger_clk;
+reg         overflow_low_d, overflow_low_dd;
+reg         overflow_high_d, overflow_high_dd;
+
 //-------------------------------------------------------
 assign TDC_tgate_n = !TDC_tgate;
 assign TDC_trigger_n = !TDC_trigger;
@@ -175,17 +178,25 @@ assign clk5_2_i = !clk5_2;
 always @(posedge clk5_2 or negedge rst_n) begin
     if(!rst_n) begin
         overflow_low <= 0;
+        overflow_low_d <= 0;
+        overflow_low_dd <= 0;
     end
     else begin
         overflow_low <= (counter_low >= range_dd_low);
+        overflow_low_d <= overflow_low;
+        overflow_low_dd <= overflow_low_d;
     end
 end
 always @(posedge clk5_2_i or negedge rst_n) begin
     if(!rst_n) begin
         overflow_high <= 0;
+        overflow_high_d <= 0;
+        overflow_high_dd <= 0;
     end
     else begin
         overflow_high <= (counter_high >= range_dd_high);
+        overflow_high_d <= overflow_high;
+        overflow_high_dd <= overflow_high_d;
     end
 end
 //---------------coarse counter--------------------------
@@ -202,7 +213,7 @@ always @(posedge clk5_2 or negedge rst_n) begin
     if(!rst_n) begin
         counter_low <= 0;
     end
-    else if(overflow_low) begin
+    else if(overflow_low_dd) begin
         counter_low <= 0;
     end
     else if(cnt_en) begin
@@ -213,7 +224,7 @@ always @(posedge clk5_2_i or negedge rst_n) begin
     if(!rst_n) begin
         counter_high <= 0;
     end
-    else if(overflow_high) begin
+    else if(overflow_high_dd) begin
         counter_high <= 0;
     end
     else if(cnt_en) begin
