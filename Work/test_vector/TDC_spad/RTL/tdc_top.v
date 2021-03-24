@@ -107,8 +107,10 @@ always @(posedge TDC_start or negedge rst_n) begin
     if (!rst_n) begin
         cnt_start <= 1'b0;
     end
-    else if (!busy) begin             
-        cnt_start <= ~cnt_start;
+    else begin
+        if (!busy) begin             
+            cnt_start <= ~cnt_start;
+        end
     end
 end
 
