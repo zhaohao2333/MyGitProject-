@@ -19,7 +19,6 @@ reg     [15:0]  norbuf;
 reg     [7 :0]  sel1;
 reg     [3 :0]  sel2;
 reg     [1 :0]  sel3;
-reg				dec_valid;
 reg     [4 :0]  dec_shift;
 reg     [4 :0]  start_dec_data;
 reg             comp, comp_done;
@@ -168,10 +167,20 @@ end
 // calculate tof data
 always @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
+        sum1[7:0] <= 0;
+    end
+    else if (dec_valid) begin
+        sum1[7:0] <= counter_in[19:13] + counter_in[6:0]; //!todo
+    end
+end
+always @(posedge clk or negedge rst_n) begin
+    if (!rst_n) begin
         tof[4:0] <= 0;
+        sum2[6:0] <= 0;
     end
     else if (dec_valid_d) begin
         tof[4:0] <= decode - start_dec_data;
+        sum2[6:0] <= counter_in[25:20] + counter_in[12:7] + sum1[7]; //!todo
     end
 end
 
@@ -180,7 +189,7 @@ always @(posedge clk or negedge rst_n) begin
         tof_reg <= 0;
     end
     else if (dec_valid_d2) begin
-        tof_reg <= counter_in;
+        tof_reg <= {sum2[6:0],sum1[6:0]};
     end
 end
 
@@ -197,9 +206,9 @@ always @(posedge clk or negedge rst_n) begin
         end
         else begin */
             if (comp)
-                tof[18:5] <= tof_reg;
-            else
                 tof[18:5] <= tof_reg - 1;
+            else
+                tof[18:5] <= tof_reg - 2;
         end
 end
 
@@ -252,7 +261,7 @@ always @(posedge clk or negedge rst_n) begin //valid
         tof_num_cnt <= num_cnt;
     end
     else if (dec_valid_d4) begin
-        if (tof <= 19'b111_1111_1111_1111_1111) begin  //! todo
+        if (tof <= range) begin
             tof_data_in <= tof;
             tof_num_cnt <= tof_num_cnt;
         end
