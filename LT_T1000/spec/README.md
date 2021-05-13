@@ -16,14 +16,24 @@ stop sync 方案： clk5 和clk5_i,两路（rise和fall）采到`stop为1并且屏蔽信号为低`时
 
 当stop0、1拉高，同时产生屏蔽信号，计数器加一，当计数器到3时，复位，屏蔽信号撤销；
 
-如何尽量减少`sync`的脉冲宽度？？？
-
 时钟buffer问题
-
-trigger(D) --> (Q) --> mux --> (tsetup) --> counter(D) :下降沿到上升沿需要的延迟，很难满足
-
-tof_cal中不需要对counter进行计算
 
 `5-200ns 的 trigger pulse`,对sync进行若干级的delay,当trigger上升沿时刻，sync_d仍为高电平，则此次trigger屏蔽
 
 DLL PHASE延迟500ps锁存
+
+两个stop路径，各自采一个counter，trigger下降沿处判断并存储；
+
+多周期路径，下降沿到上升沿的路径需要加buffer延迟（最好情况和最坏情况下加的buffer延迟多大区别？？），ck-q的时间＋mux+延迟+setup time < 3ns 
+
+上升沿和下降沿到start0和start1的两条路径都需要加延迟，stop0和stop1同样；
+
+向后进位的计数器结构？需要手动替换逻辑门的顺序？
+
+sync_d做多周期，延迟一周期，然后用他的上升沿采粗计数器？
+
+上电后，25M晶振时钟工作，同时定时器打开，搬运efuse给模拟，PLL工作一段时间后，启动无毛刺切换电路；
+
+计数器等TDC_Olast清零，或者直接外部清零
+
+两个TDC与core之间的通信顺序
