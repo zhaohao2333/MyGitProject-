@@ -20,7 +20,7 @@ stop sync 方案： clk5 和clk5_i,两路（rise和fall）采到`stop为1并且屏蔽信号为低`时
 
 `5-200ns 的 trigger pulse`,对sync进行若干级的delay,当trigger上升沿时刻，sync_d仍为高电平，则此次trigger屏蔽
 
-DLL PHASE延迟500ps锁存
+DLL PHASE延迟500ps锁存??
 
 两个stop路径，各自采一个counter，trigger下降沿处判断并存储；
 
@@ -37,3 +37,9 @@ sync_d做多周期，延迟一周期，然后用他的上升沿采粗计数器？
 计数器等TDC_Olast清零，或者直接外部清零
 
 两个TDC与core之间的通信顺序
+
+如果用户通过spi设置了TMUX=1，则需要再等300us才能稳定，然后用户发出start信号
+
+复用INT0的用途？TMUX为1时，INT0输出PLL64用作PLL的测试。是否需要再发送一次命令TMUX=0,然后再正常工作
+
+相关的spec,register table也需要修改

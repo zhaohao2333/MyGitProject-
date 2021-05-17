@@ -80,9 +80,10 @@ module INPUT_BUF (
     input wire SPI_Odstart,
     output logic [23:0] OUT,
 
-    // Two Intrrupt
-    output logic INT_raw,
-    output logic INT_peak
+    // Intrrupt
+    output logic INT,
+    output logic read_done,
+    input  logic read_en
 );
     // TDC Buffer
     logic TDC_full;
@@ -93,8 +94,9 @@ module INPUT_BUF (
     logic [18:0] raw_buf1 [5];  // raw data buffer
     logic [18:0] raw_buf2 [5];  // raw data buffer, level 2
 
+
     // raw adder delay counter
-    logic [3:0] TDC_valid_d; 
+    logic [5:0] TDC_valid_d; 
     //logic [2:0] adder_valid;
     logic [2:0] adder_cnt;
     //logic [2:0] raw_onum;
@@ -105,14 +107,13 @@ module INPUT_BUF (
     // valid delay driver
     always_ff@(posedge clk or negedge rst_n)begin
         if(!rst_n) begin //adder_cnt<=3'b0; cnt_en<=1'b0; counter_mod<=2'b0; adder_cnt<=3'b0;
-           TDC_valid_d <= 4'b0;
+           TDC_valid_d <= 0;
         end
         else begin
-           TDC_valid_d <= {TDC_valid_d[2:0], TDC_Ovalid};
+           TDC_valid_d <= {TDC_valid_d[4:0], TDC_Ovalid};
         end
     end
-    
-    //assign adder_valid={TDC_valid_d[2:0]==3'b100,TDC_valid_d[2:0]==3'b110,TDC_valid_d[2:0]==3'b111};
+
     // 20 bit fixed point adder for raw
     assign calib = TDC_Calib;
     generate 
@@ -128,14 +129,13 @@ module INPUT_BUF (
             TDC_cnt <= 0; 
             adder_cnt <= 0; 
             onum_cnt <= 0;
-            raw_buf1 <= {19'b0,19'b0,19'b0};
-            raw_buf2 <= {19'b0,19'b0,19'b0};
+            raw_buf1 <= {19'b0,19'b0,19'b0,19'b0,19'b0};
+            raw_buf2 <= {19'b0,19'b0,19'b0,19'b0,19'b0};
             //raw_onum <= 0;
         end 
         else begin
                 TDC_cnt <= TDC_Ovalid ? TDC_cnt + 1'b1 : 2'b0;
                 adder_cnt <= TDC_valid_d[2] ? adder_cnt + 1'b1 : 2'b0;
-                //raw_onum<=adder_cnt;
             if(TDC_Ovalid) begin //raw data drive
                 //TDC_cnt<=TDC_cnt+1'b1;
                 onum_cnt <= (TDC_Onum == 0) ? 2'b1 : TDC_Onum;
@@ -147,32 +147,36 @@ module INPUT_BUF (
         end
     end
 
-    // Output SPI_Data Control here
+    // ================= Output SPI_Data Control here ====================
+
+
     always_ff@(posedge clk or negedge rst_n)begin
         if(!rst_n) begin
             TDC_full <= 1'b0; 
-            readout_cnt <= 2'b1;
+            readout_cnt <= 1;
+            read_done <= 0;
         end
         else begin 
-            if(TDC_valid_d[3:2]==2'b10) begin 
-                readout_cnt <= 2'b0;
+            if(TDC_valid_d[5:4]==2'b10) begin 
+                readout_cnt <= 0;
                 TDC_full <= 1'b1;
+                read_done <= 0;
             end 
-            else if (SPI_Odstart & (!HIS_full)) begin
+            else if (SPI_Odstart & read_en) begin
                 readout_cnt <= readout_cnt + 1'b1;
                 if(readout_cnt == onum_cnt - 1'b1) begin
                     TDC_full <= 1'b0;
+                    read_done <= 1;
                 end
             end
         end
     end
 
-    assign out_tag=readout_cnt+1'b1;
-    assign OUT= HIS_full?{HIS_buf2,5'b0,onum_cnt,2'b0}:
-                TDC_full?{raw_buf2[readout_cnt],int_buf2[readout_cnt],1'b0,onum_cnt,out_tag}:24'b0;
+    assign out_tag = 0; // out_tag indicate the current data from TDC1 or TDC2
+    //assign out_tag=readout_cnt+1'b1;
+    assign OUT= {raw_buf2[readout_cnt], onum_cnt, out_tag};
     assign TDC_Oready=1'b1;
-    assign INT_raw = TDC_full;
-    assign INT_peak = HIS_full;
+    assign INT = TDC_full;
 endmodule
 
 module counterMax #(parameter DW=8)

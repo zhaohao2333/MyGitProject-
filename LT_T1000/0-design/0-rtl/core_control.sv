@@ -4,17 +4,19 @@ module Core_Control // Core control module
     input  wire                 PLL_clk,
     input  wire                 rstn_osc,
     input  wire                 rstn_pll,
-    input  wire                 OSC_clk,  
-    output logic                CMUX_clk,         
-    // TDC module interface starts here    
-    input  wire [14:0]          TDC_Odata,
-    input  wire [1:0]           TDC_Onum,
-    input  wire                 TDC_Olast,
-    input  wire                 TDC_Ovalid,
-    output logic                TDC_Oready,   
-    output logic                TDC_start,   
-    input  wire                 TDC_busy,   
-    // TDC module interface ends 
+    input  wire                 OSC_clk,  //25 Mhz
+    output logic                CMUX_clk,
+    // TDC1 module interface starts here    
+    input  wire [18:0]          TDC1_Odata,
+    input  wire [2:0]           TDC1_Onum,
+    input  wire                 TDC1_Ovalid,
+    // TDC1 module interface ends
+
+    // TDC2 module interface starts here    
+    input  wire [18:0]          TDC2_Odata,
+    input  wire [2:0]           TDC2_Onum,
+    input  wire                 TDC2_Ovalid,
+    // TDC2 module interface ends 
 
     // SPI slave Interface starts here
     input  wire                 SPI_CS,
@@ -61,35 +63,21 @@ module Core_Control // Core control module
     output logic                bypass_all,
     // Analog end Interface ends
 
-    // VSCEL Driver Siganl
-    output logic                TX_Driver,
-    output logic                DRiver_OEN,
     // two interrrupt Output
-    output logic                INT0,   // raw/PLL division
+    output logic                INT0,
     output logic                INT0_OEN,
-    output logic                INT1,   // Peak interrupt
+    output logic                INT1,
     output logic                INT1_OEN
 
 );
     // OEN assignment 
-	assign DRiver_OEN=1'b0;
-	assign INT0_OEN=1'b0;
-	assign INT1_OEN=1'b0;
-
+	assign INT0_OEN   = 1'b0;
+	assign INT1_OEN   = 1'b0;
 
     // Enable Control registers
     logic TDC_EN;
     logic EFUSE_PGMEN;  //self-reset
-    logic TDC_EXTEN;    //self-reset
     logic TRIM_MUX;     //Trimming MUX, 1 for reg-OSC, 0 for NVM, OSC(init=1)->PLL(init=0)
-    
-    // Exposure Frequency control
-    wire [15:0] cntfreq;
-    logic [15:0] cnt_max;
-    logic cntfreq_en;
-    logic cntfreq_rstn;
-    logic cntfreq_oen;
-    logic TDC_start_reg;
 
     // eFuse Interface            
     logic           efuse_rstart; 
@@ -137,24 +125,22 @@ module Core_Control // Core control module
     logic [7:0] reg_add_r,wreg_dat_r,rreg_dat_r;
     logic [2:0] wreg_req_d,rreg_req_d;
 
-// TDC Calibration register
-    // TDC module
-    logic [15:0]    TDC_Calib;  // TDC Calibration data
-    logic           TDC_Inten;  // TDC Intensity output enable
+// TDC Module
+    logic [19:0]    TDC_Calib;  // TDC Calibration data
     logic [1:0]     TDC_mode;   // TDC Working mode, detail 
-    logic [1:0]     TDC_freqm;  // TDC and SPAD exposure frequency mode
-
+    logic           TDC1_Oready;
+    logic           TDC2_Oready;
 // Initial Trimming readout 
     //logic           efuse_iread_en; // EFUSE read enable
-    logic           efuse_prgen; // EFUSE program enable
-    logic [31:0]    efuse_idata; // EFUSE initial read data
+    logic           efuse_prgen;    // EFUSE program enable
+    logic [31:0]    efuse_idata;    // EFUSE initial read data
 
     // clock mux instantiation
-    logic init_delay;   // init delay for 300us, 0 for OSC, 1 for PLL(init done)
-    logic reg_div2;     // division reg
-    // logic clk2;         // PLL clock after division
+    logic init_delay;       // init delay for 300us, 0 for OSC, 1 for PLL(init done)
+    logic reg_div2;         // division reg
+    // logic clk2;          // PLL clock after division
     logic CMUX_rst;
-    logic CMUX_sel;     // 0 for OSC, 1 for PLL
+    logic CMUX_sel;         // 0 for OSC, 1 for PLL
 
     // PLL output Test - 64 div PLL_OUT
     logic cntpll_en;
@@ -163,31 +149,26 @@ module Core_Control // Core control module
     logic cntpll_rstn;
 
 // Buf module 
-    logic INT_raw;
-    logic INT_peak;
+    logic TDC1_INT;
+    logic TDC2_INT;
+    logic [23:0]    OUT1;
+    logic [23:0]    OUT2;
+    logic TDC1_rdone;   // TDC1 BUF read done, start read TDC2 BUF
     logic PLL_div64;    // PLL clock divided by 64
-    
-// TX_Driver module
-    // logic [3:0] cnttx;
-    // logic cnttx_oen;
-    logic [2:0] cnttx;  //delay counter for tx_driver
+
+    logic [23:0] OUT;
+
 // register configuration assignment
     always_comb begin
         // TDC Module
-        TDC_Range       =   {Add_Reg_01[6:0],Add_Reg_00};
         TDC_Calib       =   {Add_Reg_03,Add_Reg_02};
         TDC_mode        =   Add_Reg_04[1:0];
-        TDC_freqm       =   Add_Reg_04[3:2];
-        TDC_Inten       =   Add_Reg_04[4];
         SPI_Onum        =   Add_Reg_04[6:5];
-
         // Enable signal
         TDC_EN          =   Add_Reg_07[0];
-
         EFUSE_PGMEN     =   Add_Reg_07[2];
-        TDC_EXTEN       =   Add_Reg_07[3];
         TRIM_MUX        =   Add_Reg_07[4];
-        
+
         // Analog End
         reset_pd_pll_dll     =   Add_Reg_0C[0];
         // sreg_pd_dll     =   Add_Reg_0C[1];
@@ -201,6 +182,7 @@ module Core_Control // Core control module
         sreg_vbg_test_ctrl  =   Add_Reg_0C[6];
         sreg_tmux_sel   =   Add_Reg_0D[4:0];
         start_dll       =   init_delay;
+
         //Trimming assignment
         // sreg_pll_r_cp        =   Add_Reg_08[2:0];
         // sreg_pll_r_div       =   Add_Reg_;
@@ -307,7 +289,7 @@ module Core_Control // Core control module
             Add_Reg_08<=8'b0; Add_Reg_09<=8'b0; Add_Reg_0A<=8'b0; Add_Reg_0B<='0;
         end
         else begin
-            if(wreg_req_d[1])begin 
+            if(wreg_req_d[1]) begin 
                 case(reg_add_r[3:0])
                     4'h8:Add_Reg_08<=wreg_dat_r;
                     4'h9:Add_Reg_09<=wreg_dat_r;
@@ -315,7 +297,8 @@ module Core_Control // Core control module
                     4'hb:Add_Reg_0B<=wreg_dat_r;
                 endcase
             end
-            else if(efuse_rvalid) {Add_Reg_0B,Add_Reg_0A,Add_Reg_09,Add_Reg_08}<=efuse_rdat;
+            else if(efuse_rvalid) 
+                {Add_Reg_0B,Add_Reg_0A,Add_Reg_09,Add_Reg_08} <= efuse_rdat;
         end
     end
 
@@ -350,14 +333,15 @@ module Core_Control // Core control module
     // Initial Trimming read, working at 25M Oscillator clock
     always_ff@ (posedge OSC_clk or negedge rstn_osc) begin
         if(!rstn_osc) begin 
-            efuse_rstart<=1'b1; efuse_idata<=32'b0; 
+            efuse_rstart <= 1'b1;
+            efuse_idata <= 32'b0; 
         end
         else begin 
 			if(efuse_rstart&&efuse_rack_d[1]) begin
-                efuse_rstart<=1'b0;
+                efuse_rstart <= 1'b0;
             end
             if(efuse_rvalid) begin 
-                efuse_idata<=efuse_rdat;
+                efuse_idata <= efuse_rdat;
             end
         end
     end
@@ -379,100 +363,38 @@ module Core_Control // Core control module
         end
     end
     assign efuse_wdat={Add_Reg_0B,Add_Reg_0A,Add_Reg_09,Add_Reg_08};
+
     // Exposure Frequency Counter driver
     always_comb begin
-        //cnt5k_rstn=rst_n&&(!cnt10k_oen)&&(!cnt50k_oen)&&(!cnt100k_oen);
-        cnt_max=TDC_freqm==2'b0 ? 16'd49999:
-                TDC_freqm==2'b1 ? 16'd24999:
-                TDC_freqm==2'd2 ? 16'd4999 : 16'd2499;
-        //cntfreq_rstn=rst_n;
-        cntfreq_en=(TDC_EN&&TDC_mode==2'b1)|(!init_delay);
-        //cntfreq_oen=cntfreq==cnt_max;
-//        cnt10k_oen=cnt_5k==16'd24999&&cnt5k_en&&TDC_freqm==2'b1;
-//        cnt50k_oen=cnt_5k==16'd4999&&cnt5k_en&&TDC_freqm==2'd2;
-//        cnt100k_oen=cnt_5k==16'd2499&&cnt5k_en&&TDC_freqm==2'd3;
-    end
-    
-    // TDC start driver
-    always_ff@(posedge CMUX_clk or negedge rstn_osc)begin
-        if(!rstn_osc) TDC_start_reg<=1'b0; 
-        //else if(TDC_Mode_Reg==2'b1) begin
-        else begin
-            TDC_start_reg<=cntfreq_oen;
-//            case(TDC_freqm)
-//                2'b0:TDC_start_reg<=cnt5k_oen;
-//                2'b1:TDC_start_reg<=cnt10k_oen;
-//                2'd2:TDC_start_reg<=cnt50k_oen;
-//                2'd3:TDC_start_reg<=cnt100k_oen;
-//                default:TDC_start_reg<=1'b0;
-//            endcase
-        end
+        cntfreq_en = (TDC_EN&&TDC_mode==2'b1)|(!init_delay);
     end
 
     // init delay
     always_ff@(posedge CMUX_clk or negedge rstn_osc)begin
-    /* ***** for final, use this, ~300us dead time ****/
-            if(!rstn_osc) begin 
-				init_delay <=1'b0;
-			end
-            else begin 
-				if((&cntfreq[14:13])&&(!init_delay))
-                    init_delay<=1'b1;
-			end
-
-    /* ***** for test only, 800ns dead time  ****/
+    // for final, ~300us dead time
+        if(!rstn_osc) begin 
+			init_delay <=1'b0;
+		end
+        else begin 
+			if((&cntfreq[14:13])&&(!init_delay))
+                init_delay<=1'b1;
+		end
+    // for test, 800ns dead time
     /*
-	   if(!rst_n) begin 
+	    if(!rst_n) begin
             init_delay <=1'b0; 
-        end else begin
-        	if(cntfreq[5]&&!init_delay) init_delay<=1'b1;
+        end 
+        else begin
+        	if(cntfreq[5]&&!init_delay) 
+                init_delay<=1'b1;
         end
 	*/
     end
-    // clock divider
-    // always_ff@(posedge PLL_clk or negedge rst_n)begin
-    //     if(!rst_n)reg_div2<=0;
-    //     else reg_div2<=~reg_div2;
-    // end
 
-    // cnttx driver
-    always_ff@(posedge CMUX_clk or negedge rstn_osc) begin
-        if(!rstn_osc)begin
-            cnttx<='0;
-            TDC_start<='0;
-        end else begin
-            if ((TDC_mode[1]?TDC_EXTEN:TDC_start_reg)|(cnttx!=3'b0))begin
-                cnttx<=cnttx+1'b1; 
-                if(cnttx==3'b0) begin TDC_start<=1'b1;      end
-                else if(cnttx[1])  begin TDC_start<=1'b0;   end
-            end
-        end
-    end
-    
-	//********** only for test, delete this for synthesis *********************
-	logic [15:0] raw_cnt;
-	logic TDC_start_del;
-	always_ff@(posedge CMUX_clk or negedge rstn_osc) begin
-		if(!rstn_osc)begin
-			raw_cnt<='0;
-			TDC_start_del<=1'b0;
-		end
-		else  begin 
-			TDC_start_del<=TDC_start;
-			if((!TDC_start_del)&&(TDC_start))begin
-				raw_cnt<=raw_cnt+1'b1;
-			end
-		end
-	end	
-	
-	//************ start counter ends, delete this when synthesis**********
 
     always_comb begin
         CMUX_sel=(init_delay&(!TRIM_MUX));
         cntpll_en=TRIM_MUX;
-        //cntpll_rstn=rst_n;
-        //init_pll=((!init_delay)&&(&cntfreq[14:13]))
-        // clk2=reg_div2;
     end
 
     always_ff@(posedge PLL_clk or negedge rstn_pll)begin
@@ -486,86 +408,111 @@ module Core_Control // Core control module
 
     // External PAD assignment
     always_comb begin   
-        //TDC_start=(TDC_mode[1]?TDC_EXTEN:TDC_start_reg)||(cnttx==3'b1);
-        INT0 = TRIM_MUX ? PLL_div64 : INT_raw;
-        //INT1=INT_peak;
-        TX_Driver = (|cnttx);
+        INT0 = TRIM_MUX ? PLL_div64 : TDC1_INT;//   ?????????????????????????????????????????????????????
+        INT1 = TDC2_INT;
         SPI_Oreg = rreg_dat_r;
         SPI_Orvalid = rreg_req_d[2];
         SPI_Irready = 1'b1;
     end
     
-    // TX_Driver counter
-    
-    
-    // Trimming Test outputc
-    counterM #(.cnt_mod(32)) cnt_PLL  (.clk(PLL_clk),.rst_n(rstn_pll),.cnt_en(cntpll_en),.cntout( ),.cout_en(cntpll_oen));
+    // Trimming Test output
+    counterM #(.cnt_mod(32)) cnt_PLL(
+        .clk(PLL_clk),
+        .rst_n(rstn_pll),
+        .cnt_en(cntpll_en),
+        .cntout(),
+        .cout_en(cntpll_oen)
+    );
     // Exposure frequency 
-    counterMax #(.DW(16)) cntf_req (.clk(CMUX_clk),.rst_n(rstn_osc),.en(cntfreq_en),.max(cnt_max),.cnt(cntfreq),.co(cntfreq_oen));
+    counterMax #(.DW(16)) cnt_freq(
+        .clk(CMUX_clk),
+        .rst_n(rstn_osc),
+        .en(cntfreq_en),
+        .max(cnt_max),         // set cnt_max
+        .cnt(cntfreq),         // for init_delay
+        .co( )
+    );
     // TDC and Histogram Buffer 
-    INPUT_BUF in_buf(.clk(CMUX_clk),.rst_n(rstn_osc),.TDC_Ovalid(TDC_Ovalid),.TDC_Onum(TDC_Onum),.TDC_Oint(TDC_Oint),
-        .TDC_Calib(TDC_Calib), .TDC_Odata(TDC_Odata), .TDC_Oready(TDC_Oready), .HIS_Odata(HIS_Odata), .HIS_Ovalid(HIS_Ovalid), .HIS_Oready(HIS_Oready),
-        //.TDC_Odata_cal(TDC_Odata_cal), .TDC_Ovalid_cal(TDC_Ovalid_cal),
-        .SPI_Odstart(SPI_Odstart), .OUT(SPI_Odata), .INT_raw(INT_raw), .INT_peak(INT1));
+    INPUT_BUF tdc1_buf(
+        .clk(CMUX_clk),
+        .rst_n(rstn_osc),
+        .TDC_Ovalid(TDC1_Ovalid),
+        .TDC_Onum(TDC1_Onum),
+        .TDC_Calib(TDC_Calib),
+        .TDC_Odata(TDC1_Odata),
+        .TDC_Oready(TDC1_Oready), // always high for TDC
+        .SPI_Odstart(SPI_Odstart),
+        .OUT(OUT1),
+        .INT(TDC1_INT),
+        .read_en(1'b1),
+        .read_done(TDC1_rdone)
+    );
+
+    INPUT_BUF tdc2_buf(
+        .clk(CMUX_clk),
+        .rst_n(rstn_osc),
+        .TDC_Ovalid(TDC2_Ovalid),
+        .TDC_Onum(TDC2_Onum),
+        .TDC_Calib(TDC_Calib),
+        .TDC_Odata(TDC2_Odata),
+        .TDC_Oready(TDC2_Oready), // always high for TDC
+        .SPI_Odstart(SPI_Odstart),
+        .OUT(OUT2),
+        .INT(TDC2_INT),
+        .read_en(TDC1_rdone),
+        .read_done()
+    );
+    //===========================================================================
+    assign SPI_Odata =  TDC1_INT ? OUT1:
+                        TDC2_INT ? OUT2:24'b0;
+
+    
+    //===========================================================================
+
     // SPI Instantiation
-    SPI_top  #(.MAX_WIDTH(24),.IN_WIDTH(8)) spi ( .clk(CMUX_clk), .rst_n(rstn_osc), .SPI_Odata(SPI_Odata), .SPI_Odstart(SPI_Odstart), 
-        .SPI_Irreg(SPI_Irreg), .SPI_Irvalid(SPI_Irvalid), .SPI_Irready(SPI_Irready), .SPI_Iadd(SPI_Iadd), .SPI_Oreg(SPI_Oreg), .SPI_Orreq(SPI_Orreq), 
-        .SPI_Orvalid(SPI_Orvalid), .SPI_CS(SPI_CS), .SPI_CLK(SPI_CLK), .SPI_MOSI(SPI_MOSI), .SPI_MISO(SPI_MISO), .MISO_OEN(MISO_OEN));  
+    SPI_top  #(.MAX_WIDTH(24),.IN_WIDTH(8)) spi(
+        .clk(CMUX_clk),
+        .rst_n(rstn_osc),
+        .SPI_Odata(SPI_Odata),
+        .SPI_Odstart(SPI_Odstart), 
+        .SPI_Irreg(SPI_Irreg),
+        .SPI_Irvalid(SPI_Irvalid),
+        .SPI_Irready(SPI_Irready),
+        .SPI_Iadd(SPI_Iadd),
+        .SPI_Oreg(SPI_Oreg),
+        .SPI_Orreq(SPI_Orreq), 
+        .SPI_Orvalid(SPI_Orvalid),
+        .SPI_CS(SPI_CS),
+        .SPI_CLK(SPI_CLK),
+        .SPI_MOSI(SPI_MOSI),
+        .SPI_MISO(SPI_MISO),
+        .MISO_OEN(MISO_OEN)
+    );  
     // EFUSE Instantiation
-    efuse_driver efuse ( .clk(OSC_clk),.rstn(rstn_osc),.read_start(efuse_rstart),.read_ack(efuse_rack), .dout(efuse_rdat), .dout_valid(efuse_rvalid), 
-        .efuse_din(efuse_wdat), .prog_start(efuse_wstart),  .prog_ack(efuse_wack), .EFUSE_SCLK(EFUSE_SCLK), .EFUSE_CS(EFUSE_CS), .EFUSE_RW(EFUSE_RW), 
-        .EFUSE_PGM(EFUSE_PGM), .EFUSE_DOUT(EFUSE_DOUT));
+    efuse_driver efuse (
+        .clk(OSC_clk),
+        .rstn(rstn_osc),
+        .read_start(efuse_rstart),
+        .read_ack(efuse_rack),
+        .dout(efuse_rdat),
+        .dout_valid(efuse_rvalid), 
+        .efuse_din(efuse_wdat),
+        .prog_start(efuse_wstart),
+        .prog_ack(efuse_wack),
+        .EFUSE_SCLK(EFUSE_SCLK),
+        .EFUSE_CS(EFUSE_CS),
+        .EFUSE_RW(EFUSE_RW), 
+        .EFUSE_PGM(EFUSE_PGM),
+        .EFUSE_DOUT(EFUSE_DOUT)
+    );
     // CLOCK MUX, sel 0 for OSC, 1 for PLL
-    CLK_MUX clk_mux(.OSC_CLK(OSC_clk),.PLL_CLK(PLL_clk),.rstn_osc(rstn_osc),.rstn_pll(rstn_pll),.sel(CMUX_sel),.OUT_CLK(CMUX_clk));
+    CLK_MUX clk_mux(
+        .OSC_CLK(OSC_clk),
+        .PLL_CLK(PLL_clk),
+        .rstn_osc(rstn_osc),
+        .rstn_pll(rstn_pll),
+        .sel(CMUX_sel),
+        .OUT_CLK(CMUX_clk)
+    );
 
-
-    
 endmodule
-
-
-/*
-module Regadd_dec(
-    input wire clk,
-    input wire rst_n,
-    input wire [3:0] add,
-    input wire add_valid,
-    output logic [15:0] add_odat,
-    output logic add_ovalid
-);
-    logic [2:0] valid_reg;
-    //logic [1:0] sate_cnt
-    logic [1:0] partial_dec;
-    assign partial_dec=valid_reg[0]?add[3:2]:add[1:0];
-
-    // valid delay line - 3 cycle for output
-    always_ff@ (posedge clk or negedge rst_n) begin
-        if(!rst_n) valid_reg<=3'b0;
-        else begin
-            valid_reg<={valid_reg[1:0],add_valid};
-        end
-    end
-
-    // logic driver
-    always_ff@(posedge clk or negedge rst_n) begin
-        if(!rst_n) add_odat<=16'b0;
-        else begin
-           if(add_valid) begin
-               case(partial_dec)
-               2'b00:add_odat[15:4]<=12'b0;
-               2'b01:begin add_odat[15:8]<=8'b0; add_odat[3:0]<=4'b0;end
-               2'b10:begin add_odat[15:12]<=4'b0;add_odat[7:0]<=8'b0;end
-               2'b11:add_odat[11:0]<=12'b0;
-           end
-           else if(valid_reg[0])begin
-               case(partial_dec)
-               2'b00:begin add_odat[3:1]<=3'b0; add_odat[]
-               2'b01:
-
-           end
-        end
-    end
-endmodule 
- */
-    
-
-

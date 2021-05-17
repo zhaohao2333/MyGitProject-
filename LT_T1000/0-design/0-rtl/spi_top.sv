@@ -211,8 +211,10 @@ module SPI_top
 //                end
                 //else if (read_Reg_hs) SPI_Orreq<=1'b0;
                 //write register
-                if(cntreg_oen&&cur_state==IN_REG)  SPI_Irvalid<=1'b1;
-                else if (write_Reg_hs) SPI_Irvalid<=1'b0;
+                if(cntreg_oen&&cur_state==IN_REG)  
+                    SPI_Irvalid<=1'b1;
+                else if (write_Reg_hs) 
+                    SPI_Irvalid<=1'b0;
             end
         end
        

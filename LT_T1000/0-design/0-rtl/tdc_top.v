@@ -9,7 +9,7 @@
 `define COARSE_CNT_HIGH_BIT 7
 `define PHASE_BIT 16
 `define TOF_BIT 19
-`define FSM_STATE_BIT 16
+`define FSM_STATE_BIT 17
 `define NUM_BIT 3
 `define RANGE_3KM 14'b10_0111_0001_0000
 //------------------- tdc top ------------------------------
@@ -28,23 +28,23 @@ module tdc_top (
     output reg                      busy
 );
 //------------------- fsm state ----------------------------
-parameter IDLE    = `FSM_STATE_BIT'b0000_0000_0000_0000;
-parameter DATA0   = `FSM_STATE_BIT'b0000_0000_0000_0001;
-parameter DATA1   = `FSM_STATE_BIT'b0000_0000_0000_0010;
-parameter DATA2   = `FSM_STATE_BIT'b0000_0000_0000_0100;
-parameter DATA2_1 = `FSM_STATE_BIT'b0000_0000_0000_1000;
-parameter DATA3   = `FSM_STATE_BIT'b0000_0000_0001_0000;
-parameter DATA3_1 = `FSM_STATE_BIT'b0000_0000_0010_0000;
-parameter DATA3_2 = `FSM_STATE_BIT'b0000_0000_0100_0000;
-parameter DATA4   = `FSM_STATE_BIT'b0000_0000_1000_0000;
-parameter DATA4_1 = `FSM_STATE_BIT'b0000_0001_0000_0000;
-parameter DATA4_2 = `FSM_STATE_BIT'b0000_0010_0000_0000;
-parameter DATA4_3 = `FSM_STATE_BIT'b0000_0100_0000_0000;
-parameter DATA5   = `FSM_STATE_BIT'b0000_1000_0000_0000;
-parameter DATA5_1 = `FSM_STATE_BIT'b0001_0000_0000_0000;
-parameter DATA5_2 = `FSM_STATE_BIT'b0010_0000_0000_0000;
-parameter DATA5_3 = `FSM_STATE_BIT'b0100_0000_0000_0000;
-parameter DATA5_4 = `FSM_STATE_BIT'b1000_0000_0000_0000;
+parameter IDLE    = `FSM_STATE_BIT'b0000_0000_0000_0000_1;
+parameter DATA0   = `FSM_STATE_BIT'b0000_0000_0000_0001_0;
+parameter DATA1   = `FSM_STATE_BIT'b0000_0000_0000_0010_0;
+parameter DATA2   = `FSM_STATE_BIT'b0000_0000_0000_0100_0;
+parameter DATA2_1 = `FSM_STATE_BIT'b0000_0000_0000_1000_0;
+parameter DATA3   = `FSM_STATE_BIT'b0000_0000_0001_0000_0;
+parameter DATA3_1 = `FSM_STATE_BIT'b0000_0000_0010_0000_0;
+parameter DATA3_2 = `FSM_STATE_BIT'b0000_0000_0100_0000_0;
+parameter DATA4   = `FSM_STATE_BIT'b0000_0000_1000_0000_0;
+parameter DATA4_1 = `FSM_STATE_BIT'b0000_0001_0000_0000_0;
+parameter DATA4_2 = `FSM_STATE_BIT'b0000_0010_0000_0000_0;
+parameter DATA4_3 = `FSM_STATE_BIT'b0000_0100_0000_0000_0;
+parameter DATA5   = `FSM_STATE_BIT'b0000_1000_0000_0000_0;
+parameter DATA5_1 = `FSM_STATE_BIT'b0001_0000_0000_0000_0;
+parameter DATA5_2 = `FSM_STATE_BIT'b0010_0000_0000_0000_0;
+parameter DATA5_3 = `FSM_STATE_BIT'b0100_0000_0000_0000_0;
+parameter DATA5_4 = `FSM_STATE_BIT'b1000_0000_0000_0000_0;
 //-------------- register/wire define ----------------------
 wire [`PHASE_BIT - 1:0]                 start_phase_latch;
 wire [`PHASE_BIT - 1:0]                 stop_phase_latch;
