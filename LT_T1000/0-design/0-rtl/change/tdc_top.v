@@ -68,7 +68,7 @@ reg  [`TOF_BIT - 1:0]                   tof_data[4:0];
 reg  [`NUM_BIT - 1:0]                   num_cnt;
 wire [`NUM_BIT - 1:0]                   tof_num_cnt;
 reg          cnt_start;
-//wire         sync;
+wire         sync;
 reg          cnt_start_d;
 reg          cnt_en;
 wire         hs;
@@ -88,7 +88,7 @@ wire         TDC_trigger_n;
 reg          overflow_low, overflow_high;
 reg          tri_ign;
 //wire         coarse_tri;
-reg			 overflow, overflow_f;
+reg			 overflow;
 reg			 fsm_valid;
 reg          start_s;
 reg          stop_s;
@@ -96,11 +96,8 @@ wire         clk5_i;
 reg          start_f, start_r;
 reg          start_d, start_dd;
 reg          stop_d, stop_dd;
-reg          overflow_dis_r, overflow_dis_r_d;
-reg          overflow_dis_f, overflow_dis_f_d;
-reg          TDC_Olast_d;
 //----------------------------------------------------------
-//-------------- RTL codes begin  --------------------------
+//-------------- RTL codes begin from here -----------------
 assign TDC_trigger_n = !TDC_trigger;
 
 always @(posedge clk or negedge rst_n) begin
@@ -196,9 +193,6 @@ always @(posedge clk5 or negedge rst_n) begin
     if (!rst_n) begin
         start_r <= 0;
     end
-    else if (overflow) begin
-        start_r <= 0;
-    end
     else if(TDC_start) begin    //! reset
         start_r <= 1;
     end
@@ -206,9 +200,6 @@ end
 
 always @(posedge clk5_i or negedge rst_n) begin
     if (!rst_n) begin
-        start_f <= 0;
-    end
-    else if (overflow_f) begin
         start_f <= 0;
     end
     else if(TDC_start) begin    //! reset
@@ -219,8 +210,7 @@ counter counter_rise_inst(
 	.clk5		(clk5),
 	.rst_n		(rst_n),
 	.cnt_en		(start_r),
-	.counter	(counter_rise),
-    .overflow   (overflow_dis_r_d)
+	.counter	(counter_rise)
 );
 // rise counter latch in clk5_i
 always @(posedge clk5_i or negedge rst_n) begin
@@ -236,8 +226,7 @@ counter counter_fall_inst(
 	.clk5		(clk5_i),
 	.rst_n		(rst_n),
 	.cnt_en		(start_f),
-	.counter	(counter_fall),
-    .overflow   (overflow_dis_f_d)
+	.counter	(counter_fall)
 );
 
 // fall counter latch in clk5
@@ -249,43 +238,9 @@ always @(posedge clk5 or negedge rst_n) begin
         counter_fall_r <= counter_fall;
     end
 end
-// overflow is high until TDC_Olast is set
-always @(posedge clk or negedge rst_n) begin //250M clk
-    if(!rst_n) begin
-        TDC_Olast_d <= 0;
-    end
-    else begin
-        TDC_Olast_d <= TDC_Olast;
-    end
-end
 
 always @(posedge clk5 or negedge rst_n) begin
     if(!rst_n) begin
-        overflow_dis_r <= 0;
-        overflow_dis_r_d <= 0;
-    end
-    else begin
-        overflow_dis_r <= TDC_Olast_d;
-        overflow_dis_r_d <= overflow_dis_r;
-    end
-end
-
-always @(posedge clk5_i or negedge rst_n) begin
-    if(!rst_n) begin
-        overflow_dis_f <= 0;
-        overflow_dis_f_d <= 0;
-    end
-    else begin
-        overflow_dis_f <= TDC_Olast_d;
-        overflow_dis_f_d <= overflow_dis_f;
-    end
-end
-
-always @(posedge clk5 or negedge rst_n) begin
-    if(!rst_n) begin
-        overflow <= 0;
-    end
-    else if (overflow_dis_r_d) begin
         overflow <= 0;
     end
     else if(counter_rise[13:12]== 2'b11) begin
@@ -293,27 +248,15 @@ always @(posedge clk5 or negedge rst_n) begin
     end
 end
 
-always @(posedge clk5_i or negedge rst_n) begin
-    if(!rst_n) begin
-        overflow_f <= 0;
-    end
-    else if (overflow_dis_f_d) begin
-        overflow_f <= 0;
-    end
-    else if(counter_fall[13:12]== 2'b11) begin
-        overflow_f <= 1;
-    end
-end
-
 always @(posedge clk5 or negedge rst_n) begin
     if(!rst_n) begin
         cnt_en <= 0;
     end
-    else if (overflow) begin
-        cnt_en <= 0;
-    end
     else if (start_d & (!start_dd)) begin
         cnt_en <= 1;
+    end
+    else if (overflow) begin
+        cnt_en <= 0;
     end
 end
 //---------------sync module--------------------------------
@@ -373,7 +316,7 @@ always @(posedge TDC_trigger or negedge rst_n) begin
 end
 
 //---------------tof data out-------------------------------
-assign rst = rst_n & clr_n; //!todo
+assign rst = rst_n & clr_n;
 
 always @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin

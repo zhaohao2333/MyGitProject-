@@ -1,4 +1,5 @@
 module sync (
+    input  wire         start_s, // ~latch[15]
     input  wire         stop_s,
     input  wire         TDC_start,
     input  wire         TDC_trigger,
@@ -21,24 +22,6 @@ reg         sync_d;
 assign clk5_i = !clk5;
 //------------------ start sync -------------------------
 always @(posedge clk5 or negedge rst_n) begin
-    if (!rst_n) begin
-        start_r <= 0;
-    end
-    else if(TDC_start) begin    //! reset
-        start_r <= 1;
-    end
-end
-
-always @(posedge clk5_i or negedge rst_n) begin
-    if (!rst_n) begin
-        start_f <= 0;
-    end
-    else if(TDC_start) begin    //! reset
-        start_f <= 1;
-    end
-end
-
-/* always @(posedge clk5 or negedge rst_n) begin
     if(!rst_n) begin
         start_1 <= 1'b0;
     end
@@ -60,7 +43,7 @@ always @(posedge clk5_i or negedge rst_n) begin
     else if (TDC_start)begin
         start_0 <= 1;
     end
-end */
+end
 
 assign cnt_en = (start_s == 1) ? start_1 : start_0;
 

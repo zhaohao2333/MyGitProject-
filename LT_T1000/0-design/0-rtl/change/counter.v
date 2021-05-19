@@ -2,7 +2,7 @@ module counter(
 	input 	wire			clk5,
 	input	wire			rst_n,
 	input	wire			cnt_en,
-	input   wire            overflow,
+	
 	//output  wire			enable,
 	output  reg		[13:0]	counter
 );
@@ -18,9 +18,6 @@ always @(posedge clk5 or negedge rst_n) begin
 	if(!rst_n) begin
 		counter[0] <= 0;
 	end
-    else if (overflow) begin
-        counter[0] <= 0;
-    end
 	else begin
 		counter[0] <= counter[0] ^ cnt_en;
 	end
@@ -31,10 +28,6 @@ always @(posedge clk5 or negedge rst_n) begin
 		pen1_0 <= 0;
 		pen1_1 <= 0;
 	end
-    else if (overflow) begin
-		pen1_0 <= 0;
-		pen1_1 <= 0;
-    end
 	else if (cnt_en) begin
 		pen1_0 <= ~pen1_0;
 		pen1_1 <= ~pen1_1;
@@ -54,9 +47,6 @@ always @(posedge clk5 or negedge rst_n) begin
 	if(!rst_n) begin
 		counter[1] <= 0;
 	end
-    else if (overflow) begin
-		counter[1] <= 0;
-    end
 	else begin
 		counter[1] <= counter[1] ^ pen1_0;
 	end
@@ -66,9 +56,6 @@ always @(posedge clk5 or negedge rst_n) begin
 	if(!rst_n) begin
 		counter[2] <= 0;
 	end
-    else if (overflow) begin
-		counter[2] <= 0;
-    end
 	else if (pen1_0) begin
 		counter[2] <= counter[2] ^ (counter[1]);
 	end
@@ -78,9 +65,6 @@ always @(posedge clk5 or negedge rst_n) begin
 	if(!rst_n) begin
 		counter[3] <= 0;
 	end
-    else if (overflow) begin
-		counter[3] <= 0;
-    end
 	else if (pen1_1) begin
 		counter[3] <= counter[3] ^ (counter[1] & counter[2]);
 	end
@@ -90,9 +74,6 @@ always @(posedge clk5 or negedge rst_n) begin
 	if(!rst_n) begin
 		counter[4] <= 0;
 	end
-    else if (overflow) begin
-		counter[4] <= 0;
-    end
 	else if (pen1_1) begin
 		counter[4] <= counter[4] ^ (counter[1] & counter[2] & counter[3]);
 	end
@@ -103,10 +84,6 @@ always @(posedge clk5 or negedge rst_n) begin
 		pen2_0 <= 0;
         pen2_1 <= 0;
 	end
-    else if (overflow) begin
-		pen2_0 <= 0;
-        pen2_1 <= 0;
-    end
 	else if (counter[1] & counter[2] & counter[3] & counter[4]) begin
 		pen2_0 <= ~pen2_0;
         pen2_1 <= ~pen2_1;
@@ -129,9 +106,6 @@ always @(posedge clk5 or negedge rst_n) begin
 	if(!rst_n) begin
 		counter[5] <= 0;
 	end
-    else if (overflow) begin
-		counter[5] <= 0;
-    end
 	else begin
 		counter[5] <= counter[5] ^ pen2_0;
 	end
@@ -141,9 +115,6 @@ always @(posedge clk5 or negedge rst_n) begin
 	if(!rst_n) begin
 		counter[6] <= 0;
 	end
-    else if (overflow) begin
-		counter[6] <= 0;
-    end
 	else if (pen2_0) begin
 		counter[6] <= counter[6] ^ (counter[5]);
 	end
@@ -153,9 +124,6 @@ always @(posedge clk5 or negedge rst_n) begin
 	if(!rst_n) begin
 		counter[7] <= 0;
 	end
-    else if (overflow) begin
-		counter[7] <= 0;
-    end
 	else if (pen2_1) begin
 		counter[7] <= counter[7] ^ (counter[5] & counter[6]);
 	end
@@ -165,9 +133,6 @@ always @(posedge clk5 or negedge rst_n) begin
 	if(!rst_n) begin
 		counter[8] <= 0;
 	end
-    else if (overflow) begin
-		counter[8] <= 0;
-    end
 	else if (pen2_1) begin
 		counter[8] <= counter[8] ^ (counter[5] & counter[6] & counter[7]);
 	end
@@ -177,9 +142,6 @@ always @(posedge clk5 or negedge rst_n) begin
 	if(!rst_n) begin
 		pen3_0 <= 0;
 	end
-    else if (overflow) begin
-		pen3_0 <= 0;
-    end
 	else if (&counter[8:1]) begin
 		pen3_0 <= ~pen3_0;
 	end
@@ -191,9 +153,6 @@ always @(posedge clk5 or negedge rst_n) begin
 	if(!rst_n) begin
 		counter[13:9] <= 0;
 	end
-    else if (overflow) begin
-		counter[13:9] <= 0;
-    end
 	else if (pen3_0) begin
 		counter[13:9] <= counter[13:9] + 1;
 	end

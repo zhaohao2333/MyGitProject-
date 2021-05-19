@@ -136,7 +136,7 @@ Lvshift_3p3to1p8 LS_SPIMOSI         ( .A(SPI_MOSI_core),.DGND(1'b0), .DVDD(1'b1)
 tdc_top tdc1(
     .DLL_Phase(dll_phase),
     .clk5(clk_dll), //500 Mhz for cnt, DLL_Phase[0]
-    .clk(CMUX_clk), //250 Mhz for logic, axi stream logic
+    .clk(CMUX_clk), //250 Mhz for logic
     .rst_n(rstn_osc), //from external PIN, active low
     .TDC_start(TDC_start), // external
     .TDC_trigger(trigger1), //from AFE1
@@ -149,7 +149,7 @@ tdc_top tdc1(
 tdc_top tdc2(
     .DLL_Phase(dll_phase),
     .clk5(clk_dll), //500 Mhz for cnt, DLL_Phase[0]
-    .clk(CMUX_clk), //250 Mhz for logic, axi stream logic
+    .clk(CMUX_clk), //250 Mhz for logic
     .rst_n(rstn_osc), //from external PIN, active low
     .TDC_start(TDC_start), // external
     .TDC_trigger(trigger2), //from AFE2
@@ -230,7 +230,9 @@ Core_Control core(
 );
 
 
-reset_best sync_osc (.clk(clk_osc_core),.asyn_resetn(rst_n_LS),.syn_resetn(rstn_osc));
-reset_best sync_pll (.clk(clk_pll),.asyn_resetn(rst_n_LS),.syn_resetn(rstn_pll));
+reset_best sync_osc (.clk(clk_osc_core),.asyn_resetn(rst_n_LS),.syn_resetn(rstn_osc)); //25M
+reset_best sync_pll (.clk(clk_pll),.asyn_resetn(rst_n_LS),.syn_resetn(rstn_pll)); //250M
+
+//! 500M clk5/clk5_i reset
 
 endmodule 

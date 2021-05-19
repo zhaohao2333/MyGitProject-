@@ -52,13 +52,8 @@ reg  [`PHASE_BIT - 1:0]                 start_reg_out;
 reg  [`PHASE_BIT - 1:0]                 stop_reg_out;
 reg  [`PHASE_BIT - 1:0]                 stop_reg[4:0];
 reg  [`PHASE_BIT - 1:0]                 decode_in;
-wire [13:0]        						counter_rise,counter_fall;
-reg  [13:0]        						counter_rise_f,counter_fall_r;
-reg  [13:0]                             counter_reg_out;
-reg  [13:0]   							counter_reg_out0;
-reg  [13:0]   							counter_reg_out1;
-reg  [13:0]   							counter_reg_out2;
-reg  [13:0]   							counter_reg_out3;
+wire [13:0]        						counter;
+reg  [13:0]   							counter_reg_out;
 reg  [13:0]   							counter_reg[4:0];
 reg  [13:0]   							counter_in;
 reg  [`FSM_STATE_BIT - 1:0]             n_state;
@@ -68,9 +63,9 @@ reg  [`TOF_BIT - 1:0]                   tof_data[4:0];
 reg  [`NUM_BIT - 1:0]                   num_cnt;
 wire [`NUM_BIT - 1:0]                   tof_num_cnt;
 reg          cnt_start;
-//wire         sync;
+wire         sync;
 reg          cnt_start_d;
-reg          cnt_en;
+wire         cnt_en;
 wire         hs;
 reg          Ovalid_d1, Ovalid_d2, Ovalid_d3;
 reg          clr_n;
@@ -86,21 +81,13 @@ wire         tof_cal_stop;
 wire         tri_en;
 wire         TDC_trigger_n;
 reg          overflow_low, overflow_high;
+reg          start_d;
 reg          tri_ign;
-//wire         coarse_tri;
-reg			 overflow, overflow_f;
+wire         coarse_tri;
+reg			 overflow;
 reg			 fsm_valid;
-reg          start_s;
-reg          stop_s;
-wire         clk5_i;
-reg          start_f, start_r;
-reg          start_d, start_dd;
-reg          stop_d, stop_dd;
-reg          overflow_dis_r, overflow_dis_r_d;
-reg          overflow_dis_f, overflow_dis_f_d;
-reg          TDC_Olast_d;
 //----------------------------------------------------------
-//-------------- RTL codes begin  --------------------------
+//-------------- RTL codes begin from here -----------------
 assign TDC_trigger_n = !TDC_trigger;
 
 always @(posedge clk or negedge rst_n) begin
@@ -146,178 +133,40 @@ always @(posedge clk or negedge rst_n) begin //clk 250M
     end
 end */
 
-always @(posedge clk5 or negedge rst_n) begin
-    if (!rst_n) begin
-        start_d <= 0;
-        start_dd <= 0;
-    end
-    else begin
-        start_d <= TDC_start;
-        start_dd <= start_d;
-    end
-end
-
-always @(posedge clk5 or negedge rst_n) begin
-    if (!rst_n) begin
-        stop_d <= 0;
-        stop_dd <= 0;
-    end
-    else begin
-        stop_d <= TDC_trigger;
-        stop_dd <= stop_d;
-    end
-end
-
-always @(posedge clk5 or negedge rst_n) begin //! cnt_en
+always @(posedge cnt_en or negedge rst_n) begin //! cnt_en
     if (!rst_n) begin
         start_reg_out <= 0;
-        start_s <= 0;
     end
-    else if(start_d & (!start_dd)) begin
+    else begin
         start_reg_out <= start_phase_latch;
-        start_s <= !start_phase_latch[15];
     end
 end
 
-always @(posedge clk5 or negedge rst_n) begin //! sync
+always @(posedge sync or negedge rst_n) begin //! sync
     if (!rst_n) begin
         stop_reg_out <= 0;
-        stop_s <= 0;
     end
-    else if(stop_d & (!stop_dd)) begin
+    else begin
         stop_reg_out <= stop_phase_latch;
-        stop_s <= !stop_phase_latch[15];
     end
 end
 //---------------coarse counter-----------------------------
-assign clk5_i = !clk5;
-
-always @(posedge clk5 or negedge rst_n) begin
-    if (!rst_n) begin
-        start_r <= 0;
-    end
-    else if (overflow) begin
-        start_r <= 0;
-    end
-    else if(TDC_start) begin    //! reset
-        start_r <= 1;
-    end
-end
-
-always @(posedge clk5_i or negedge rst_n) begin
-    if (!rst_n) begin
-        start_f <= 0;
-    end
-    else if (overflow_f) begin
-        start_f <= 0;
-    end
-    else if(TDC_start) begin    //! reset
-        start_f <= 1;
-    end
-end
-counter counter_rise_inst(
+counter counter_inst(
 	.clk5		(clk5),
 	.rst_n		(rst_n),
-	.cnt_en		(start_r),
-	.counter	(counter_rise),
-    .overflow   (overflow_dis_r_d)
+	.cnt_en		(cnt_en),
+	.counter	(counter)
 );
-// rise counter latch in clk5_i
-always @(posedge clk5_i or negedge rst_n) begin
-    if (!rst_n) begin
-        counter_rise_f <= 0;
-    end
-    else begin
-        counter_rise_f <= counter_rise;
-    end
-end
-
-counter counter_fall_inst(
-	.clk5		(clk5_i),
-	.rst_n		(rst_n),
-	.cnt_en		(start_f),
-	.counter	(counter_fall),
-    .overflow   (overflow_dis_f_d)
-);
-
-// fall counter latch in clk5
-always @(posedge clk5 or negedge rst_n) begin
-    if (!rst_n) begin
-        counter_fall_r <= 0;
-    end
-    else begin
-        counter_fall_r <= counter_fall;
-    end
-end
-// overflow is high until TDC_Olast is set
-always @(posedge clk or negedge rst_n) begin //250M clk
-    if(!rst_n) begin
-        TDC_Olast_d <= 0;
-    end
-    else begin
-        TDC_Olast_d <= TDC_Olast;
-    end
-end
-
-always @(posedge clk5 or negedge rst_n) begin
-    if(!rst_n) begin
-        overflow_dis_r <= 0;
-        overflow_dis_r_d <= 0;
-    end
-    else begin
-        overflow_dis_r <= TDC_Olast_d;
-        overflow_dis_r_d <= overflow_dis_r;
-    end
-end
-
-always @(posedge clk5_i or negedge rst_n) begin
-    if(!rst_n) begin
-        overflow_dis_f <= 0;
-        overflow_dis_f_d <= 0;
-    end
-    else begin
-        overflow_dis_f <= TDC_Olast_d;
-        overflow_dis_f_d <= overflow_dis_f;
-    end
-end
-
 always @(posedge clk5 or negedge rst_n) begin
     if(!rst_n) begin
         overflow <= 0;
     end
-    else if (overflow_dis_r_d) begin
-        overflow <= 0;
-    end
-    else if(counter_rise[13:12]== 2'b11) begin
+    else if(counter[13:12]== 2'b11) begin
         overflow <= 1;
     end
 end
-
-always @(posedge clk5_i or negedge rst_n) begin
-    if(!rst_n) begin
-        overflow_f <= 0;
-    end
-    else if (overflow_dis_f_d) begin
-        overflow_f <= 0;
-    end
-    else if(counter_fall[13:12]== 2'b11) begin
-        overflow_f <= 1;
-    end
-end
-
-always @(posedge clk5 or negedge rst_n) begin
-    if(!rst_n) begin
-        cnt_en <= 0;
-    end
-    else if (overflow) begin
-        cnt_en <= 0;
-    end
-    else if (start_d & (!start_dd)) begin
-        cnt_en <= 1;
-    end
-end
 //---------------sync module--------------------------------
-/* sync sync_inst(
+sync sync_inst(
     .start_s(!start_phase_latch[15]), //! ~latch[15] or start_reg_out[15] ?
     .stop_s(!stop_phase_latch[15]),
     .TDC_start(TDC_start),
@@ -328,52 +177,21 @@ end
     .coarse_tri(coarse_tri),
 	.sync(sync),
 	.overflow(overflow)
-); */
+);
 
 //---------------coarse counter reg-------------------------
 
-/* always @(posedge clk5 or negedge rst_n) begin
+always @(posedge clk5 or negedge rst_n) begin
     if(!rst_n) begin
         counter_reg_out <= 0;
     end
     else if (coarse_tri) begin
         counter_reg_out <= counter;
     end
-end */
-//==========================================================
-/* always @(posedge TDC_trigger or negedge rst_n) begin
-    if (!rst_n) begin
-        counter_reg_out <= 0;
-    end
-    else begin
-        case ({start_s, !DLL_Phase[15]})
-            0:  counter_reg_out <= counter_fall_r + 2;
-            1:  counter_reg_out <= counter_fall + 1;
-            2:  counter_reg_out <= counter_rise + 1;
-            3:  counter_reg_out <= counter_rise_f + 2;
-            default:
-                counter_reg_out <= 0;
-        endcase
-    end
-end */
-//==========================================================
-always @(posedge TDC_trigger or negedge rst_n) begin
-    if (!rst_n) begin
-        counter_reg_out0 <= 0;
-        counter_reg_out1 <= 0;
-        counter_reg_out2 <= 0;
-        counter_reg_out3 <= 0;
-    end
-    else begin
-        counter_reg_out0 <= counter_fall_r + 2;
-        counter_reg_out1 <= counter_fall + 1;
-        counter_reg_out2 <= counter_rise + 1;
-        counter_reg_out3 <= counter_rise_f + 2;
-    end
 end
 
 //---------------tof data out-------------------------------
-assign rst = rst_n & clr_n; //!todo
+assign rst = rst_n & clr_n;
 
 always @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
@@ -411,17 +229,6 @@ always @(posedge TDC_trigger_n or negedge rst) begin //! rst
     end
 end
 //----------------------------------------------------------
-always @(*) begin
-    case ({start_s, stop_s})
-        0:  counter_reg_out <= counter_reg_out0;
-        1:  counter_reg_out <= counter_reg_out1;
-        2:  counter_reg_out <= counter_reg_out2;
-        3:  counter_reg_out <= counter_reg_out3;
-        default:
-            counter_reg_out <= 0;
-    endcase
-end
-
 always @(posedge TDC_trigger_n or negedge rst_n) begin
     if (!rst_n) begin
         counter_reg[0] <= 0;
