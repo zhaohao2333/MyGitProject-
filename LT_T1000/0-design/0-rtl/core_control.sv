@@ -157,7 +157,7 @@ module Core_Control // Core control module
     logic PLL_div64;    // PLL clock divided by 64
 
     logic [23:0] OUT;
-
+//========================================================================
 // register configuration assignment
     always_comb begin
         // TDC Module
@@ -366,7 +366,8 @@ module Core_Control // Core control module
 
     // Exposure Frequency Counter driver
     always_comb begin
-        cntfreq_en = (TDC_EN&&TDC_mode==2'b1)|(!init_delay);
+        //cntfreq_en = (TDC_EN&&TDC_mode==2'b1)|(!init_delay);
+        cntfreq_en = !init_delay;        
     end
 
     // init delay
@@ -379,16 +380,16 @@ module Core_Control // Core control module
 			if((&cntfreq[14:13])&&(!init_delay))
                 init_delay<=1'b1;
 		end
+
+
     // for test, 800ns dead time
-    /*
-	    if(!rst_n) begin
+/* 	    if(!rst_n) begin
             init_delay <=1'b0; 
         end 
         else begin
-        	if(cntfreq[5]&&!init_delay) 
+        	if(cntfreq[5]&&(!init_delay)) 
                 init_delay<=1'b1;
-        end
-	*/
+        end */
     end
 
 
@@ -428,7 +429,7 @@ module Core_Control // Core control module
         .clk(CMUX_clk),
         .rst_n(rstn_osc),
         .en(cntfreq_en),
-        .max(cnt_max),         // set cnt_max
+        .max(cnt_max),         // set cnt_max = 24999 at 25Mhz
         .cnt(cntfreq),         // for init_delay
         .co( )
     );

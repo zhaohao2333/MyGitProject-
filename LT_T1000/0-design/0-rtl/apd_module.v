@@ -1,7 +1,8 @@
 `timescale 1ns/10fs
 module apd_module(
 	input TDC_start,
-	output reg trig
+	output reg trig,
+	output wire trig_d
 );
 	reg photon;
 
@@ -55,4 +56,6 @@ module apd_module(
 		trig <= 1;
 		#10 trig <= 0;
 	end //! todo
+
+	assign #0.0625 trig_d = trig;
 endmodule

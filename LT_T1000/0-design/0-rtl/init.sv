@@ -157,7 +157,7 @@ module INPUT_BUF (
             read_done <= 0;
         end
         else begin 
-            if(TDC_valid_d[5:4]==2'b10) begin 
+            if(TDC_valid_d[5:4]==2'b10) begin  //not pull up TDC_full when TDC_Onum = 0
                 readout_cnt <= 0;
                 TDC_full <= 1'b1;
                 read_done <= 0;

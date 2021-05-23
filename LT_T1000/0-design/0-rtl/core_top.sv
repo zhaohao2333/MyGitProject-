@@ -63,10 +63,7 @@ module Core_Top
     
 // two interrupt, to PAD 
     output wire             INT0,           // output PAD, Configurable for TDC1 Interrupt / PLL Output
-    output wire             INT1,           // output PAD, Configurable for TDC2 Interrupt
-
-// VSCEL Driver, to PAD
-    output wire             VSCEL_Driver   // output PAD, MOS driver
+    output wire             INT1            // output PAD, Configurable for TDC2 Interrupt
 );
 
 // clock 
@@ -182,6 +179,7 @@ Core_Control core(
     .SPI_CLK(SPI_CLK_LS),
     .SPI_MOSI(SPI_MOSI_LS),
     .SPI_MISO(SPI_MISO_LS),
+    .MISO_OEN(SPI_MISOEN_LS),
     // SPI slave Interface ends
 
     // eFuse Interface starts here
@@ -190,7 +188,7 @@ Core_Control core(
     .EFUSE_RW(EFUSE_RW),
     .EFUSE_PGM(EFUSE_PGM),
     .EFUSE_DOUT(EFUSE_DOUT),
-    .MISO_OEN(SPI_MISOEN_LS),
+
     // eFuse Interface ends
 
     // Analog end Interface starts here
@@ -231,7 +229,7 @@ Core_Control core(
 
 
 reset_best sync_osc (.clk(clk_osc_core),.asyn_resetn(rst_n_LS),.syn_resetn(rstn_osc)); //25M
-reset_best sync_pll (.clk(clk_pll),.asyn_resetn(rst_n_LS),.syn_resetn(rstn_pll)); //250M
+reset_best sync_pll (.clk(clk_pll),.asyn_resetn(rst_n_LS),.syn_resetn(rstn_pll)); //500M
 
 //! 500M clk5/clk5_i reset
 
