@@ -1,7 +1,7 @@
 module top_ioed(
     input  wire             clk_osc,
     input  wire             rst_n,
-    input  wire             TDC_START,
+    input  wire             TDC_start,
     input  wire             SPI_CS,   
     input  wire             SPI_CLK,  
     input  wire             SPI_MOSI, 
@@ -15,7 +15,7 @@ module top_ioed(
 chip_top chip_top_uut(
 .clk_osc(clk_osc),
 .rst_n(rst_n),
-.TDC_START(TDC_START),
+.TDC_start(TDC_start),
 .SPI_CS(SPI_CS),   
 .SPI_CLK(SPI_CLK),  
 .SPI_MOSI(SPI_MOSI), 
